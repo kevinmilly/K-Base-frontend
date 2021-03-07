@@ -7,7 +7,7 @@ import { DashboardComponent } from './layout/dashboard/dashboard.component';
 import { ToolbarComponent } from './layout/toolbar/toolbar.component';
 import { TableComponent } from './presentational/table/table.component';
 import { GraphComponent } from './presentational/graph/graph.component';
-import { ButtonComponent } from './presentational/button/button.component';
+import { ButtonComponent } from './shared/button/button.component';
 import { KanbanComponent } from './presentational/kanban/kanban.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
