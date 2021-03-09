@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-graph',
+  selector: 'kb-graph',
   templateUrl: './graph.component.html',
   styleUrls: ['./graph.component.scss']
 })

@@ -1,1 +1,21 @@
-<p>kanban works!</p>
+<div class="kanban-container">
+    <div class="kanban-container__kanban">
+        <div class="kanban-container__kanban__header">To Do</div>
+        <div cdkDropList class="kanban-container__kanban-list" (cdkDropListDropped)="drop($event)">
+            <div class="kanban-container__kanban-list__box" *ngFor="let data of dragData" cdkDrag>{{data.title}}</div>
+        </div>
+    </div>
+    <div class="kanban-container__kanban">
+        <div class="kanban-container__kanban__header">In Progress</div>
+        <div cdkDropList class="kanban-container__kanban-list" (cdkDropListDropped)="drop($event)">
+            <div class="kanban-container__kanban-list__box" *ngFor="let data of dragData" cdkDrag>{{data.title}}</div>
+        </div>
+    </div>
+    <div class="kanban-container__kanban">
+        <div class="kanban-container__kanban__header">Done</div>
+        <div cdkDropList class="kanban-container__kanban-list" (cdkDropListDropped)="drop($event)">
+            <div class="kanban-container__kanban-list__box" *ngFor="let data of dragData" cdkDrag>{{data.title}}</div>
+        </div>
+    </div>
+</div>
+
