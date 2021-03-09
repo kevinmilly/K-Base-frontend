@@ -1,4 +1,6 @@
+
 import { Component, OnInit } from '@angular/core';
+
 
 @Component({
     selector: 'kb-main',
@@ -7,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainContainerComponent implements OnInit {
 
+ 
     constructor() {
 
     }
@@ -14,4 +17,6 @@ export class MainContainerComponent implements OnInit {
     ngOnInit() {
 
     }
+
+   
 }

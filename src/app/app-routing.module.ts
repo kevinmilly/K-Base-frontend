@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ContainerModule } from './container/container.module';
 
 const routes: Routes = [
-  // {path:'', loadChildren: () => import('./container/container.module').then(m => ContainerModule)}
+  {path:'', loadChildren: () => import('./container/container.module').then(m => m.ContainerModule)}
 ];
 
 @NgModule({

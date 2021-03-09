@@ -1,7 +1,7 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row>
       <button mat-icon-button>
-        <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
+        <mat-icon (click)="onToggle()">menu</mat-icon>
       </button>
       <h1>K-Base</h1>
       <span class="menu-spacer"></span>
@@ -20,4 +20,6 @@
         <span style="font-size: 12px;">Actionable Knowledgebase</span>
       </mat-toolbar-row>
   </mat-toolbar>
-  
+  <ng-content>
+
+  </ng-content>

@@ -3,7 +3,7 @@ import { SharedModule } from '../shared/shared.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
-
+import { Router, RouterModule, Routes } from '@angular/router';
 
 
 @NgModule({
@@ -13,7 +13,8 @@ import { SidenavComponent } from './sidenav/sidenav.component';
     SidenavComponent
   ],
   imports: [
-    SharedModule
+    SharedModule,
+    RouterModule
   ],
   exports: [
     DashboardComponent,

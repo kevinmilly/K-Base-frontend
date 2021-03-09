@@ -16,6 +16,8 @@ import { MatInputModule } from '@angular/material/input';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSidenavModule} from '@angular/material/sidenav';
 
+import {MatListModule} from '@angular/material/list';
+
 @NgModule({
     declarations:[],
     imports:[
@@ -32,7 +34,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
         MatFormFieldModule,
         MatInputModule,
         MatToolbarModule,
-        MatSidenavModule
+        MatSidenavModule,
+        MatListModule
 
     ],
     exports:[
@@ -49,7 +52,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
         MatFormFieldModule,
         MatInputModule,
         MatToolbarModule,
-        MatSidenavModule
+        MatSidenavModule,
+        MatListModule
    
     ]
 })
