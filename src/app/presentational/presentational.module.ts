@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { GraphComponent } from './graph/graph.component';
 import { KanbanComponent } from './kanban/kanban.component';
-import { TableComponent } from './table/table.component';
+
 
 
 
 @NgModule({
-  declarations: [GraphComponent,KanbanComponent,TableComponent],
+  declarations: [GraphComponent,KanbanComponent],
   imports: [
   ],
   exports:[
-    GraphComponent,KanbanComponent,TableComponent
+    GraphComponent,KanbanComponent
   ]
 })
 export class PresentationalModule { }

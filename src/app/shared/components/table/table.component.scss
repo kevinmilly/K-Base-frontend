@@ -1,0 +1,68 @@
+.mat-table {
+    width: auto;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  .filter-options {
+    display: flex;
+    justify-content: flex-start;
+  }
+  .mat-cell,
+  .mat-header-cell {
+    word-wrap: initial;
+    display: table-cell;
+    padding: 0px 5px;
+    line-break: unset;
+    width: 50%;
+    white-space: nowrap;
+    overflow: hidden;
+    vertical-align: middle;
+  }
+
+  tr:nth-child(even) {
+    background-color: var(--off-white);
+  }
+  
+  tr:hover {
+    animation: myfirst 4s 1;
+    -webkit-animation: myfirst 4s 1; /* Safari and Chrome */
+  }
+  
+  @keyframes myfirst {
+    0% {
+      background: var(--off-white);
+    }
+    25% {
+      background: #ffffff;
+    }
+    75% {
+      background: #ffffff;
+    }
+    100% {
+      background: var(--off-white);
+    }
+  }
+  
+  .table-link {
+    cursor: var(--link-cursor);
+  }
+  
+  .mat-paginator-container {
+    font-size: var(--table-control-font-size);
+    border: var(--off-gray);
+  }
+  
+  .mat-paginator-container {
+    font-size: var(--table-control-font-size);
+    border: black;
+  }
+  
+  .horiz-scroll {
+    width: var(--semi-full-width);
+    overflow: auto;
+    // padding: 0 2rem 0 1rem;
+  }

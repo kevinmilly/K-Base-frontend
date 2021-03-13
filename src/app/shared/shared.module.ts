@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 import {HttpClientModule} from '@angular/common/http';
 import { BackendService } from './services/backend.service';
 import { MaterialModule } from './modules/material.module';
+import { TableComponent } from './components/table/table.component';
+import { DropdownComponent } from './components/dropdown/dropdown.component';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [TableComponent, DropdownComponent],
   imports: [
     CommonModule,
     HttpClientModule,

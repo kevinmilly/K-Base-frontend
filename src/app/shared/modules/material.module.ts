@@ -13,6 +13,12 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatSidenavModule} from '@angular/material/sidenav';
+
+import {MatToolbarModule} from '@angular/material/toolbar';
+import { MatSelectModule } from '@angular/material/select';
+
 @NgModule({
     declarations:[],
     imports:[
@@ -27,7 +33,11 @@ import { MatInputModule } from '@angular/material/input';
         MatDialogModule,
         MatDividerModule,
         MatFormFieldModule,
-        MatInputModule
+        MatInputModule,
+        MatSidenavModule,
+        MatGridListModule,
+        MatToolbarModule,
+        MatSelectModule
 
     ],
     exports:[
@@ -42,7 +52,10 @@ import { MatInputModule } from '@angular/material/input';
         MatDialogModule,
         MatDividerModule,
         MatFormFieldModule,
-        MatInputModule
+        MatInputModule,
+        MatSidenavModule,
+        MatGridListModule,
+        MatToolbarModule
    
     ]
 })
