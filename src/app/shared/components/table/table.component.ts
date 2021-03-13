@@ -17,7 +17,7 @@ export class TableComponent implements OnInit {
   @Input() filters:string[] = []; //different things you can filter by
   @Input() displayNames:string[] = [];
   @Input() action = false;
-  @Input() actionButtonIcon?:string;
+  @Input() actionButtonIcon:string = 'thumbs_up';
 
   @Output() onApproved = new EventEmitter();
 

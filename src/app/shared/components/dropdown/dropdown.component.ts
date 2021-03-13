@@ -1,6 +1,5 @@
-import {Component, Input, Output} from '@angular/core';
+import {Component, Input, Output, EventEmitter} from '@angular/core';
 import {FormControl} from '@angular/forms';
-import * as EventEmitter from 'node:events';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -20,9 +19,8 @@ import { Observable } from 'rxjs';
 export class DropdownComponent {
 
   @Input() list:string[] = [];
-  @Output() onChoiceEmitter:EventEmitter = new EventEmitter();
+  @Output() onChoiceEmitter:EventEmitter<string> = new EventEmitter<string>();
   selected = new FormControl();
-  selected$:Observable<string> = new Observable();
 
   constructor() { }
 

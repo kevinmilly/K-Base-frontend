@@ -7,11 +7,7 @@ import { KanbanComponent } from './kanban/kanban.component';
 
 
 @NgModule({
-<<<<<<< HEAD
   declarations: [GraphComponent,KanbanComponent],
-=======
-  declarations: [GraphComponent,KanbanComponent,TableComponent], 
->>>>>>> 42d81fb57986b306e8b0035988d1752653fdb6e5
   imports: [
     SharedModule
   ],

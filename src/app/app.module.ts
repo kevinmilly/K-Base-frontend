@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ContainerModule } from './container/container.module';
-import { GlobalLayoutModule } from './global-layout/layout.module';
+import { GlobalLayoutModule } from './global-layout/global-layout.module';
 
 
 

@@ -1,0 +1,29 @@
+<ng-container [ngSwitch]="type">
+    <button 
+      *ngSwitchCase="'regular'" 
+       mat-raised-button 
+       [ngClass]="{'reg': size==='reg', 'small': size==='small', 'big': size==='big'}"
+       (click)="clicked.emit()"
+       color="primary"
+       >
+       <ng-content *ngIf="content === ''; else noContent"></ng-content>
+       <ng-template #noContent>{{content}}</ng-template>
+      </button>
+    <button 
+      *ngSwitchCase="'fab'" 
+       mat-fab color="primary"
+       [ngClass]="{'reg': size==='reg', 'small': size==='small', 'big': size==='big'}"
+       (click)="clicked.emit()"
+       >
+      <mat-icon>{{content}}</mat-icon>
+    </button>
+    <button 
+      *ngSwitchCase="'icon'"
+       color="accent"
+       mat-icon-button
+       [ngClass]="{'reg': size==='reg', 'small': size==='small', 'big': size==='big'}"
+       (click)="clicked.emit()"
+    >
+        <mat-icon>{{content}}</mat-icon>
+      </button>
+</ng-container>
