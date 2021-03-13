@@ -13,11 +13,18 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
+<<<<<<< HEAD
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatSidenavModule} from '@angular/material/sidenav';
 
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { MatSelectModule } from '@angular/material/select';
+=======
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatSidenavModule} from '@angular/material/sidenav';
+
+import {MatListModule} from '@angular/material/list';
+>>>>>>> 42d81fb57986b306e8b0035988d1752653fdb6e5
 
 @NgModule({
     declarations:[],
@@ -34,10 +41,16 @@ import { MatSelectModule } from '@angular/material/select';
         MatDividerModule,
         MatFormFieldModule,
         MatInputModule,
+<<<<<<< HEAD
         MatSidenavModule,
         MatGridListModule,
         MatToolbarModule,
         MatSelectModule
+=======
+        MatToolbarModule,
+        MatSidenavModule,
+        MatListModule
+>>>>>>> 42d81fb57986b306e8b0035988d1752653fdb6e5
 
     ],
     exports:[
@@ -53,9 +66,15 @@ import { MatSelectModule } from '@angular/material/select';
         MatDividerModule,
         MatFormFieldModule,
         MatInputModule,
+<<<<<<< HEAD
         MatSidenavModule,
         MatGridListModule,
         MatToolbarModule
+=======
+        MatToolbarModule,
+        MatSidenavModule,
+        MatListModule
+>>>>>>> 42d81fb57986b306e8b0035988d1752653fdb6e5
    
     ]
 })
