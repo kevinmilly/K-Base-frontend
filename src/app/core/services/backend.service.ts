@@ -17,12 +17,11 @@ export class BackendService {
   constructor(private http:HttpClient) { }
 
   getConcepts() {
-    this.http.get<{m:string,c:IConcept[]}>('http://localhost:3000/api/concepts')
-      .subscribe((data) => {
-        this.concepts = data.c;
-        this.conceptsUpdated.next(this.concepts);
-
-      });
+    // this.http.get<{m:string,c:IConcept[]}>('http://localhost:3000/api/concepts')
+    //   .subscribe((data) => {
+    //     this.concepts = data.c;
+    //   });
+    return this.http.get<{m:string,c:IConcept[]}>('http://localhost:3000/api/concepts');
   }
 
   getNotes() {

@@ -1,7 +1,7 @@
 export interface IConcept {
     _id:string;
     title:string;
-    progress:number;
+    difficulty:number;
     relatedConcepts:string[];
     relatedNotes:string[];
     milestones:string[];

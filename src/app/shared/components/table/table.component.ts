@@ -5,13 +5,13 @@ import {MatTableDataSource} from '@angular/material/table';
 import { Observable, Subscription } from 'rxjs';
 
 @Component({
-  selector: 'kb-table',
+  selector: 'kb-table', 
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss']
 })
 export class TableComponent implements OnInit {
 
-  @Input() data$:Observable<any> = new Observable<any>();
+  @Input() data:any[] = [];
   @Input() columns:string[] = [];
   @Input() filterChoices:string[][] = []; //options the below filters can be, order of this filter Choices array based on order of filters array
   @Input() filters:string[] = []; //different things you can filter by
@@ -22,7 +22,7 @@ export class TableComponent implements OnInit {
   @Output() onApproved = new EventEmitter();
 
   dataSaved:any[] = [];
-  data: any[] = [];
+
 
   displayedColumns: string[] = [];
   dataSource: MatTableDataSource<any> = new MatTableDataSource;
@@ -31,35 +31,20 @@ export class TableComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  dataSub?:Subscription;
-
-  
 
   constructor() {
     
    }
 
-  ngOnInit(): void {
-    this.dataSub = this.data$.subscribe( d => {
-
-        console.dir(d);
-        this.dataSaved = [...d];
-        this.data = [...d];
-        this.dataSource = new MatTableDataSource([...this.data]);
-        this.setupSortAndPagination();
+  ngOnInit(): void {    
+    this.dataSaved = [...this.data];
+    this.dataSource = new MatTableDataSource([...this.data]);
+    this.setupSortAndPagination();
       
-    })
-
     this.displayedColumns = this.displayNames;
     this.columns = this.columns.filter(c => c !== "_id");
 
-
   }
-
-  // ngAfterViewInit() {
-
-  //   this.setupSortAndPagination();
-  // }
 
   applySearchFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -86,8 +71,6 @@ export class TableComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
 
-  ngOnDestroy() {
-    if(this.dataSub) this.dataSub.unsubscribe();
-  }
+
 
 }

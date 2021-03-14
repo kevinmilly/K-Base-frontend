@@ -3,16 +3,13 @@
       <button mat-icon-button>
         <mat-icon (click)="onToggle()">menu</mat-icon>
       </button>
-      <h1>K-Base</h1>
+      <h1 class="title">K-Base</h1>
       <span class="menu-spacer"></span>
       <div>
-        <a mat-button [routerLink]="'/accounts'"> Accounts </a>
-        <a mat-button [routerLink]="'/create-account'"> Create Account </a>
-        <a mat-button [routerLink]="'/contacts'"> Contacts </a>
-        <a mat-button [routerLink]="'/create-contact'"> Create Contact </a>
-        <a mat-button [routerLink]="'/activities'"> Activities </a>
-        <a mat-button [routerLink]="'/create-activity'"> Create Activity </a>
-  
+        <a mat-button [routerLink]="'/dashboard'"  routerLinkActive="router-link-active" > Dashboard </a>
+        <a mat-button [routerLink]="'/concepts'"  routerLinkActive="router-link-active" > Concepts </a>
+        <a mat-button> Logout </a>
+        
       </div>
     </mat-toolbar-row>
   

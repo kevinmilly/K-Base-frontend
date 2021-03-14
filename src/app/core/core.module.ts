@@ -4,18 +4,16 @@ import { GlobalLayoutModule } from '../global-layout/global-layout.module';
 
 
 import { SharedModule } from '../shared/shared.module';
-import { ContainerRoutingModule } from './container.routing.module';
-import { MainComponent } from './main/main.component';
-
+import { BackendService } from './services/backend.service';
 
 
 
 @NgModule({
-  declarations: [MainComponent],
+  declarations: [],
   imports: [
-    ContainerRoutingModule,
     GlobalLayoutModule,
     SharedModule
-  ]
+  ],
+  providers: [BackendService]
 })
-export class ContainerModule { }
+export class CoreModule { }

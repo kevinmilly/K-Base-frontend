@@ -1,0 +1,9 @@
+<form class="concept-form">
+    <mat-form-field>
+        <mat-label>Input</mat-label>
+        <input matInput [formControl]="enterConcept" placeholder="Ex. Quantum physics">
+        <mat-error *ngIf="enterConcept.hasError('required')">
+            Concept is required is <strong>required</strong>
+          </mat-error>
+    </mat-form-field>
+</form>
