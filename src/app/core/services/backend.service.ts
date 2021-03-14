@@ -44,6 +44,7 @@ export class BackendService {
   /*POSTS*/
 
   addConcepts(c:IConcept) {
+    console.log({c});
     this.http.post<{m: string}>('http://localhost:3000/api/concepts', c)
       .subscribe((response) => {
         this.concepts.push(c);
