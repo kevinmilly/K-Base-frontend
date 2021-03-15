@@ -43,6 +43,7 @@ export class TableComponent implements OnInit {
       
     this.displayedColumns = this.displayNames;
     this.columns = this.columns.filter(c => c !== "_id");
+    console.dir(this.columns);
 
   }
 

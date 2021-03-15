@@ -47,8 +47,10 @@ export class ConceptsComponent implements OnInit {
   ngOnInit(): void {
     this.subs.sink = this.backend.getConcepts()
       .subscribe(conceptAndMessage => {
-        console.log(conceptAndMessage.m);
-        this.concepts = conceptAndMessage.c;
+        console.dir(conceptAndMessage);
+        console.log(conceptAndMessage.message);
+        this.concepts = conceptAndMessage.concepts;
+        console.dir(this.concepts);
       })
 
   }

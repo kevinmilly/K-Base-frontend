@@ -1,5 +1,5 @@
 export interface IConcept {
-    _id:string;
+    _id?:string;
     title:string;
     difficulty:number;
     relatedConcepts:string[];

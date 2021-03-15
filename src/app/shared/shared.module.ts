@@ -4,7 +4,6 @@ import {HttpClientModule} from '@angular/common/http';
 import { MaterialModule } from './modules/material.module';
 import { TableComponent } from './components/table/table.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedButtonComponent } from './components/button/shared-button.component';
 import { AddConceptComponent } from './components/add-concept/add-concept.component';
 
@@ -16,17 +15,14 @@ import { AddConceptComponent } from './components/add-concept/add-concept.compon
     CommonModule,
     HttpClientModule,
     MaterialModule,
-    FormsModule,
-    ReactiveFormsModule
   ],
   exports: [
     CommonModule,
     HttpClientModule,
     MaterialModule,
-    FormsModule,
-    ReactiveFormsModule,
     TableComponent, 
     DropdownComponent,
+    AddConceptComponent,
     SharedButtonComponent
   ],
 })

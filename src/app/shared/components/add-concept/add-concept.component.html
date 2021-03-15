@@ -1,9 +1,22 @@
-<form class="concept-form">
+<form class="concept-form"  [style.margin-left.rem]="8">
     <mat-form-field>
-        <mat-label>Input</mat-label>
-        <input matInput [formControl]="enterConcept" placeholder="Ex. Quantum physics">
-        <mat-error *ngIf="enterConcept.hasError('required')">
-            Concept is required is <strong>required</strong>
+        <mat-label>Quick Add Concept</mat-label>
+        <input 
+            matInput 
+            [formControl]="enterConcept" 
+            placeholder="Ex. Quantum physics"
+            (keydown)="enterSubmit($event)"
+            >
+        <mat-error *ngIf="enterConcept.hasError('required')" [style.color]="'red'">
+            Concept is <strong>required</strong>
           </mat-error>
     </mat-form-field>
+    <kb-shared-button
+        *ngIf="!enterConcept.hasError('required') && enterConcept.value !== ''"
+        class="" 
+        [type]="'icon'" 
+        [content]="'thumb_up_off_alt'"
+        [size]="'small'"
+        (clicked)="submit()"
+    ></kb-shared-button>
 </form>

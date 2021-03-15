@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { IConcept } from '../models/concepts.model';
 
 @Injectable({
@@ -21,7 +20,7 @@ export class BackendService {
     //   .subscribe((data) => {
     //     this.concepts = data.c;
     //   });
-    return this.http.get<{m:string,c:IConcept[]}>('http://localhost:3000/api/concepts');
+    return this.http.get<{message:string,concepts:IConcept[]}>('http://localhost:3000/api/concepts');
   }
 
   getNotes() {

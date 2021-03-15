@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { IConcept } from 'src/app/core/models/concepts.model';
 import { BackendService } from 'src/app/core/services/backend.service';
 
 @Component({
@@ -21,7 +22,32 @@ export class AddConceptComponent implements OnInit {
   }
 
   submit() {
-    this.backend.addConcepts({...this.enterConcept.value})
+    this.backend.addConcepts({
+      title: this.enterConcept.value,
+      difficulty: 3,
+      status: 0,
+      relatedConcepts:[],
+      relatedNotes:[],
+      milestones:[],
+      lastRecalled: new Date().toDateString()
+    } as IConcept)
+    this.enterConcept.reset();
+  }
+
+  enterSubmit(event:any) {
+    if (event.keyCode === 13) {
+      this.backend.addConcepts({
+        title: this.enterConcept.value,
+        difficulty: 3,
+        status: 0,
+        relatedConcepts:[],
+        relatedNotes:[],
+        milestones:[],
+        lastRecalled: new Date().toDateString()
+      } as IConcept)
+      this.enterConcept.reset();
+     
+    }
   }
 
 }

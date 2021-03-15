@@ -22,7 +22,7 @@
                 </td>
             </ng-container>
 
-                <ng-container *ngFor="let c of refColumns; let i = index">
+                <ng-container *ngFor="let c of columns; let i = index">
                     
                     <ng-container *ngIf="i != 0" matColumnDef="{{c}}">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> {{displayedColumns[i]}} </th>
