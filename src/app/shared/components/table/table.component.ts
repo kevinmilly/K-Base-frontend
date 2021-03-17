@@ -37,6 +37,7 @@ export class TableComponent implements OnInit {
    }
 
   ngOnInit(): void {    
+    console.dir(this.data);
     this.dataSaved = [...this.data];
     this.dataSource = new MatTableDataSource([...this.data]);
     this.setupSortAndPagination();

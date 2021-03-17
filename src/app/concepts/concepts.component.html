@@ -1,4 +1,5 @@
 <kb-table
+    *ngIf="concepts.length > 0"
     [data]="concepts"
     [columns]="columns"
     [filterChoices]="filterChoices"
