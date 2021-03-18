@@ -3,11 +3,16 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { Observable, Subscription } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { DetailComponent } from 'src/app/concepts/detail/detail.component';
+import { BackendService } from 'src/app/core/services/backend.service';
+import { IConcept } from 'src/app/core/models/concepts.model';
 
 @Component({
   selector: 'kb-table', 
   templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss']
+  styleUrls: ['./table.component.scss'] 
 })
 export class TableComponent implements OnInit {
 
@@ -16,7 +21,7 @@ export class TableComponent implements OnInit {
   @Input() filterChoices:string[][] = []; //options the below filters can be, order of this filter Choices array based on order of filters array
   @Input() filters:string[] = []; //different things you can filter by
   @Input() displayNames:string[] = [];
-  @Input() action = false;
+  @Input() action = false; 
   @Input() actionButtonIcon:string = 'thumbs_up';
 
   @Output() onApproved = new EventEmitter();
@@ -32,8 +37,11 @@ export class TableComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
 
 
-  constructor() {
-    
+  constructor(
+    private _snackBar: MatSnackBar,
+    public dialog: MatDialog,
+    private backend:BackendService
+  ) {
    }
 
   ngOnInit(): void {    
@@ -73,6 +81,19 @@ export class TableComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
 
+  rowClick(event:IConcept) {
+    const dialogRef = this.dialog.open(DetailComponent, {
+      width: '50rem',
+      height: '26rem',
+      data: {
+        concept:event,
+        tasks$:this.backend.getTasks(event._id)
+      }
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+
+    });
+  }
 
 }

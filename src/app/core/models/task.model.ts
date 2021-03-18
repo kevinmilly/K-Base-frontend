@@ -1,8 +1,10 @@
 export interface ITask {
-    id:string;
+    _id:string;
     title:string;
-    progress:number;
-    relatedMilestone:string; 
+    resource:string;
+    difficulty:number;
+    dependentTasks:string[];
+    lastRecalled:string[];
+    status:number;
     completed:boolean;
-    resourceLink:string;
 }

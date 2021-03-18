@@ -26,10 +26,11 @@ export class AddConceptComponent implements OnInit {
       title: this.enterConcept.value,
       difficulty: 3,
       status: 0,
-      relatedConcepts:[],
+      dependentConcepts:[],
       relatedNotes:[],
-      milestones:[],
-      lastRecalled: new Date().toDateString()
+      resource:`https://www.youtube.com/results?search_query=${this.enterConcept.value}`,
+      lastRecalled: new Date().toDateString(),
+      completed:false
     } as IConcept)
     this.enterConcept.reset();
   }
@@ -38,12 +39,13 @@ export class AddConceptComponent implements OnInit {
     if (event.keyCode === 13) {
       this.backend.addConcepts({
         title: this.enterConcept.value,
+        resource:`https://www.youtube.com/results?search_query=${this.enterConcept.value}`,
         difficulty: 3,
         status: 0,
-        relatedConcepts:[],
+        dependentConcepts:[],
         relatedNotes:[],
-        milestones:[],
-        lastRecalled: new Date().toDateString()
+        lastRecalled: new Date().toDateString(),
+        completed:false
       } as IConcept)
       this.enterConcept.reset();
      

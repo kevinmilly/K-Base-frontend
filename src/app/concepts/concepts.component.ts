@@ -19,7 +19,8 @@ export class ConceptsComponent implements OnInit {
     "title",
     "difficulty",
     "lastRecalled",
-    "status"
+    "status",
+    "resource"
   ]
 
   filterChoices:string[][] = [
@@ -53,6 +54,10 @@ export class ConceptsComponent implements OnInit {
         console.dir(this.concepts);
       })
 
+  }
+
+  detail(row:IConcept) {
+    
   }
 
   ngOnDestroy() {

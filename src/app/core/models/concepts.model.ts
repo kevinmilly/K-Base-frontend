@@ -1,10 +1,11 @@
 export interface IConcept {
     _id?:string;
     title:string;
+    resource:string;
     difficulty:number;
-    relatedConcepts:string[];
+    dependentConcepts:string[];
     relatedNotes:string[];
-    milestones:string[];
     lastRecalled:string;
     status:number;
+    completed:boolean;
 }

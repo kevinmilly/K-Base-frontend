@@ -1,9 +1,10 @@
 .mat-table {
-    width: auto;
+    width: 100%;
+
   }
   
   .mat-form-field {
-    font-size: 14px;
+    font-size: 1.4rem;
     width: 100%;
   }
   
@@ -22,6 +23,7 @@
     white-space: nowrap;
     overflow: hidden;
     vertical-align: middle;
+    font-size: 1.2rem;
   }
 
   tr:nth-child(even) {
@@ -36,21 +38,25 @@
 
   @keyframes myfirst {
     0% {
-      background: var(--off-white);
+      background: #2c2c2c;
     }
     25% {
-      background: #ffffff;
+      background: #000000;
     }
     75% {
-      background: #ffffff;
+      background: #19103a;
     }
     100% {
-      background: var(--off-white);
+      background: #2c2c2c;
     }
   }
   
   .table-link {
     cursor: var(--link-cursor);
+  }
+
+  a {
+    color: aqua;
   }
   
   .mat-paginator-container {

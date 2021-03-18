@@ -1,0 +1,21 @@
+<kb-tab [labels]="['Monthly','YTD']">
+    <div id="first">
+        <kb-table
+         [action]="true"
+         [data$]="timeTransactions$" 
+         [columns]="columns"
+         [displayNames]="displayNames"
+         [link]="true"
+         (onLinkClicked)="changeCharge($event)"
+         (onApproved)="markApproved($event)"
+         ></kb-table>
+    </div>
+    <div id="second">
+        <kb-table
+            [action]="false"
+            [data$]="approvedTimeTransactions$" 
+            [columns]="ytdColumns"
+            [displayNames]="ytdDisplayNames"
+        ></kb-table>
+    </div>
+</kb-tab>

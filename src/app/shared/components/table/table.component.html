@@ -33,12 +33,23 @@
                     </ng-container>
                     
                     <ng-template #nonStatusDifficulty>
-                        <ng-container  matColumnDef="{{c}}">
-                            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{displayedColumns[i]}} </th>
-                            <td mat-cell *matCellDef="let row">
-                                 {{row[c]}}
-                            </td>
+                        <ng-container *ngIf="c==='resource'; else nonResource">
+                            <ng-container  matColumnDef="resource">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Resource </th>
+                                <td mat-cell *matCellDef="let row">
+                                     <a href={{row[c]}}>{{row[c]}}</a>
+                                </td>
+                            </ng-container>
                         </ng-container>
+
+                        <ng-template #nonResource>
+                            <ng-container matColumnDef="{{c}}">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{displayedColumns[i]}} </th>
+                                <td mat-cell *matCellDef="let row">
+                                     {{row[c]}}
+                               </td>
+                            </ng-container>
+                        </ng-template>
                     </ng-template>
                     
                 </ng-container>

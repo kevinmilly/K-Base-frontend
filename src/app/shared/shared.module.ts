@@ -5,8 +5,8 @@ import { MaterialModule } from './modules/material.module';
 import { TableComponent } from './components/table/table.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { SharedButtonComponent } from './components/button/shared-button.component';
-import { AddConceptComponent } from './components/add-concept/add-concept.component';
 import { DifficultyPipe } from './pipes/difficulty-status.pipe';
+import { TabComponent } from './components/tab/tab.component';
 
 
 
@@ -15,7 +15,7 @@ import { DifficultyPipe } from './pipes/difficulty-status.pipe';
     TableComponent, 
     DropdownComponent,
     SharedButtonComponent,
-     AddConceptComponent,
+    TabComponent,
     DifficultyPipe],
   imports: [
     CommonModule,
@@ -27,8 +27,8 @@ import { DifficultyPipe } from './pipes/difficulty-status.pipe';
     HttpClientModule,
     MaterialModule,
     TableComponent, 
+    TabComponent,
     DropdownComponent,
-    AddConceptComponent,
     SharedButtonComponent
   ],
 })
