@@ -21,52 +21,32 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+const modules = [        
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatSnackBarModule, 
+    MatCardModule,
+    MatIconModule,
+    MatButtonModule,
+    MatTabsModule,
+    MatDialogModule,
+    MatDividerModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSidenavModule,
+    MatListModule,
+    MatGridListModule,
+    MatToolbarModule,
+    MatSelectModule,
+    FormsModule,
+    ReactiveFormsModule
+]
+
 @NgModule({
     declarations:[],
-    imports:[
-        MatTableModule,
-        MatPaginatorModule,
-        MatSortModule,
-        MatSnackBarModule, 
-        MatCardModule,
-        MatIconModule,
-        MatButtonModule,
-        MatTabsModule,
-        MatDialogModule,
-        MatDividerModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatSidenavModule,
-        MatListModule,
-        MatGridListModule,
-        MatToolbarModule,
-        MatSelectModule,
-        FormsModule,
-        ReactiveFormsModule
-
-    ],
-    exports:[
-        MatTableModule,
-        MatPaginatorModule,
-        MatSortModule,
-        MatSnackBarModule, 
-        MatCardModule,
-        MatIconModule,
-        MatButtonModule,
-        MatTabsModule,
-        MatDialogModule,
-        MatDividerModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatSidenavModule,
-        MatListModule,
-        MatGridListModule,
-        MatToolbarModule,
-        MatSelectModule,
-        FormsModule,
-        ReactiveFormsModule
-   
-    ]
+    imports:modules,
+    exports: modules
 })
 export class MaterialModule {
     

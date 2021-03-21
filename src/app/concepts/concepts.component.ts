@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { Observable, Subscription } from 'rxjs';
 import { SubSink } from 'subsink';
 import { IConcept } from '../core/models/concepts.model';
 import { BackendService } from '../core/services/backend.service';
+import { DetailComponent } from './detail/detail.component';
 
 @Component({
   selector: 'kb-concepts',
@@ -42,8 +44,9 @@ export class ConceptsComponent implements OnInit {
   displayNames:string[] = ["Title","Difficulty","Last Recalled", "Status"];
 
   
+  
 
-  constructor(private backend:BackendService) { }
+  constructor(private backend:BackendService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.subs.sink = this.backend.getConcepts()
@@ -57,7 +60,21 @@ export class ConceptsComponent implements OnInit {
   }
 
   detail(row:IConcept) {
+    this.subs.sink = this.backend.getTasks(row._id || "")
+      .subscribe(taskAndMessage => {
+        console.dir(taskAndMessage);
+
+        const dialogRef = this.dialog.open(DetailComponent, {
+          width: '250px',
+          data: { concept: row, tasks:taskAndMessage.tasks} 
+        });
     
+        this.subs.sink = dialogRef.afterClosed().subscribe(result => {
+          console.dir(result);
+        });
+        
+      })
+   
   }
 
   ngOnDestroy() {

@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { IConcept } from 'src/app/core/models/concepts.model';
+import { ITask } from 'src/app/core/models/task.model';
 import { BackendService } from 'src/app/core/services/backend.service';
 
 @Component({
@@ -9,6 +11,28 @@ import { BackendService } from 'src/app/core/services/backend.service';
   styleUrls: ['./detail.component.scss']
 })
 export class DetailComponent implements OnInit {
+
+  columns:string[] =[
+    "title",
+    "difficulty",
+    "lastRecalled",
+    "status",
+    "resource"
+  ]
+
+  filterChoices:string[][] = [
+    [
+      "Cake",
+      "Average",
+      "Formiddable",
+      "Impossible"
+    ],
+    [
+      "Not Started",
+      "In Progress",
+      "Done"
+    ]
+  ]
 
   messages:string[] = [
     `Small steps motivate. Big steps overwhelm. - Maxime Lagacé`,
@@ -34,12 +58,27 @@ export class DetailComponent implements OnInit {
       Nothing can be done without hope or confidence. - Helen Keller`
   ];
 
+  concept:IConcept = {} as IConcept;
+  tasks:ITask[] = [];
+
   constructor(
     private _snackBar: MatSnackBar,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    @Inject(MAT_DIALOG_DATA) public data: {concept:IConcept, tasks:ITask[]},
+    private dialogRef: MatDialogRef<DetailComponent>,
+    private backend:BackendService
   ) { }
 
   ngOnInit(): void {
+    this.concept = this.data.concept;
+    this.tasks = this.data.tasks;
+  }
+
+
+  markApproved(event:IConcept) {
+    console.dir(event);
+    event.completed = true;
+    this.dialogRef.close(event);
   }
 
 }

@@ -13,6 +13,9 @@ import { DetailComponent } from './detail/detail.component';
     CommonModule,
     ConceptsRoutingModule,
     SharedModule
+  ],
+  entryComponents:[
+    DetailComponent
   ]
 })
 export class ConceptsModule { }

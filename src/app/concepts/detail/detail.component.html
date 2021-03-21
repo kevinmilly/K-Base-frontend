@@ -1,21 +1,18 @@
-<kb-tab [labels]="['Monthly','YTD']">
+<kb-tab [labels]="['Tasks','Concept Edit']">
     <div id="first">
         <kb-table
-         [action]="true"
-         [data$]="timeTransactions$" 
-         [columns]="columns"
-         [displayNames]="displayNames"
-         [link]="true"
-         (onLinkClicked)="changeCharge($event)"
-         (onApproved)="markApproved($event)"
+        *ngIf="concepts.length > 0"
+        [data]="concepts"
+        [columns]="columns"
+        [filterChoices]="filterChoices"
+        [filters]="filters"
+        [displayNames]="displayNames"
+        [action]="true"
+        [actionButtonIcon]="'zoom_in'"
+       (onApproved)="markApproved($event)"
          ></kb-table>
     </div>
     <div id="second">
-        <kb-table
-            [action]="false"
-            [data$]="approvedTimeTransactions$" 
-            [columns]="ytdColumns"
-            [displayNames]="ytdDisplayNames"
-        ></kb-table>
+       Need to make Concept Edit
     </div>
-</kb-tab>
+</kb-tab> 
