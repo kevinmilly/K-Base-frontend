@@ -20,12 +20,12 @@ export class BackendService {
 
   /*TASKS*/
 
-  getTasks(id:string) {
+  getTasks(id?:string) {
     return this.http.get<{message:string,tasks:ITask[]}>(`http://localhost:3000/api/tasks/${id}`);
   }
 
-  editTasks(id:string) {
-    this.http.put<{task:ITask}>(`http://localhost:3000/api/tasks/${id}`);
+  editTasks(task:ITask) {
+    this.http.put<{task:ITask}>(`http://localhost:3000/api/tasks/${task.id}`, task);
   }
 
 
@@ -33,7 +33,6 @@ export class BackendService {
   /*CONCEPTS*/
 
   addConcepts(c:IConcept) {
-    console.log({c});``)
     this.http.post<{m: string}>('http://localhost:3000/api/concepts', c)
       .subscribe((response) => {
         this.concepts.push(c);
@@ -47,6 +46,10 @@ export class BackendService {
     //     this.concepts = data.c;
     //   });
     return this.http.get<{message:string,concepts:IConcept[]}>('http://localhost:3000/api/concepts');
+  }
+
+  editConcept(concept:IConcept) {
+    this.http.put<{concept:IConcept}>(`http://localhost:3000/api/concepts/${concept.id}`, concept);
   }
 
 

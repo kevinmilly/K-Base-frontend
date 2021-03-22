@@ -17,7 +17,8 @@ export class DetailComponent implements OnInit {
     "difficulty",
     "lastRecalled",
     "status",
-    "resource"
+    "resource",
+    "completed"
   ]
 
   filterChoices:string[][] = [
@@ -65,8 +66,7 @@ export class DetailComponent implements OnInit {
     private _snackBar: MatSnackBar,
     public dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: {concept:IConcept, tasks:ITask[]},
-    private dialogRef: MatDialogRef<DetailComponent>,
-    private backend:BackendService
+    private dialogRef: MatDialogRef<DetailComponent>
   ) { }
 
   ngOnInit(): void {

@@ -7,6 +7,7 @@ import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { SharedButtonComponent } from './components/button/shared-button.component';
 import { DifficultyPipe } from './pipes/difficulty-status.pipe';
 import { TabComponent } from './components/tab/tab.component';
+import { EditElementComponent } from './components/edit-element/edit-element.component';
 
 
 
@@ -16,7 +17,8 @@ import { TabComponent } from './components/tab/tab.component';
     DropdownComponent,
     SharedButtonComponent,
     TabComponent,
-    DifficultyPipe],
+    DifficultyPipe,
+    EditElementComponent],
   imports: [
     CommonModule,
     HttpClientModule,
