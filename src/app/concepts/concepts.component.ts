@@ -18,6 +18,7 @@ export class ConceptsComponent implements OnInit {
   concepts:IConcept[] = [];
 
   columns:string[] =[
+    "action",
     "title",
     "difficulty",
     "lastRecalled",
@@ -41,7 +42,7 @@ export class ConceptsComponent implements OnInit {
 
   filters:string[] = ["difficulty", "status"];
 
-  displayNames:string[] = ["Title","Difficulty","Last Recalled", "Status"];
+  displayNames:string[] = ["Actions","Title","Difficulty","Last Recalled", "Status"];
 
   
   

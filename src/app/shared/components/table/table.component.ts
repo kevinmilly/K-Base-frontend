@@ -23,8 +23,10 @@ export class TableComponent implements OnInit {
   @Input() displayNames:string[] = [];
   @Input() action = false; 
   @Input() actionButtonIcon:string = 'thumbs_up';
+  @Input() secondaryButtonIcon:string ='zoom_in';
 
-  @Output() onApproved = new EventEmitter();
+  @Output() onComplete = new EventEmitter();
+  @Output() onZoom = new EventEmitter();
 
   dataSaved:any[] = [];
 
@@ -35,6 +37,25 @@ export class TableComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+
+  categories:any[] = [
+    {
+      icon:'book',
+      cat:'Bible'
+    },
+    {
+      icon:'keyboard',
+      cat: 'Programming'
+    },
+    {
+      icon:'translate',
+      cat: 'Language Studies'
+    },
+    {
+      icon:'psychology',
+      cat:'Potpourri'
+    }
+  ]
 
 
   constructor(
@@ -71,9 +92,12 @@ export class TableComponent implements OnInit {
     this.setupSortAndPagination();
   }
 
-  onClicked(event:any) {
-    this.onApproved.emit({event:event, length:this.data.length - 1});
-
+  onClicked(type:string,event:any) {
+    if(type==='zoom') {
+      this.rowClick(event);
+    } else {
+       this.onComplete.emit({event:event, length:this.data.length - 1});
+    }
   }
 
   setupSortAndPagination() {
@@ -95,5 +119,29 @@ export class TableComponent implements OnInit {
 
     });
   }
+
+  categoryFilter(category:string) {
+   
+    switch (category) {
+      case "nonfiction":
+        this.data = this.dataSaved.filter(d => );
+        break;
+    
+       case "potpourri":
+        this.data = this.dataSaved.filter(d => );
+        break;
+        case "":
+          this.data = this.dataSaved.filter(d => );
+        break;
+        case "Thomas":
+          this.data = this.dataSaved.filter(d => );
+        break;
+    }
+
+    this.dataSource = new MatTableDataSource(this.data);
+      this.setupSortAndPagination();
+
+  }
+
 
 }

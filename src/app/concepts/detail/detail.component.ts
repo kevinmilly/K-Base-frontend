@@ -114,10 +114,13 @@ export class DetailComponent implements OnInit {
   }
 
 
-  markApproved(event:IConcept) {
-    console.dir(event);
-    event.completed = true;
-    this.dialogRef.close(event);
+  markApproved(eventObj:any) {
+    this._snackBar.open(this.messages[Math.floor(Math.random() * this.messages.length)], `${eventObj.length} more to go!`, {
+      duration: 4000,
+    });
+    console.dir(eventObj);
+    eventObj.event.completed = true;
+    this.dialogRef.close(eventObj.event);
   }
 
 }
