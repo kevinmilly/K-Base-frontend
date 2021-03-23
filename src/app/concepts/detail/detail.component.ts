@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { IConcept } from 'src/app/core/models/concepts.model';
+import { IControlModel } from 'src/app/core/models/control.model';
 import { ITask } from 'src/app/core/models/task.model';
 import { BackendService } from 'src/app/core/services/backend.service';
 
@@ -34,6 +35,14 @@ export class DetailComponent implements OnInit {
       "Done"
     ]
   ]
+
+  displayNames:string[] = ["Title","Difficulty","Last Recalled", "Status"];
+
+  filters:string[] = ["difficulty", "status"];
+
+  editControls:IControlModel[] = [];
+
+  
 
   messages:string[] = [
     `Small steps motivate. Big steps overwhelm. - Maxime Lagacé`,
@@ -72,6 +81,36 @@ export class DetailComponent implements OnInit {
   ngOnInit(): void {
     this.concept = this.data.concept;
     this.tasks = this.data.tasks;
+
+    this.editControls = [
+      {
+        name:"Title", 
+        type:"string", 
+        required:true, 
+        default: this.concept.title,
+  
+      },
+      {
+        name:"Resource", 
+        type:"string", 
+        required:false, 
+        default:this.concept.resource,
+      },
+      {
+        name:"Difficulty", 
+        type:"stringChoice", 
+        required:true, 
+        default:this.concept.difficulty,
+        stringChoices:this.filterChoices[0]
+      },
+      {
+        name:"Status", 
+        type:"stringChoice", 
+        required:true, 
+        default:this.concept.status,
+        stringChoices:this.filterChoices[1]
+      }
+    ]
   }
 
 

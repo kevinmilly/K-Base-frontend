@@ -5,13 +5,15 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { Router, RouterModule, Routes } from '@angular/router';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
+import { AddConceptComponent } from '../concepts/add-concept/add-concept.component';
 
 
 @NgModule({
   declarations: [
     DashboardComponent,
     ToolbarComponent,
-    SidenavComponent
+    SidenavComponent,
+    AddConceptComponent
   ],
   imports: [
     SharedModule,

@@ -10,28 +10,23 @@ import { TabComponent } from './components/tab/tab.component';
 import { EditElementComponent } from './components/edit-element/edit-element.component';
 
 
+const components = [
+  TableComponent, 
+  DropdownComponent,
+  SharedButtonComponent,
+  TabComponent,
+  DifficultyPipe,
+  EditElementComponent
+];
+const modules = [
+  CommonModule,
+  HttpClientModule,
+  MaterialModule,
+];
 
 @NgModule({
-  declarations: [
-    TableComponent, 
-    DropdownComponent,
-    SharedButtonComponent,
-    TabComponent,
-    DifficultyPipe,
-    EditElementComponent],
-  imports: [
-    CommonModule,
-    HttpClientModule,
-    MaterialModule,
-  ],
-  exports: [
-    CommonModule,
-    HttpClientModule,
-    MaterialModule,
-    TableComponent, 
-    TabComponent,
-    DropdownComponent,
-    SharedButtonComponent
-  ],
+  declarations: components,
+  imports: modules,
+  exports: [...components,...modules]
 })
 export class SharedModule { }

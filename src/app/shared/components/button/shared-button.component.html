@@ -9,6 +9,16 @@
        <ng-content *ngIf="content === ''; else noContent"></ng-content>
        <ng-template #noContent>{{content}}</ng-template>
       </button>
+     <button 
+      *ngSwitchCase="'cancel'" 
+       mat-raised-button 
+       [ngClass]="{'reg': size==='reg', 'small': size==='small', 'big': size==='big'}"
+       (click)="clicked.emit()"
+       color="warn"
+       >
+       <ng-content *ngIf="content === ''; else noContent"></ng-content>
+       <ng-template #noContent>{{content}}</ng-template>
+    </button>
     <button 
       *ngSwitchCase="'fab'" 
        mat-fab color="primary"
@@ -26,4 +36,4 @@
     >
         <mat-icon>{{content}}</mat-icon>
       </button>
-</ng-container>
+</ng-container> 

@@ -1,8 +1,8 @@
 <kb-tab [labels]="['Tasks','Concept Edit']">
     <div id="first">
         <kb-table
-        *ngIf="concepts.length > 0"
-        [data]="concepts"
+        *ngIf="tasks.length > 0"
+        [data]="tasks"
         [columns]="columns"
         [filterChoices]="filterChoices"
         [filters]="filters"
@@ -13,6 +13,11 @@
          ></kb-table>
     </div>
     <div id="second">
-       Need to make Concept Edit
+        <kb-edit-element
+            [controlsToCreate]="editControls"
+        >
+
+        </kb-edit-element>
     </div>
 </kb-tab> 
+

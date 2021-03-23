@@ -25,7 +25,7 @@ export class BackendService {
   }
 
   editTasks(task:ITask) {
-    this.http.put<{task:ITask}>(`http://localhost:3000/api/tasks/${task.id}`, task);
+    this.http.put<{task:ITask}>(`http://localhost:3000/api/tasks/${task._id}`, task);
   }
 
 
@@ -49,7 +49,7 @@ export class BackendService {
   }
 
   editConcept(concept:IConcept) {
-    this.http.put<{concept:IConcept}>(`http://localhost:3000/api/concepts/${concept.id}`, concept);
+    this.http.put<{concept:IConcept}>(`http://localhost:3000/api/concepts/${concept._id}`, concept);
   }
 
 

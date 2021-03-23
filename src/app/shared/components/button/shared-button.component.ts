@@ -13,12 +13,11 @@ export class SharedButtonComponent implements OnInit {
   @Input() type: string = 'regular';
   @Input() size: string = 'reg';
   @Input() content: string = '';
-
   @Output() clicked = new EventEmitter();
 
   constructor() { }
 
   ngOnInit(): void {
   }
-
+ 
 }

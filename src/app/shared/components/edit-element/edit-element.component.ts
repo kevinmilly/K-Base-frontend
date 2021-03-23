@@ -1,15 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { error } from 'node:console';
+import { IControlModel } from 'src/app/core/models/control.model';
 
-interface IControlModel {
-  name:string, 
-  type:string, 
-  required:boolean, 
-  default:any,
-  numberMax?:number,
-  numberMin?:number
-};
+
 
 @Component({
   selector: 'kb-edit-element',
@@ -20,15 +13,15 @@ export class EditElementComponent implements OnInit {
 
   @Input() controlsToCreate:IControlModel[] = [];
 
-  form:FormGroup = new FormGroup({
-    controlsCreated: new FormArray([])
-  })
+
+ controlsCreated:FormArray = new FormArray([]);
+
 
 
   constructor() { }
 
   ngOnInit(): void {
-
+    this.generateControls(this.controlsToCreate);
   }
 
   generateControls(controlsToCreate:IControlModel[]) {
@@ -37,6 +30,12 @@ export class EditElementComponent implements OnInit {
       vals = [];
       switch (c.type) {
         case "string":
+          if(c.required) vals.push(Validators.required);
+          this.controlsCreated.push(
+            new FormControl(c.default,vals)
+          )
+          break;
+        case "stringChoice":
           if(c.required) vals.push(Validators.required);
           this.controlsCreated.push(
             new FormControl(c.default,vals)
@@ -63,10 +62,15 @@ export class EditElementComponent implements OnInit {
      
       }
     });
+    console.dir(this.controlsCreated);
   }
 
-  get controlsCreated() {
-    return this.form.get('controlsCreated') as FormArray;
+  submit() {}
+
+  get createdControls() {
+    return this.controlsCreated.controls;
   }
+
+  indexedCreatedControls(i:number) { return this.createdControls[i] as FormControl}
 
 }

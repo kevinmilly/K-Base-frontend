@@ -1,1 +1,49 @@
-<p>edit-element works!</p>
+<div class="edit__container">
+    <div class="edit__container__header">
+
+    </div>
+    <div class="edit__container__content">
+            <div *ngFor="let control of createdControls; index as i" [ngSwitch]="controlsToCreate[i].type">
+                <div *ngSwitchCase="'string'">
+                    <mat-form-field>
+                        <mat-label>{{controlsToCreate[i].name}}</mat-label>
+                          <input matInput type="text" [formControl]="indexedCreatedControls(i)" />
+                    </mat-form-field>
+                </div>
+                <div *ngSwitchCase="'number'">
+                    <mat-form-field>
+                        <mat-label>{{controlsToCreate[i].name}}</mat-label>
+                             <input matInput type="number" [formControl]="indexedCreatedControls(i)" />
+                    </mat-form-field>
+                </div>
+                <div *ngSwitchCase="'boolean'">
+                    <mat-form-field>
+                        <mat-label>{{controlsToCreate[i].name}}</mat-label>
+                            <input matInput type="boolean" [formControl]="indexedCreatedControls(i)" />
+                    </mat-form-field>
+                </div>
+                <div *ngSwitchCase="'stringChoice'">
+                    <mat-form-field>
+                        <mat-label>{{controlsToCreate[i].name}}</mat-label>
+                        <mat-select>
+                          <mat-option value="{{c}}" *ngFor="let c of controlsToCreate[i].stringChoices">
+                            {{c}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field> 
+                </div>
+
+            </div>
+    </div>
+
+    <div class="edit__container__buttons">
+
+        <kb-shared-button
+         [type]="'regular'"
+         [size]="'reg'"
+         (clicked)="submit()"
+        >
+         Submit
+        </kb-shared-button>
+     </div>
+</div>
