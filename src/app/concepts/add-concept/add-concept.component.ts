@@ -30,7 +30,8 @@ export class AddConceptComponent implements OnInit {
       relatedNotes:[],
       resource:`https://www.youtube.com/results?search_query=${this.enterConcept.value}`,
       lastRecalled: new Date().toDateString(),
-      completed:false
+      completed:false,
+      tag:"Potpourri"
     } as IConcept)
     this.enterConcept.reset();
   }
@@ -45,7 +46,8 @@ export class AddConceptComponent implements OnInit {
         dependentConcepts:[],
         relatedNotes:[],
         lastRecalled: new Date().toDateString(),
-        completed:false
+        completed:false,
+        tag:"Potpourri"
       } as IConcept)
       this.enterConcept.reset();
      

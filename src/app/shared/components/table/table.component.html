@@ -4,41 +4,40 @@
         <input matInput (keyup)="applySearchFilter($event)" placeholder="Ex. Cooking" #input>
       </mat-form-field>
 
-      <div class="filter-buttons">
         <div class="filter-buttons">
-            <cchDash-shared-button
-               *ngFor="let subject of cateogory"
-               [type]="'regular'" 
-               [content]="subject"
+            <kb-shared-button
+               *ngFor="let subject of categories"
+               [type]="'icon'" 
+               [content]="subject.icon"
                [size]="'big'"
-               (clicked)="cateogoryFilter(subject)"
+               (clicked)="categoryFilter(subject)"
            >
-           </cchDash-shared-button>
+           </kb-shared-button>
        </div>
 
     <table mat-table [dataSource]="dataSource" matSort *ngIf="displayedColumns.length > 0" >
-
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
-                <td mat-cell *matCellDef="let row"> 
-                    <kb-shared-button
-                        [type]="'icon'" 
-                        [content]="actionButtonIcon"
-                        [size]="'reg'"
-                        (clicked)="onClicked('zoom', row)"
-                    >
-                    </kb-shared-button>
-                    <kb-shared-button
-                        [type]="'icon'" 
-                        [content]="secondaryButtonIcon"
-                        [size]="'reg'"
-                        (clicked)="onClicked('complete', row)"
+        <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+            <td mat-cell *matCellDef="let row"> 
+                <kb-shared-button
+                    [type]="'icon'" 
+                    [content]="actionButtonIcon"
+                    [size]="'reg'"
+                    (clicked)="onClicked('zoom', row)"
                 >
                 </kb-shared-button>
-                </td>
-         
-
+                <kb-shared-button
+                    [type]="'icon'" 
+                    [content]="secondaryButtonIcon"
+                    [size]="'reg'"
+                    (clicked)="onClicked('complete', row)"
+            >
+            </kb-shared-button>
+            </td>
+        </ng-container>
+    
                 <ng-container *ngFor="let c of columns; let i = index">
-                    <ng-container *ngIf="i != 0" matColumnDef="{{c}}">
+                    <ng-container *ngIf="i !== 0">
                         <ng-container *ngIf="c === 'difficulty' || c === 'status'; else nonStatusDifficulty">
                             <ng-container matColumnDef="{{c}}">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header> {{displayedColumns[i]}} </th>

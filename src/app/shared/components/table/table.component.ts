@@ -123,18 +123,18 @@ export class TableComponent implements OnInit {
   categoryFilter(category:string) {
    
     switch (category) {
-      case "nonfiction":
-        this.data = this.dataSaved.filter(d => );
+      case "Bible":
+        this.data = this.dataSaved.filter(d => d.tag === "Bible"  );
         break;
     
-       case "potpourri":
-        this.data = this.dataSaved.filter(d => );
+       case "Programming":
+        this.data = this.dataSaved.filter(d => d.tag === "Programming");
         break;
-        case "":
-          this.data = this.dataSaved.filter(d => );
+        case "Language Studies":
+          this.data = this.dataSaved.filter(d => d.tag === "Language Studies");
         break;
-        case "Thomas":
-          this.data = this.dataSaved.filter(d => );
+        case "Potpourri":
+          this.data = this.dataSaved.filter(d => "Potpourri");
         break;
     }
 

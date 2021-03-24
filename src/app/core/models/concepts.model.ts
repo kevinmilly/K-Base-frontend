@@ -8,5 +8,6 @@ export interface IConcept {
     lastRecalled:string;
     status:number;
     completed:boolean;
+    tag:string;
 }
  
