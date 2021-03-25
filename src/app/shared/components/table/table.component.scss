@@ -10,6 +10,7 @@
   .filter-buttons {
     display: flex;
     justify-content: center;
+    margin-bottom: 2rem;
   }
   
   
@@ -37,6 +38,10 @@
     tr:hover {
       animation: myfirst 4s 1;
       -webkit-animation: myfirst 4s 1; /* Safari and Chrome */
+    }
+
+    th {
+      text-transform: uppercase;
     }
   
 

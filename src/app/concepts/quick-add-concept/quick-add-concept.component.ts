@@ -4,9 +4,9 @@ import { IConcept } from 'src/app/core/models/concepts.model';
 import { BackendService } from 'src/app/core/services/backend.service';
 
 @Component({
-  selector: 'kb-add-concept',
-  templateUrl: './add-concept.component.html',
-  styleUrls: ['./add-concept.component.scss']
+  selector: 'kb-quick-add-concept',
+  templateUrl: './quick-add-concept.component.html',
+  styleUrls: ['./quick-add-concept.component.scss']
 })
 export class AddConceptComponent implements OnInit {
 

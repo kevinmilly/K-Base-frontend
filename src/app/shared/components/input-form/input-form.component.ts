@@ -5,11 +5,11 @@ import { IControlModel } from 'src/app/core/models/control.model';
 
 
 @Component({
-  selector: 'kb-edit-element',
-  templateUrl: './edit-element.component.html',
-  styleUrls: ['./edit-element.component.scss']
+  selector: 'kb-input-form',
+  templateUrl: './input-form.component.html',
+  styleUrls: ['./input-form.component.scss']
 })
-export class EditElementComponent implements OnInit {
+export class InputFormComponent implements OnInit {
 
   @Input() controlsToCreate:IControlModel[] = [];
 

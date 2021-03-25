@@ -21,9 +21,12 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import {MatTooltipModule} from '@angular/material/tooltip';
+
 const modules = [        
     MatTableModule,
     MatPaginatorModule,
+    MatTooltipModule,
     MatSortModule,
     MatSnackBarModule, 
     MatCardModule,
@@ -39,6 +42,7 @@ const modules = [
     MatGridListModule,
     MatToolbarModule,
     MatSelectModule,
+    MatGridListModule,
     FormsModule,
     ReactiveFormsModule
 ]

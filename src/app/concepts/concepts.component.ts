@@ -4,7 +4,7 @@ import { Observable, Subscription } from 'rxjs';
 import { SubSink } from 'subsink';
 import { IConcept } from '../core/models/concepts.model';
 import { BackendService } from '../core/services/backend.service';
-import { DetailComponent } from './detail/detail.component';
+import { ConceptDetailComponent } from './concept-detail/concept-detail.component';
 
 @Component({
   selector: 'kb-concepts',
@@ -20,29 +20,30 @@ export class ConceptsComponent implements OnInit {
   columns:string[] =[
     "action",
     "title",
-    "difficulty",
-    "lastRecalled",
-    "status",
-    "resource"
+    "necessity",
+    "level",
+    "details"
   ]
 
   filterChoices:string[][] = [
     [
-      "Cake",
-      "Average",
-      "Formiddable",
-      "Impossible"
+      "Frivolous",
+      "Somewhat Useful",
+      "Very Useful",
+      "Need to Know"
     ],
     [
-      "Not Started",
-      "In Progress",
-      "Done"
+      "Nincompoop",
+      "Beginner",
+      "Intermediate",
+      "Expert",
+      "1%"
     ]
   ]
 
-  filters:string[] = ["difficulty", "status"];
+  filters:string[] = ["necessity", "level"];
 
-  displayNames:string[] = ["Actions","Title","Difficulty","Last Recalled", "Status"];
+  displayNames:string[] = ["Actions","Title","Necessity","Status", "Details"];
 
   
   
@@ -65,7 +66,7 @@ export class ConceptsComponent implements OnInit {
       .subscribe(taskAndMessage => {
         console.dir(taskAndMessage);
 
-        const dialogRef = this.dialog.open(DetailComponent, {
+        const dialogRef = this.dialog.open(ConceptDetailComponent, {
           width: '250px',
           data: { concept: row, tasks:taskAndMessage.tasks} 
         });

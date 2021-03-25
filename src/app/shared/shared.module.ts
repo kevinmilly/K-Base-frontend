@@ -7,7 +7,7 @@ import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { SharedButtonComponent } from './components/button/shared-button.component';
 import { DifficultyPipe } from './pipes/difficulty-status.pipe';
 import { TabComponent } from './components/tab/tab.component';
-import { EditElementComponent } from './components/edit-element/edit-element.component';
+import { InputFormComponent } from './components/input-form/input-form.component';
 
 
 const components = [
@@ -16,7 +16,7 @@ const components = [
   SharedButtonComponent,
   TabComponent,
   DifficultyPipe,
-  EditElementComponent
+  InputFormComponent
 ];
 const modules = [
   CommonModule,

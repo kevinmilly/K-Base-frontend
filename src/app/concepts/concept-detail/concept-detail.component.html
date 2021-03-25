@@ -1,5 +1,21 @@
 <kb-tab [labels]="['Tasks','Concept Edit']">
     <div id="first">
+        <h1>Edit Concept</h1>
+        <kb-input-form
+            [controlsToCreate]="editControls"
+        >
+
+        </kb-input-form>
+    </div>
+    <div id="second">
+        <h1>Add Task</h1>
+        <kb-input-form
+        [controlsToCreate]="addTaskControls"
+    >
+    </kb-input-form>
+    </div>
+    <div id="third">
+        <h1>Current Tasks</h1>
         <kb-table
         *ngIf="tasks.length > 0"
         [data]="tasks"
@@ -8,16 +24,10 @@
         [filters]="filters"
         [displayNames]="displayNames"
         [action]="true"
+        [completeable]="true"
         [actionButtonIcon]="'zoom_in'"
         (onComplete)="markApproved($event)"
          ></kb-table>
-    </div>
-    <div id="second">
-        <kb-edit-element
-            [controlsToCreate]="editControls"
-        >
-
-        </kb-edit-element>
     </div>
 </kb-tab> 
 

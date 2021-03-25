@@ -5,7 +5,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import { Observable, Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { DetailComponent } from 'src/app/concepts/detail/detail.component';
+import { ConceptDetailComponent } from 'src/app/concepts/concept-detail/concept-detail.component';
 import { BackendService } from 'src/app/core/services/backend.service';
 import { IConcept } from 'src/app/core/models/concepts.model';
 
@@ -22,8 +22,9 @@ export class TableComponent implements OnInit {
   @Input() filters:string[] = []; //different things you can filter by
   @Input() displayNames:string[] = [];
   @Input() action = false; 
-  @Input() actionButtonIcon:string = 'thumbs_up';
-  @Input() secondaryButtonIcon:string ='zoom_in';
+  @Input() actionButtonIcon:string = 'zoom_in';
+  @Input() completeable:boolean = false;
+  @Input() secondaryButtonIcon:string ='assignment_turned_in';
 
   @Output() onComplete = new EventEmitter();
   @Output() onZoom = new EventEmitter();
@@ -106,7 +107,7 @@ export class TableComponent implements OnInit {
   }
 
   rowClick(event:IConcept) {
-    const dialogRef = this.dialog.open(DetailComponent, {
+    const dialogRef = this.dialog.open(ConceptDetailComponent, {
       width: '50rem',
       height: '26rem',
       data: {

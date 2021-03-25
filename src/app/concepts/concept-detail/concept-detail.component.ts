@@ -1,24 +1,25 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Observable } from 'rxjs';
 import { IConcept } from 'src/app/core/models/concepts.model';
 import { IControlModel } from 'src/app/core/models/control.model';
 import { ITask } from 'src/app/core/models/task.model';
 import { BackendService } from 'src/app/core/services/backend.service';
+import { SubSink } from 'subsink';
 
 @Component({
-  selector: 'kb-detail',
-  templateUrl: './detail.component.html',
-  styleUrls: ['./detail.component.scss']
+  selector: 'kb-concept-detail',
+  templateUrl: './concept-detail.component.html',
+  styleUrls: ['./concept-detail.component.scss']
 })
-export class DetailComponent implements OnInit {
+export class ConceptDetailComponent implements OnInit {
 
   columns:string[] =[
     "title",
     "difficulty",
     "lastRecalled",
     "status",
-    "resource",
     "completed"
   ]
 
@@ -36,11 +37,12 @@ export class DetailComponent implements OnInit {
     ]
   ]
 
-  displayNames:string[] = ["Title","Difficulty","Last Recalled", "Status"];
+  displayNames:string[] = ["Title","Difficulty","Last Recalled", "Status", "Completed"];
 
   filters:string[] = ["difficulty", "status"];
 
   editControls:IControlModel[] = [];
+  addTaskControls:IControlModel[] = [];
 
   
 
@@ -70,17 +72,23 @@ export class DetailComponent implements OnInit {
 
   concept:IConcept = {} as IConcept;
   tasks:ITask[] = [];
+  
+  private subs = new SubSink();
 
   constructor(
     private _snackBar: MatSnackBar,
     public dialog: MatDialog,
-    @Inject(MAT_DIALOG_DATA) public data: {concept:IConcept, tasks:ITask[]},
-    private dialogRef: MatDialogRef<DetailComponent>
+    @Inject(MAT_DIALOG_DATA) public data: {concept:IConcept, tasks$:Observable<ITask[]>},
+    private dialogRef: MatDialogRef<ConceptDetailComponent>
   ) { }
 
   ngOnInit(): void {
+    
     this.concept = this.data.concept;
-    this.tasks = this.data.tasks;
+    this.subs.sink = this.data.tasks$
+                .subscribe(tasks => {
+                  this.tasks = tasks;
+                })
 
     this.editControls = [
       {
@@ -91,23 +99,47 @@ export class DetailComponent implements OnInit {
   
       },
       {
-        name:"Resource", 
+        name:"Details", 
         type:"string", 
         required:false, 
-        default:this.concept.resource,
+        default:this.concept.details,
+      },
+      {
+        name:"Necessity", 
+        type:"stringChoice", 
+        required:true, 
+        default:this.concept.necessity,
+        stringChoices:this.filterChoices[0]
+      },
+      {
+        name:"Level", 
+        type:"stringChoice", 
+        required:true, 
+        default:this.concept.level,
+        stringChoices:this.filterChoices[1]
+      }
+    ]
+
+    this.addTaskControls = [
+      {
+        name:"Title", 
+        type:"string", 
+        required:true, 
+        default: '',
+  
       },
       {
         name:"Difficulty", 
         type:"stringChoice", 
         required:true, 
-        default:this.concept.difficulty,
+        default:0,
         stringChoices:this.filterChoices[0]
       },
       {
         name:"Status", 
         type:"stringChoice", 
         required:true, 
-        default:this.concept.status,
+        default:0,
         stringChoices:this.filterChoices[1]
       }
     ]
@@ -122,5 +154,7 @@ export class DetailComponent implements OnInit {
     eventObj.event.completed = true;
     this.dialogRef.close(eventObj.event);
   }
+
+  ngOnDestroy() {this.subs.unsubscribe()}
 
 }
