@@ -8,6 +8,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConceptDetailComponent } from 'src/app/concepts/concept-detail/concept-detail.component';
 import { BackendService } from 'src/app/core/services/backend.service';
 import { IConcept } from 'src/app/core/models/concepts.model';
+import { ITask } from 'src/app/core/models/task.model';
 
 @Component({
   selector: 'kb-table', 
@@ -108,8 +109,8 @@ export class TableComponent implements OnInit {
 
   rowClick(event:IConcept) {
     const dialogRef = this.dialog.open(ConceptDetailComponent, {
-      width: '50rem',
-      height: '26rem',
+      width: '30rem',
+      height: '45rem',
       data: {
         concept:event,
         tasks$:this.backend.getTasks(event._id)
@@ -117,6 +118,19 @@ export class TableComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      if(result.action === 'update') {
+        if (result.action === 'concept') {
+          this.backend.editConcept(result as IConcept);
+        } else { //task
+           this.backend.editTasks(result as ITask);
+        }
+      } else { //add
+        if (result.action === 'concept') {
+          this.backend.addConcepts(result as IConcept);
+        } else { //task
+            this.backend.addTasks(result as ITask);
+        }
+      }
 
     });
   }

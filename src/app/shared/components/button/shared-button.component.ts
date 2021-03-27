@@ -11,13 +11,14 @@ import { Component, OnInit } from '@angular/core';
 export class SharedButtonComponent implements OnInit {
 
   @Input() type: string = 'regular';
-  @Input() size: string = 'reg';
   @Input() content: string = '';
   @Output() clicked = new EventEmitter();
+  @Input() size: string = 'reg';
 
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.type);
   }
  
 }

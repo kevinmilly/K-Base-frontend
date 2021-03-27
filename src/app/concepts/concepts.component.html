@@ -1,13 +1,19 @@
-<kb-table
-    *ngIf="concepts.length > 0"
-    [data]="concepts"
-    [columns]="columns"
-    [filterChoices]="filterChoices"
-    [filters]="filters"
-    [displayNames]="displayNames"
-    [action]="true"
-    [actionButtonIcon]="'zoom_in'"
-    (onZoom)="detail($event)"
->
+<kb-tab [labels]="['Table View','Kanban View']">
+    <div id="first" class="tab-content">
+            <kb-table
+            *ngIf="concepts.length > 0"
+            [data]="concepts"
+            [columns]="columns"
+            [filterChoices]="filterChoices"
+            [filters]="filters"
+            [displayNames]="displayNames"
+            [action]="true"
+            [actionButtonIcon]="'zoom_in'"
+            (onZoom)="detail($event)"
+        >
+        </kb-table>
+    </div>
+    <div id="second" class="tab-content">
+      Kanban here
 
-</kb-table>
+    </div>

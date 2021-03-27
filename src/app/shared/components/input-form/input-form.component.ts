@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { IControlModel } from 'src/app/core/models/control.model';
 
@@ -12,9 +12,12 @@ import { IControlModel } from 'src/app/core/models/control.model';
 export class InputFormComponent implements OnInit {
 
   @Input() controlsToCreate:IControlModel[] = [];
+  @Output() onSubmit = new EventEmitter();
 
 
  controlsCreated:FormArray = new FormArray([]);
+
+ submission:any;
 
 
 
@@ -29,7 +32,7 @@ export class InputFormComponent implements OnInit {
     controlsToCreate.forEach(c => {
       vals = [];
       switch (c.type) {
-        case "string":
+        case "string": 
           if(c.required) vals.push(Validators.required);
           this.controlsCreated.push(
             new FormControl(c.default,vals)
@@ -65,7 +68,13 @@ export class InputFormComponent implements OnInit {
     console.dir(this.controlsCreated);
   }
 
-  submit() {}
+  submit() {
+    this.controlsToCreate.forEach((control, i) => {
+      this.submission[control.name] = this.controlsCreated.controls[i]
+    });
+    console.dir(this.submission);
+    this.onSubmit.emit(this.submission);
+  }
 
   get createdControls() {
     return this.controlsCreated.controls;

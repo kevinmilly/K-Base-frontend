@@ -1,32 +1,29 @@
-<kb-tab [labels]="['Tasks','Concept Edit']">
-    <div id="first">
-        <h1>Edit Concept</h1>
-        <kb-input-form
-            [controlsToCreate]="editControls"
-        >
+<kb-tab [labels]="['Edit Concept','Add Task', 'Current Tasks']">
+    <div id="first" class="tab-content">
+       
+        <kb-input-form 
+          [controlsToCreate]="editControls"
+          (onSubmit)="submit($event)"
+        ></kb-input-form>
 
-        </kb-input-form>
+
     </div>
-    <div id="second">
-        <h1>Add Task</h1>
-        <kb-input-form
-        [controlsToCreate]="addTaskControls"
-    >
-    </kb-input-form>
+    <div id="second" class="tab-content">
+        <kb-input-form [controlsToCreate]="addTaskControls"></kb-input-form>
+
     </div>
-    <div id="third">
-        <h1>Current Tasks</h1>
+    <div id="third" class="tab-content">
         <kb-table
-        *ngIf="tasks.length > 0"
-        [data]="tasks"
-        [columns]="columns"
-        [filterChoices]="filterChoices"
-        [filters]="filters"
-        [displayNames]="displayNames"
-        [action]="true"
-        [completeable]="true"
-        [actionButtonIcon]="'zoom_in'"
-        (onComplete)="markApproved($event)"
+            *ngIf="tasks.length > 0"
+            [data]="tasks"
+            [columns]="columns"
+            [filterChoices]="filterChoices"
+            [filters]="filters"
+            [displayNames]="displayNames"
+            [action]="true"
+            [completeable]="true"
+            [actionButtonIcon]="'zoom_in'"
+            (onComplete)="markApproved($event)"
          ></kb-table>
     </div>
 </kb-tab> 

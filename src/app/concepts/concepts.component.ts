@@ -22,7 +22,8 @@ export class ConceptsComponent implements OnInit {
     "title",
     "necessity",
     "level",
-    "details"
+    "details" ,
+    "tag"
   ]
 
   filterChoices:string[][] = [
@@ -43,7 +44,7 @@ export class ConceptsComponent implements OnInit {
 
   filters:string[] = ["necessity", "level"];
 
-  displayNames:string[] = ["Actions","Title","Necessity","Status", "Details"];
+  displayNames:string[] = ["Actions","Title","Necessity","Status", "Details", "Tag"];
 
   
   

@@ -26,7 +26,7 @@
                     <mat-form-field>
                         <mat-label>{{controlsToCreate[i].name}}</mat-label>
                         <mat-select>
-                          <mat-option value="{{c}}" *ngFor="let c of controlsToCreate[i].stringChoices">
+                          <mat-option value="{{c}}" *ngFor="let c of controlsToCreate[i].stringChoices; index as j">
                             {{c}}
                           </mat-option>
                         </mat-select>
@@ -37,13 +37,12 @@
     </div>
 
     <div class="edit__container__buttons">
-
-        <kb-shared-button
-         [type]="'regular'"
-         [size]="'reg'"
-         (clicked)="submit()"
+        <button
+            mat-raised-button
+            (clicked)="submit()"
+            color="primary"
         >
-         Submit
-        </kb-shared-button>
+        Submit
+        </button>
      </div>
 </div>

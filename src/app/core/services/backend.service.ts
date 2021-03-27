@@ -12,13 +12,25 @@ export class BackendService {
   private conceptsUpdated:BehaviorSubject<IConcept[]> = new BehaviorSubject<IConcept[]>([]);
   public concepts$:Observable<IConcept[]> = this.conceptsUpdated.asObservable();
 
+  private tasksUpdated:BehaviorSubject<ITask[]> = new BehaviorSubject<ITask[]>([]);
+  private tasks$:Observable<ITask[]> = this.tasksUpdated.asObservable();
+
   private concepts:IConcept[] = [];
+  private tasks:ITask[] = [];
 
   constructor(private http:HttpClient) { }
 
 
 
   /*TASKS*/
+
+  addTasks(t:ITask) {
+    this.http.post<{m: string}>('http://localhost:3000/api/tasks', t)
+      .subscribe((response) => {
+        this.tasks.push(t);
+        this.tasksUpdated.next([...this.tasks]);
+      })
+  }
 
   getTasks(id?:string) {
     return this.http.get<{message:string,tasks:ITask[]}>(`http://localhost:3000/api/tasks/${id}`);

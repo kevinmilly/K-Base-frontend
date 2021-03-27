@@ -24,14 +24,14 @@ export class AddConceptComponent implements OnInit {
   submit() {
     this.backend.addConcepts({
       title: this.enterConcept.value,
-      difficulty: 3,
-      status: 0,
+      necessity: 3,
+      level: 0,
       dependentConcepts:[],
       relatedNotes:[],
-      resource:`https://www.youtube.com/results?search_query=${this.enterConcept.value}`,
       lastRecalled: new Date().toDateString(),
       completed:false,
-      tag:"Potpourri"
+      tag:"Potpourri",
+      details:''
     } as IConcept)
     this.enterConcept.reset();
   }
@@ -40,14 +40,14 @@ export class AddConceptComponent implements OnInit {
     if (event.keyCode === 13) {
       this.backend.addConcepts({
         title: this.enterConcept.value,
-        resource:`https://www.youtube.com/results?search_query=${this.enterConcept.value}`,
-        difficulty: 3,
-        status: 0,
+        necessity: 3,
+        level: 0,
         dependentConcepts:[],
         relatedNotes:[],
         lastRecalled: new Date().toDateString(),
         completed:false,
-        tag:"Potpourri"
+        tag:"Potpourri",
+        details:''
       } as IConcept)
       this.enterConcept.reset();
      

@@ -145,7 +145,6 @@ export class ConceptDetailComponent implements OnInit {
     ]
   }
 
-
   markApproved(eventObj:any) {
     this._snackBar.open(this.messages[Math.floor(Math.random() * this.messages.length)], `${eventObj.length} more to go!`, {
       duration: 4000,
@@ -153,6 +152,13 @@ export class ConceptDetailComponent implements OnInit {
     console.dir(eventObj);
     eventObj.event.completed = true;
     this.dialogRef.close(eventObj.event);
+  }
+
+
+
+  submit(eventObj:any) {
+    console.dir(eventObj);
+    this.dialogRef.close({event:eventObj, type:'update'});
   }
 
   ngOnDestroy() {this.subs.unsubscribe()}

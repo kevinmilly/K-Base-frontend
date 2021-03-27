@@ -1,6 +1,7 @@
 @import "../../../../styles.scss";
 
 .reg {
+  width: 100%;
   @include reg-button;
 }
 

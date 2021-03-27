@@ -5,7 +5,6 @@
                *ngFor="let subject of categories"
                [type]="'icon'" 
                [content]="subject.icon"
-               [size]="'big'"
                (clicked)="categoryFilter(subject)"
                matTooltip="{{subject.cat}}"
                [matTooltipPosition]="'below'"
@@ -26,7 +25,6 @@
                 <kb-shared-button
                     [type]="'icon'" 
                     [content]="actionButtonIcon"
-                    [size]="'reg'"
                     (clicked)="onClicked('zoom', row)"
                 >
                 </kb-shared-button>
@@ -34,7 +32,6 @@
                     *ngIf="completeable"
                     [type]="'icon'" 
                     [content]="secondaryButtonIcon"
-                    [size]="'reg'"
                     (clicked)="onClicked('complete', row)"
             >
             </kb-shared-button>
