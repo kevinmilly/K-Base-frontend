@@ -16,6 +16,7 @@ export class ConceptsComponent implements OnInit {
   private subs = new SubSink();
 
   concepts:IConcept[] = [];
+  filteredConcepts:[IConcept[]] = [[]];
 
   columns:string[] =[
     "action",
@@ -25,6 +26,13 @@ export class ConceptsComponent implements OnInit {
     "details" ,
     "tag"
   ]
+
+  boxDetails:string[] = [
+    "details",
+    "necessity",
+    "level" ,
+    "tag"
+  ];
 
   filterChoices:string[][] = [
     [
@@ -58,6 +66,11 @@ export class ConceptsComponent implements OnInit {
         console.log(conceptAndMessage.message);
         this.concepts = conceptAndMessage.concepts;
         console.dir(this.concepts);
+
+        this.filterChoices[1].forEach((choice, i) => {
+          this.filteredConcepts.push(this.concepts.filter(concept => concept.level === i))
+        })
+
       })
 
   }

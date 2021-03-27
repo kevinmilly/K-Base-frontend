@@ -1,7 +1,10 @@
 import { NgModule } from '@angular/core';
+
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import {DragDropModule} from '@angular/cdk/drag-drop';
+
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -23,11 +26,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import {MatTooltipModule} from '@angular/material/tooltip';
 
+
 const modules = [        
     MatTableModule,
     MatPaginatorModule,
     MatTooltipModule,
     MatSortModule,
+    DragDropModule,
     MatSnackBarModule, 
     MatCardModule,
     MatIconModule,

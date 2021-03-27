@@ -8,6 +8,7 @@ import { SharedButtonComponent } from './components/button/shared-button.compone
 import { DifficultyPipe } from './pipes/difficulty-status.pipe';
 import { TabComponent } from './components/tab/tab.component';
 import { InputFormComponent } from './components/input-form/input-form.component';
+import { KanbanComponent } from './components/kanban/kanban.component';
 
 
 const components = [
@@ -16,7 +17,8 @@ const components = [
   SharedButtonComponent,
   TabComponent,
   DifficultyPipe,
-  InputFormComponent
+  InputFormComponent,
+  KanbanComponent
 ];
 const modules = [
   CommonModule,

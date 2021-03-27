@@ -1,21 +1,29 @@
-<div class="kanban-container">
-    <div class="kanban-container__kanban">
-        <div class="kanban-container__kanban__header">To Do</div>
-        <div cdkDropList class="kanban-container__kanban-list" (cdkDropListDropped)="drop($event)">
-            <div class="kanban-container__kanban-list__box" *ngFor="let data of dragData" cdkDrag>{{data.title}}</div>
-        </div>
-    </div>
-    <div class="kanban-container__kanban">
-        <div class="kanban-container__kanban__header">In Progress</div>
-        <div cdkDropList class="kanban-container__kanban-list" (cdkDropListDropped)="drop($event)">
-            <div class="kanban-container__kanban-list__box" *ngFor="let data of dragData" cdkDrag>{{data.title}}</div>
-        </div>
-    </div>
-    <div class="kanban-container__kanban">
-        <div class="kanban-container__kanban__header">Done</div>
-        <div cdkDropList class="kanban-container__kanban-list" (cdkDropListDropped)="drop($event)">
-            <div class="kanban-container__kanban-list__box" *ngFor="let data of dragData" cdkDrag>{{data.title}}</div>
+<div class="kanban-container" cdkDropListGroup>
+    <div class="kanban-container__kanban" *ngFor="let label of labels; index as i">
+        <div class="kanban-container__kanban__header">{{labels[i]}}</div>
+        <div 
+            cdkDropList 
+            class="kanban-container__kanban-list" 
+            (cdkDropListDropped)="drop($event)"
+            [cdkDropListData]="kanbanFilteredDatasets[i]"
+        >
+            <div 
+                class="kanban-container__kanban-list__box" 
+                *ngFor="let content of kanbanFilteredDatasets[i]" 
+                cdkDrag>
+                <div class="kanban-container__kanban-list__box-header">
+                    {{content.title}}
+                </div>
+                <ul [style.list-style]="'none'" >
+                    <li *ngFor="let boxContent of boxDetails">
+                        <span class="kanban-container__kanban-list__box__content">
+                            {{boxContent}}
+                        </span>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>
 
+ 
