@@ -15,7 +15,7 @@ export class KanbanComponent implements OnInit {
 
   @Input() kanbanFilteredDatasets:any = [];
   @Input() labels:string[] = [];
-  @Input() filterChoices:string[][] = []; //options the below filters can be, order of this filter Choices array based on order of filters array
+  @Input() translators:string[][] = []; //options the below filters can be, order of this filter Choices array based on order of filters array
   @Input() filters:string[] = []; //different things you can filter by
   @Input() boxDetails:string[] = [];
 
@@ -53,7 +53,8 @@ export class KanbanComponent implements OnInit {
    }
 
   ngOnInit(): void {
-   console.dir(this.kanbanFilteredDatasets);
+   console.dir(this.translators);
+
   }
 
   drop(event: CdkDragDrop<string[]>) {
@@ -105,6 +106,8 @@ export class KanbanComponent implements OnInit {
 
     });
   }
+
+  
 
 }
  

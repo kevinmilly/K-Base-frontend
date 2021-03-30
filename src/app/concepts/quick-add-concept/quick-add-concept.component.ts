@@ -31,7 +31,7 @@ export class AddConceptComponent implements OnInit {
       lastRecalled: new Date().toDateString(),
       completed:false,
       tag:"Potpourri",
-      details:''
+      notes:''
     } as IConcept)
     this.enterConcept.reset();
   }
@@ -47,7 +47,7 @@ export class AddConceptComponent implements OnInit {
         lastRecalled: new Date().toDateString(),
         completed:false,
         tag:"Potpourri",
-        details:''
+        notes:''
       } as IConcept)
       this.enterConcept.reset();
      

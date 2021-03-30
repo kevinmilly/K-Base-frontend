@@ -8,6 +8,6 @@ export interface IConcept {
     level:number;
     completed:boolean;
     tag:string;
-    details:string;
+    notes:string;
 }
  

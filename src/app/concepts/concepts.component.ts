@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Observable, Subscription } from 'rxjs';
 import { SubSink } from 'subsink';
 import { IConcept } from '../core/models/concepts.model';
+import { IControlModel } from '../core/models/control.model';
 import { BackendService } from '../core/services/backend.service';
 import { ConceptDetailComponent } from './concept-detail/concept-detail.component';
 
@@ -23,12 +24,12 @@ export class ConceptsComponent implements OnInit {
     "title",
     "necessity",
     "level",
-    "details" ,
-    "tag"
+    "tag",
+    "notes" ,
   ]
 
   boxDetails:string[] = [
-    "details",
+    "notes",
     "necessity",
     "level" ,
     "tag"
@@ -52,7 +53,37 @@ export class ConceptsComponent implements OnInit {
 
   filters:string[] = ["necessity", "level"];
 
-  displayNames:string[] = ["Actions","Title","Necessity","Status", "Details", "Tag"];
+  displayNames:string[] = ["Actions","Title", "Necessity","Level", "Tag", "Notes",];
+
+  addConceptControls:IControlModel[] = [
+    {
+      name:"Title", 
+      type:"string", 
+      required:true, 
+      default: '',
+
+    },
+    {
+      name:"Necessity", 
+      type:"stringChoice", 
+      required:true, 
+      default:1,
+      stringChoices:this.filterChoices[0]
+    },
+    {
+      name:"Level", 
+      type:"stringChoice", 
+      required:true, 
+      default:1,
+      stringChoices:this.filterChoices[1]
+    },
+    {
+      name:"Notes", 
+      type:"longString", 
+      required:false, 
+      default:'',
+    },
+  ];
 
   
   
@@ -70,6 +101,8 @@ export class ConceptsComponent implements OnInit {
         this.filterChoices[1].forEach((choice, i) => {
           this.filteredConcepts.push(this.concepts.filter(concept => concept.level === i))
         })
+
+        console.dir(this.addConceptControls);
 
       })
 
@@ -91,6 +124,10 @@ export class ConceptsComponent implements OnInit {
         
       })
    
+  }
+
+  submit(event:any) {
+    console.log({event});
   }
 
   ngOnDestroy() {

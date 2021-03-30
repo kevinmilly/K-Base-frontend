@@ -99,12 +99,6 @@ export class ConceptDetailComponent implements OnInit {
   
       },
       {
-        name:"Details", 
-        type:"string", 
-        required:false, 
-        default:this.concept.details,
-      },
-      {
         name:"Necessity", 
         type:"stringChoice", 
         required:true, 
@@ -117,6 +111,12 @@ export class ConceptDetailComponent implements OnInit {
         required:true, 
         default:this.concept.level,
         stringChoices:this.filterChoices[1]
+      },
+      {
+        name:"Notes", 
+        type:"longString", 
+        required:false, 
+        default:this.concept.notes,
       }
     ]
 

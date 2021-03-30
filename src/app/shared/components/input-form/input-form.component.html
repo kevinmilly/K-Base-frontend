@@ -5,25 +5,31 @@
     <div class="edit__container__content">
             <div *ngFor="let control of createdControls; index as i" [ngSwitch]="controlsToCreate[i].type">
                 <div *ngSwitchCase="'string'">
-                    <mat-form-field>
+                    <mat-form-field class="medium">
                         <mat-label>{{controlsToCreate[i].name}}</mat-label>
                           <input matInput type="text" [formControl]="indexedCreatedControls(i)" />
                     </mat-form-field>
                 </div>
+                <div *ngSwitchCase="'longString'">
+                    <mat-form-field class="big">
+                        <mat-label>{{controlsToCreate[i].name}}</mat-label>
+                          <textarea matInput type="text" [formControl]="indexedCreatedControls(i)" ></textarea>
+                    </mat-form-field>
+                </div>
                 <div *ngSwitchCase="'number'">
-                    <mat-form-field>
+                    <mat-form-field class="small"> 
                         <mat-label>{{controlsToCreate[i].name}}</mat-label>
                              <input matInput type="number" [formControl]="indexedCreatedControls(i)" />
                     </mat-form-field>
                 </div>
                 <div *ngSwitchCase="'boolean'">
-                    <mat-form-field>
+                    <mat-form-field class="small">
                         <mat-label>{{controlsToCreate[i].name}}</mat-label>
                             <input matInput type="boolean" [formControl]="indexedCreatedControls(i)" />
                     </mat-form-field>
                 </div>
                 <div *ngSwitchCase="'stringChoice'">
-                    <mat-form-field>
+                    <mat-form-field class="medium">
                         <mat-label>{{controlsToCreate[i].name}}</mat-label>
                         <mat-select>
                           <mat-option value="{{c}}" *ngFor="let c of controlsToCreate[i].stringChoices; index as j">

@@ -1,25 +1,30 @@
-<kb-tab [labels]="['Table View','Kanban View']">
+<kb-tab [labels]="['Add Concept','Table View','Kanban View']">
     <div id="first" class="tab-content">
-            <kb-table
-            *ngIf="concepts.length > 0"
-            [data]="concepts"
-            [columns]="columns"
-            [filterChoices]="filterChoices"
-            [filters]="filters"
-            [displayNames]="displayNames"
-            [action]="true"
-            [actionButtonIcon]="'zoom_in'"
-            (onZoom)="detail($event)"
-        >
-        </kb-table>
+      <kb-input-form 
+          [controlsToCreate]="addConceptControls"
+          (onSubmit)="submit($event)"
+      ></kb-input-form>
     </div>
     <div id="second" class="tab-content">
+      <kb-table
+      *ngIf="concepts.length > 0"
+      [data]="concepts"
+      [columns]="columns"
+      [filterChoices]="filterChoices"
+      [filters]="filters"
+      [displayNames]="displayNames"
+      [action]="true"
+      [actionButtonIcon]="'zoom_in'"
+      (onZoom)="detail($event)"
+  >
+  </kb-table>
+    </div>
+    <div id="third" class="tab-content">
       <kb-kanban
         [kanbanFilteredDatasets]="filteredConcepts"
         [labels]="filterChoices[1]"
-        [boxDetails]="columns"
+        [boxDetails]="boxDetails"
+        [translators]="filterChoices"
       >
-
       </kb-kanban>
-
     </div>

@@ -24,6 +24,7 @@ export class InputFormComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.dir(this.controlsToCreate);
     this.generateControls(this.controlsToCreate);
   }
 
@@ -33,6 +34,12 @@ export class InputFormComponent implements OnInit {
       vals = [];
       switch (c.type) {
         case "string": 
+          if(c.required) vals.push(Validators.required);
+          this.controlsCreated.push(
+            new FormControl(c.default,vals)
+          )
+          break;
+        case "longString": 
           if(c.required) vals.push(Validators.required);
           this.controlsCreated.push(
             new FormControl(c.default,vals)

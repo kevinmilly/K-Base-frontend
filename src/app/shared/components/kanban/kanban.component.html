@@ -14,13 +14,32 @@
                 <div class="kanban-container__kanban-list__box-header">
                     {{content.title}}
                 </div>
-                <ul [style.list-style]="'none'" >
-                    <li *ngFor="let boxContent of boxDetails">
-                        <span class="kanban-container__kanban-list__box__content">
-                            {{boxContent}}
-                        </span>
-                    </li>
-                </ul>
+                <div class="kanban-container__kanban-list__box-content">
+                    <ul [style.list-style]="'none'" >
+                        <li *ngFor="let boxContent of boxDetails">
+                            <div class="kanban-container__kanban-list__box-content__details">
+                                <ng-container *ngIf="boxContent === 'necessity'">
+                                    <span [style.text-transform]="'capitalize'">{{boxContent}}: </span>
+                                    {{
+                                        translators[0][0]
+                                    }}
+                                </ng-container>
+                                <ng-container *ngIf="boxContent === 'level'">
+                                    <span [style.text-transform]="'capitalize'">{{boxContent}}: </span>
+                                    {{
+                                        translators[1][0]
+                                    }}
+                                </ng-container>
+                                <ng-container *ngIf="boxContent === 'tag'">
+                                    <span [style.text-transform]="'capitalize'">{{boxContent}}: </span>
+                                    {{
+                                        content[boxContent] !== ' ' && content[boxContent]
+                                    }}
+                                </ng-container>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
