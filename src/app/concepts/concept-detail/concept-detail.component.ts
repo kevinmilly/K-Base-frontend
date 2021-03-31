@@ -4,7 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
 import { IConcept } from 'src/app/core/models/concepts.model';
 import { IControlModel } from 'src/app/core/models/control.model';
-import { ITask } from 'src/app/core/models/task.model';
+import { INote } from 'src/app/core/models/note.model';
 import { BackendService } from 'src/app/core/services/backend.service';
 import { SubSink } from 'subsink';
 
@@ -37,12 +37,14 @@ export class ConceptDetailComponent implements OnInit {
     ]
   ]
 
+  noteChoices:string[] = ['Random', 'Fundamental', 'Question']
+
   displayNames:string[] = ["Title","Difficulty","Last Recalled", "Status", "Completed"];
 
   filters:string[] = ["difficulty", "status"];
 
   editControls:IControlModel[] = [];
-  addTaskControls:IControlModel[] = [];
+  addNoteControls:IControlModel[] = [];
 
   
 
@@ -71,23 +73,23 @@ export class ConceptDetailComponent implements OnInit {
   ];
 
   concept:IConcept = {} as IConcept;
-  tasks:ITask[] = [];
+  notes:INote[] = [];
   
   private subs = new SubSink();
 
   constructor(
     private _snackBar: MatSnackBar,
     public dialog: MatDialog,
-    @Inject(MAT_DIALOG_DATA) public data: {concept:IConcept, tasks$:Observable<ITask[]>},
+    @Inject(MAT_DIALOG_DATA) public data: {concept:IConcept, notes$:Observable<INote[]>},
     private dialogRef: MatDialogRef<ConceptDetailComponent>
   ) { }
 
   ngOnInit(): void {
     
     this.concept = this.data.concept;
-    this.subs.sink = this.data.tasks$
-                .subscribe(tasks => {
-                  this.tasks = tasks;
+    this.subs.sink = this.data.notes$
+                .subscribe(notes => {
+                  this.notes = notes;
                 })
 
     this.editControls = [
@@ -111,16 +113,10 @@ export class ConceptDetailComponent implements OnInit {
         required:true, 
         default:this.concept.level,
         stringChoices:this.filterChoices[1]
-      },
-      {
-        name:"Notes", 
-        type:"longString", 
-        required:false, 
-        default:this.concept.notes,
       }
     ]
 
-    this.addTaskControls = [
+    this.addNoteControls = [
       {
         name:"Title", 
         type:"string", 
@@ -129,34 +125,41 @@ export class ConceptDetailComponent implements OnInit {
   
       },
       {
-        name:"Difficulty", 
-        type:"stringChoice", 
+        name:"Content", 
+        type:"longString", 
         required:true, 
-        default:0,
-        stringChoices:this.filterChoices[0]
+        default: '',
+  
       },
       {
-        name:"Status", 
+        name:"Source", 
+        type:"string", 
+        required:false, 
+        default: '',
+  
+      },
+      {
+        name:"Type", 
         type:"stringChoice", 
         required:true, 
         default:0,
-        stringChoices:this.filterChoices[1]
+        stringChoices:this.noteChoices
       }
     ]
   }
 
-  markApproved(eventObj:any) {
-    this._snackBar.open(this.messages[Math.floor(Math.random() * this.messages.length)], `${eventObj.length} more to go!`, {
-      duration: 4000,
-    });
+  deleteNotes(eventObj:any) {
     console.dir(eventObj);
     eventObj.event.completed = true;
-    this.dialogRef.close(eventObj.event);
+    this.dialogRef.close({event:eventObj.event, type:'delete'});
   }
 
 
 
   submit(eventObj:any) {
+    this._snackBar.open(this.messages[Math.floor(Math.random() * this.messages.length)], `${eventObj.length} more to go!`, {
+      duration: 4000,
+    });
     console.dir(eventObj);
     this.dialogRef.close({event:eventObj, type:'update'});
   }

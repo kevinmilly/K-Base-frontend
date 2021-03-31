@@ -1,4 +1,4 @@
-<kb-tab [labels]="['Edit Concept','Add Task', 'Current Tasks']">
+<kb-tab [labels]="['Edit Concept','Add Note', 'Current Notes']">
     <div id="first" class="tab-content">
        
         <kb-input-form 
@@ -9,21 +9,22 @@
 
     </div>
     <div id="second" class="tab-content">
-        <kb-input-form [controlsToCreate]="addTaskControls"></kb-input-form>
+        <kb-input-form [controlsToCreate]="addNoteControls"></kb-input-form>
 
     </div>
     <div id="third" class="tab-content">
         <kb-table
-            *ngIf="tasks.length > 0"
-            [data]="tasks"
+            *ngIf="notes.length > 0"
+            [data]="notes"
             [columns]="columns"
             [filterChoices]="filterChoices"
             [filters]="filters"
             [displayNames]="displayNames"
             [action]="true"
-            [completeable]="true"
+            [deleteable]="true"
             [actionButtonIcon]="'zoom_in'"
-            (onComplete)="markApproved($event)"
+            (onDelete)="deleteNotes($event)"
+            (onZoom)=""
          ></kb-table>
     </div>
 </kb-tab> 

@@ -77,12 +77,6 @@ export class ConceptsComponent implements OnInit {
       default:1,
       stringChoices:this.filterChoices[1]
     },
-    {
-      name:"Notes", 
-      type:"longString", 
-      required:false, 
-      default:'',
-    },
   ];
 
   
@@ -109,13 +103,13 @@ export class ConceptsComponent implements OnInit {
   }
 
   detail(row:IConcept) {
-    this.subs.sink = this.backend.getTasks(row._id || "")
-      .subscribe(taskAndMessage => {
-        console.dir(taskAndMessage);
+    this.subs.sink = this.backend.getNotesByConcept(row._id || "")
+      .subscribe(noteAndMessage => {
+        console.dir(noteAndMessage);
 
         const dialogRef = this.dialog.open(ConceptDetailComponent, {
           width: '250px',
-          data: { concept: row, tasks:taskAndMessage.tasks} 
+          data: { concept: row, notes:noteAndMessage.notes} 
         });
     
         this.subs.sink = dialogRef.afterClosed().subscribe(result => {
@@ -128,6 +122,10 @@ export class ConceptsComponent implements OnInit {
 
   submit(event:any) {
     console.log({event});
+  }
+
+  deleteConcept(event:any) {
+    this.backend.deleteConcept(event);
   }
 
   ngOnDestroy() {

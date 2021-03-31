@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { BackendService } from 'src/app/core/services/backend.service';
 import { ConceptDetailComponent } from 'src/app/concepts/concept-detail/concept-detail.component';
 import { IConcept } from 'src/app/core/models/concepts.model';
-import { ITask } from 'src/app/core/models/task.model';
+import { INote } from 'src/app/core/models/note.model';
 
 @Component({
   selector: 'kb-kanban',
@@ -85,7 +85,7 @@ export class KanbanComponent implements OnInit {
       height: '45rem',
       data: {
         concept:event,
-        tasks$:this.backend.getTasks(event._id)
+        tasks$:this.backend.getNotesByConcept(event._id)
       }
     });
 
@@ -94,13 +94,13 @@ export class KanbanComponent implements OnInit {
         if (result.action === 'concept') {
           this.backend.editConcept(result as IConcept);
         } else { //task
-           this.backend.editTasks(result as ITask);
+           this.backend.editNotes(result as INote);
         }
       } else { //add
         if (result.action === 'concept') {
           this.backend.addConcepts(result as IConcept);
         } else { //task
-            this.backend.addTasks(result as ITask);
+            this.backend.addNotes(result as INote);
         }
       }
 

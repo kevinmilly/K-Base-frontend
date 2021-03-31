@@ -8,7 +8,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConceptDetailComponent } from 'src/app/concepts/concept-detail/concept-detail.component';
 import { BackendService } from 'src/app/core/services/backend.service';
 import { IConcept } from 'src/app/core/models/concepts.model';
-import { ITask } from 'src/app/core/models/task.model';
+import { INote } from 'src/app/core/models/note.model';
 
 @Component({
   selector: 'kb-table', 
@@ -24,10 +24,10 @@ export class TableComponent implements OnInit {
   @Input() displayNames:string[] = [];
   @Input() action = false; 
   @Input() actionButtonIcon:string = 'zoom_in';
-  @Input() completeable:boolean = false;
-  @Input() secondaryButtonIcon:string ='assignment_turned_in';
+  @Input() deleteable:boolean = true;
+  @Input() secondaryButtonIcon:string ='delete_forever';
 
-  @Output() onComplete = new EventEmitter();
+  @Output() onDelete = new EventEmitter();
   @Output() onZoom = new EventEmitter();
 
   dataSaved:any[] = [];
@@ -98,7 +98,7 @@ export class TableComponent implements OnInit {
     if(type==='zoom') {
       this.rowClick(event);
     } else {
-       this.onComplete.emit({event:event, length:this.data.length - 1});
+       this.onDelete.emit({event:event});
     }
   }
 
@@ -109,11 +109,11 @@ export class TableComponent implements OnInit {
 
   rowClick(event:IConcept) {
     const dialogRef = this.dialog.open(ConceptDetailComponent, {
-      width: '30rem',
-      height: '45rem',
+      width: '45rem',
+      height: '30rem',
       data: {
         concept:event,
-        tasks$:this.backend.getTasks(event._id)
+        notes$:this.backend.getNotesByConcept(event._id)
       }
     });
 
@@ -121,14 +121,14 @@ export class TableComponent implements OnInit {
       if(result.action === 'update') {
         if (result.action === 'concept') {
           this.backend.editConcept(result as IConcept);
-        } else { //task
-           this.backend.editTasks(result as ITask);
+        } else { //note
+           this.backend.editNotes(result as INote);
         }
       } else { //add
         if (result.action === 'concept') {
           this.backend.addConcepts(result as IConcept);
-        } else { //task
-            this.backend.addTasks(result as ITask);
+        } else { //note
+            this.backend.addNotes(result as INote);
         }
       }
 

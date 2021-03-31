@@ -29,10 +29,10 @@
                 >
                 </kb-shared-button>
                 <kb-shared-button
-                    *ngIf="completeable"
+                    *ngIf="deleteable"
                     [type]="'icon'" 
                     [content]="secondaryButtonIcon"
-                    (clicked)="onClicked('complete', row)"
+                    (clicked)="onClicked('delete', row)"
             >
             </kb-shared-button>
             </td>

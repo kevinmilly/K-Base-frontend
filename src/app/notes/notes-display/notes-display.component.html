@@ -1,0 +1,25 @@
+<div class="notes-container">
+    <ng-container *ngIf="displayMode; else editMode">
+        <div class="paper">
+            <div class="lines">
+              <div class="text" contenteditable spellcheck="false">
+                {{note.title}} <br /><br />
+                {{note.content}}
+                <br /><br />
+                <span>{{note.type}}</span>
+                </div>
+            </div>
+            <div class="holes hole-top"></div>
+            <div class="holes hole-middle"></div>
+            <div class="holes hole-bottom"></div>
+          </div>
+    </ng-container>
+    <ng-template #editMode>
+        <kb-input-form
+            [controlsToCreate]="editControls"
+            (onSubmit)="submit($event)"
+        >
+        </kb-input-form>
+
+    </ng-template>
+</div>
