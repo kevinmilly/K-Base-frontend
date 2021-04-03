@@ -1,0 +1,25 @@
+<mat-card>
+    <div class="resouce-container" cdkDropListGroup>
+        <div 
+            class="resource-container__current"
+            cdkDropList
+            [cdkDropListData]="currentResources"
+            class="example-list"
+            (cdkDropListDropped)="drop($event)"
+        >
+          <div class="example-box" *ngFor="let item of todo" cdkDrag>{{item}}</div>
+        </div>
+            <div class="resource-container__current__buttons">
+
+            </div>
+        </div>
+        <div class="resource-container__prospective">
+            <div class="resource-container__prospective__search">
+
+            </div>
+            <div class="resource-container__prospective__results">
+                
+            </div>
+        </div>
+    </div>
+</mat-card>

@@ -1,4 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { IControlModel } from 'src/app/core/models/control.model';
 import { INote } from 'src/app/core/models/note.model';
@@ -10,6 +11,8 @@ import { INote } from 'src/app/core/models/note.model';
 })
 export class NotesDisplayComponent implements OnInit {
 
+  displayMode:FormControl = new FormControl(false, []);
+  
   note!:INote;
 
   noteChoices:string[] = ['Random', 'Fundamental', 'Question']

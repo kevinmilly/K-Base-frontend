@@ -1,5 +1,8 @@
 <div class="notes-container">
-    <ng-container *ngIf="displayMode; else editMode">
+    <mat-slide-toggle [formControl]="displayMode">
+        Edit Note
+      </mat-slide-toggle>
+    <ng-container *ngIf="displayMode.value; else editMode">
         <div class="paper">
             <div class="lines">
               <div class="text" contenteditable spellcheck="false">
@@ -16,7 +19,7 @@
     </ng-container>
     <ng-template #editMode>
         <kb-input-form
-            [controlsToCreate]="editControls"
+            [controlsToCreate]="editNoteControls"
             (onSubmit)="submit($event)"
         >
         </kb-input-form>
