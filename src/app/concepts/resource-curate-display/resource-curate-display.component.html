@@ -4,10 +4,9 @@
             class="resource-container__current"
             cdkDropList
             [cdkDropListData]="currentResources"
-            class="example-list"
             (cdkDropListDropped)="drop($event)"
         >
-          <div class="example-box" *ngFor="let item of todo" cdkDrag>{{item}}</div>
+          <div class="resource-container__current-box" *ngFor="let resource of currentResources" cdkDrag>{{resource.title}}</div>
         </div>
             <div class="resource-container__current__buttons">
 
@@ -17,8 +16,13 @@
             <div class="resource-container__prospective__search">
 
             </div>
-            <div class="resource-container__prospective__results">
-                
+            <div 
+                class="resource-container__prospective"
+                cdkDropList
+                [cdkDropListData]="prospectResources"
+                (cdkDropListDropped)="drop($event)"
+            >
+                <div class="resource-container__prospect-box" *ngFor="let resource of prospectResources" cdkDrag>{{resource.title}}</div>
             </div>
         </div>
     </div>
