@@ -30,6 +30,7 @@
                                         translators[1][0]
                                     }}
                                 </ng-container>
+                                
                                 <ng-container *ngIf="boxContent === 'tag'">
                                     <span [style.text-transform]="'capitalize'">{{boxContent}}: </span>
                                     {{
@@ -38,6 +39,7 @@
                                 </ng-container>
                             </div>
                         </li>
+                        <li> <a (click)="openResources(content)">Resources</a></li>
                     </ul>
                 </div>
             </div>

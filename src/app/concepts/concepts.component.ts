@@ -87,8 +87,6 @@ export class ConceptsComponent implements OnInit {
   ngOnInit(): void {
     this.subs.sink = this.backend.getConcepts()
       .subscribe(conceptAndMessage => {
-        console.dir(conceptAndMessage);
-        console.log(conceptAndMessage.message);
         this.concepts = conceptAndMessage.concepts;
         console.dir(this.concepts);
 
@@ -96,7 +94,7 @@ export class ConceptsComponent implements OnInit {
           this.filteredConcepts.push(this.concepts.filter(concept => concept.level === i))
         })
 
-        console.dir(this.addConceptControls);
+ 
 
       })
 

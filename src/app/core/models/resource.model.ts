@@ -1,7 +1,7 @@
 export interface IResource {
+    _id?:string;
     title:string;
     link:string;
     level:number;
-    type:string;
     concept:string;
 }

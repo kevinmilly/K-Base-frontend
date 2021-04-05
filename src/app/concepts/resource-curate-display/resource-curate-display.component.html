@@ -14,16 +14,21 @@
         </div>
         <div class="resource-container__prospective">
             <div class="resource-container__prospective__search">
-
+                <mat-form-field>
+                    <input matInput type="text">
+                    <mat-label>Search for new resources:</mat-label>
+                </mat-form-field>
             </div>
             <div 
-                class="resource-container__prospective"
+                *ngIf="prospectResources.length < 1; else noProspects"
+                class="resource-container__prospective__list"
                 cdkDropList
                 [cdkDropListData]="prospectResources"
                 (cdkDropListDropped)="drop($event)"
             >
-                <div class="resource-container__prospect-box" *ngFor="let resource of prospectResources" cdkDrag>{{resource.title}}</div>
+                <div class="resource-container__prospective__list__box" *ngFor="let resource of prospectResources" cdkDrag>{{resource.title}}</div>
             </div>
+            <ng-template #noProspects>No Results</ng-template>
         </div>
-    </div>
+
 </mat-card>

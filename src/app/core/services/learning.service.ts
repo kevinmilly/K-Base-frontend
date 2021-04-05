@@ -43,6 +43,7 @@ export class LearningService {
 
 
   getSearchResources(term:string) {
+         console.log(term);
         return this.http.get<ISearchResult[]>(`http://localhost:3000/api/g-search/${term}`);
   }
 

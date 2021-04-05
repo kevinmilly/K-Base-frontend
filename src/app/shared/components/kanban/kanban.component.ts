@@ -5,6 +5,7 @@ import { BackendService } from 'src/app/core/services/backend.service';
 import { ConceptDetailComponent } from 'src/app/concepts/concept-detail/concept-detail.component';
 import { IConcept } from 'src/app/core/models/concepts.model';
 import { INote } from 'src/app/core/models/note.model';
+import { ResourceCurateDisplayComponent } from 'src/app/concepts/resource-curate-display/resource-curate-display.component';
 
 @Component({
   selector: 'kb-kanban',
@@ -104,6 +105,17 @@ export class KanbanComponent implements OnInit {
         }
       }
 
+    });
+  }
+
+
+  openResources(concept:IConcept) {
+    const dialogResourceRef = this.dialog.open(ResourceCurateDisplayComponent, {
+      width: '30rem',
+      height: '45rem',
+      data: {
+        concept
+      }
     });
   }
 

@@ -77,10 +77,10 @@ export class BackendService {
    /*RESOURCES*/
 
    getResources(concept:IConcept) {
-    return this.http.get<{message:string,resources:IResource[]}>('http://localhost:3000/api/resources');
+    return this.http.get<{message:string,resources:IResource[]}>(`http://localhost:3000/api/resources/${concept._id}`);
    }
 
-   editResource(resource:IResource) {
+   editResources(resource:IResource) {
       this.http.put<{resource:IResource}>(`http://localhost:3000/api/resources/${resource._id}`, resource);
     }
 
