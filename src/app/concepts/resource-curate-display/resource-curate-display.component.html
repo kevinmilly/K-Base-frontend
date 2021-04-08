@@ -15,12 +15,15 @@
         <div class="resource-container__prospective">
             <div class="resource-container__prospective__search">
                 <mat-form-field>
-                    <input matInput type="text">
+                    <input 
+                        matInput type="text"
+                        [formControl]="searchControl"
+                    >
                     <mat-label>Search for new resources:</mat-label>
                 </mat-form-field>
             </div>
             <div 
-                *ngIf="prospectResources.length < 1; else noProspects"
+                *ngIf="prospectResources.length > 0; else noProspects"
                 class="resource-container__prospective__list"
                 cdkDropList
                 [cdkDropListData]="prospectResources"

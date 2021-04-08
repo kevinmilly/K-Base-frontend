@@ -65,17 +65,18 @@ export class ResourceCurateDisplayComponent implements OnInit {
       )
      .subscribe(value => {
        this.searchTerm = value
-       console.log(this.searchTerm);
+       this.learningService.getSearchResources(this.searchTerm);
     });
 
     this.subs.sink = this.backendService.getResources(this.concept)
                         .subscribe(resourceData => this.currentResources = resourceData.resources);
 
-    this.subs.sink =  this.learningService.getSearchResources(this.searchTerm)
-                            .subscribe(results => {
+    this.learningService.getSearchResources(this.searchTerm);
+    this.subs.sink =  this.learningService.resultObs 
+                            .subscribe((results:ISearchResult[]) => {
                               console.log({results});
-                              this.prospectResources = results
-                            });
+                              this.prospectResources = results;
+                       });
   }
 
   drop(event: CdkDragDrop<any>) {
@@ -95,6 +96,10 @@ export class ResourceCurateDisplayComponent implements OnInit {
         } as IResource)
     
     }
+  }
+
+  ngOnDestroy() {
+    this.subs.unsubscribe();
   }
 
 }

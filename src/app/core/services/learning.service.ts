@@ -4,7 +4,7 @@ import {
   HttpHeaders,
   HttpErrorResponse
 } from "@angular/common/http";
-import { Observable, throwError, Subscription } from "rxjs";
+import { Observable, throwError, Subscription, BehaviorSubject } from "rxjs";
 import { catchError, map } from "rxjs/operators";
 import { ISearchResult } from '../models/search-result.model';
 import { IConcept } from '../models/concepts.model';
@@ -16,14 +16,20 @@ const httpOptions = {
 };
 
 
+
+
 @Injectable({
   providedIn: 'root'
 })
 export class LearningService {
 
   results:ISearchResult[] = [];
+  private resultSubject:BehaviorSubject<ISearchResult[]> = new BehaviorSubject<ISearchResult[]>([]);
+  resultObs:Observable<ISearchResult[]> = this.resultSubject.asObservable();
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient) {
+
+   }
 
 
 
@@ -43,9 +49,12 @@ export class LearningService {
 
 
   getSearchResources(term:string) {
-         console.log(term);
-        return this.http.get<ISearchResult[]>(`http://localhost:3000/api/g-search/${term}`);
+        this.http.get<ISearchResult[]>(`http://localhost:3000/api/g-search/${term}`)
+          .subscribe(results => this.resultSubject.next(results));
   }
+
+ 
+
 
 
 }
