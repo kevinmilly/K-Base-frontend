@@ -1,37 +1,40 @@
-<mat-card>
-    <div class="resouce-container" cdkDropListGroup>
+    <div class="resource-header">
+        <h2>Current Resources</h2>
+        <div class="resource-header__prospective__search">
+            <mat-form-field class="search-input">
+                <input 
+                    matInput type="text"
+                    [formControl]="searchControl"
+                >
+                <mat-label>Search for new resources:</mat-label>
+            </mat-form-field>
+        </div>
+    </div>
+
+   <div class="resource-container" cdkDropListGroup>
+        <!-- <div class="resource-container__current__buttons">
+
+        </div> -->
         <div 
-            class="resource-container__current"
+            class="resource-container__current-list"
             cdkDropList
             [cdkDropListData]="currentResources"
             (cdkDropListDropped)="drop($event)"
         >
-          <div class="resource-container__current-box" *ngFor="let resource of currentResources" cdkDrag>{{resource.title}}</div>
+          <div class="resource-container__current-list__box" *ngFor="let resource of currentResources" cdkDrag>{{resource.title}}</div>
         </div>
-            <div class="resource-container__current__buttons">
-
-            </div>
-        </div>
+         
         <div class="resource-container__prospective">
-            <div class="resource-container__prospective__search">
-                <mat-form-field>
-                    <input 
-                        matInput type="text"
-                        [formControl]="searchControl"
-                    >
-                    <mat-label>Search for new resources:</mat-label>
-                </mat-form-field>
-            </div>
             <div 
                 *ngIf="prospectResources.length > 0; else noProspects"
-                class="resource-container__prospective__list"
+                class="resource-container__prospective-list"
                 cdkDropList
                 [cdkDropListData]="prospectResources"
                 (cdkDropListDropped)="drop($event)"
             >
-                <div class="resource-container__prospective__list__box" *ngFor="let resource of prospectResources" cdkDrag>{{resource.title}}</div>
+                <div class="resource-container__prospective-list__box" *ngFor="let resource of prospectResources" cdkDrag>{{resource.title}}</div>
             </div>
             <ng-template #noProspects>No Results</ng-template>
         </div>
-
-</mat-card>
+    </div>
+ 

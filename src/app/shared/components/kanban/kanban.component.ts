@@ -111,7 +111,7 @@ export class KanbanComponent implements OnInit {
 
   openResources(concept:IConcept) {
     const dialogResourceRef = this.dialog.open(ResourceCurateDisplayComponent, {
-      width: '30rem',
+      width: '90%',
       height: '45rem',
       data: {
         concept
