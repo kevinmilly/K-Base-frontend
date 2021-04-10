@@ -19,28 +19,30 @@
                         <li *ngFor="let boxContent of boxDetails">
                             <div class="kanban-container__kanban-list__box-content__details">
                                 <ng-container *ngIf="boxContent === 'necessity'">
-                                    <span [style.text-transform]="'capitalize'">{{boxContent}}: </span>
+                                    <span [style.text-transform]="'capitalize'"> </span>
                                     {{
-                                        translators[0][0]
+                                        translators[0][content[boxContent]]
                                     }}
+                                    {{content[boxContent]}}
                                 </ng-container>
                                 <ng-container *ngIf="boxContent === 'level'">
-                                    <span [style.text-transform]="'capitalize'">{{boxContent}}: </span>
+                                    <span [style.text-transform]="'capitalize'"> </span>
                                     {{
-                                        translators[1][0]
+                                        translators[1][content[boxContent]]
                                     }}
+                                    {{content[boxContent]}}
                                 </ng-container>
                                 
                                 <ng-container *ngIf="boxContent === 'tag'">
-                                    <span [style.text-transform]="'capitalize'">{{boxContent}}: </span>
+                                    <span [style.text-transform]="'capitalize'"> </span>
                                     {{
                                         content[boxContent] !== ' ' && content[boxContent]
                                     }}
                                 </ng-container>
                             </div>
                         </li>
-                        <li> <a (click)="openResources(content)">Resources</a></li>
                     </ul>
+                    <span class="link-text"> <a (click)="openResources(content)">Resources</a></span>
                 </div>
             </div>
         </div>

@@ -54,7 +54,7 @@ export class KanbanComponent implements OnInit {
    }
 
   ngOnInit(): void {
-   console.dir(this.translators);
+   console.dir(this.kanbanFilteredDatasets);
 
   }
 

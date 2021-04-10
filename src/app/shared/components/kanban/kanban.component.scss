@@ -80,3 +80,10 @@
 .cdk-drag-animating {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
+
+.link-text {
+  margin-top: 4rem;
+  font-style: italic;
+  text-decoration: underline;
+  text-transform: uppercase;
+}
