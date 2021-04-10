@@ -6,19 +6,22 @@ import { Pipe, PipeTransform } from "@angular/core";
   export class DifficultyPipe implements PipeTransform {
     transform(value:number, type:string): any {
       console.dir(arguments);
-      return "difficulty" === type ? difficulty[value] : status[value];
+      return "difficulty" === type ? difficulty[value] : necessity[value];
     }
   }
 
   const difficulty:string[] = [
-    "Cake",
-    "Average",
-    "Formiddable",
-    "Impossible"
+    "Nincompoop",
+    "Beginner",
+    "Intermediate",
+    "Expert",
+    "1%"
   ]
 
-  const status:string[] = [
-    "Not Started",
-    "In Progress",
-    "Done"
+  const necessity:string[] = [
+    "Frivolous",
+    "Somewhat Useful",
+    "Very Useful",
+    "Need to Know"
   ]
+

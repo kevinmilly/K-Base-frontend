@@ -21,7 +21,10 @@
             [cdkDropListData]="currentResources"
             (cdkDropListDropped)="drop($event)"
         >
-          <div class="resource-container__current-list__box" *ngFor="let resource of currentResources" cdkDrag>{{resource.title}}</div>
+          <div class="resource-container__current-list__box" *ngFor="let resource of currentResources" cdkDrag>
+              <a href="{{resource.link}}" target="_blank">{{resource.title}}</a>
+            {{resource.level | difficultyStatus:'difficulty'}}
+            </div>
         </div>
          
         <div class="resource-container__prospective">

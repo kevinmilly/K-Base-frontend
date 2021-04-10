@@ -30,6 +30,21 @@ export class ResourceCurateDisplayComponent implements OnInit {
   searchControl:FormControl = new FormControl('',[Validators.required]);
   searchTerm:string = '';
 
+  levels:string[] =    [
+    "Nincompoop",
+    "Beginner",
+    "Intermediate",
+    "Expert",
+    "1%"
+  ]
+
+  necessities:string[] =    [
+    "Frivolous",
+    "Somewhat Useful",
+    "Very Useful",
+    "Need to Know"
+  ]
+
 
   constructor(
     private backendService: BackendService,
@@ -83,20 +98,28 @@ export class ResourceCurateDisplayComponent implements OnInit {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
+        if(event.container.id === 'cdk-drop-list-5') {
+              this.currentResources.push({
+                title: event.container.data.title,
+                link: event.container.data.link,
+                level: this.concept.level,
+                concept: this.concept._id,
+              } as IResource)
+        }
         transferArrayItem(event.previousContainer.data,
-                          event.container.data,
-                          event.previousIndex,
-                          event.currentIndex);
-        console.dir(event.container.data);
-        this.backendService.addResources({
-          title: event.container.data.title,
-          link: event.container.data.link,
-          level: this.concept.level,
-          concept: this.concept._id,
-        } as IResource)
+          event.container.data,
+          event.previousIndex,
+          event.currentIndex); 
     
     }
   }
+
+  // this.backendService.addResources({
+  //   title: event.container.data.title,
+  //   link: event.container.data.link,
+  //   level: this.concept.level,
+  //   concept: this.concept._id,
+  // } as IResource)
 
   ngOnDestroy() {
     this.subs.unsubscribe();
