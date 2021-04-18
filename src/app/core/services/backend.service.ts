@@ -60,7 +60,7 @@ export class BackendService {
 
   getConcepts() {
     // this.http.get<{m:string,c:IConcept[]}>('http://localhost:3000/api/concepts')
-    //   .subscribe((data) => {
+    //   .subscribe((data) => { 
     //     this.concepts = data.c;
     //   });
     return this.http.get<{message:string,concepts:IConcept[]}>('http://localhost:3000/api/concepts');
@@ -71,6 +71,7 @@ export class BackendService {
   }
 
   deleteConcept(concept:IConcept) {
+    console.log("delete on the front end")
     this.http.delete(`http://localhost:3000/api/concepts/${concept._id}`);
   }
 

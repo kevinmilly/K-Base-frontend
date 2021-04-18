@@ -88,16 +88,16 @@ export class ConceptsComponent implements OnInit {
     this.subs.sink = this.backend.getConcepts()
       .subscribe(conceptAndMessage => {
         this.concepts = conceptAndMessage.concepts;
-        console.dir(this.concepts);
+        // console.dir(this.concepts);
       
         this.filterChoices[1].forEach((choice, i) => {
           this.filteredConcepts.push(this.concepts.filter(concept => {
-            console.log(`i is ${i} and concept level is ${concept.level}`);
-            console.dir(concept);
+            // console.log(`i is ${i} and concept level is ${concept.level}`);
+            // console.dir(concept);
             return concept.level === i;
        }))
         })
-      console.dir(this.filteredConcepts);
+      // console.dir(this.filteredConcepts);
  
 
       })
@@ -107,7 +107,7 @@ export class ConceptsComponent implements OnInit {
   detail(row:IConcept) {
     this.subs.sink = this.backend.getNotesByConcept(row._id || "")
       .subscribe(noteAndMessage => {
-        console.dir(noteAndMessage);
+        // console.dir(noteAndMessage);
 
         const dialogRef = this.dialog.open(ConceptDetailComponent, {
           width: '250px',
@@ -115,7 +115,7 @@ export class ConceptsComponent implements OnInit {
         });
     
         this.subs.sink = dialogRef.afterClosed().subscribe(result => {
-          console.dir(result);
+          // console.dir(result);
         });
         
       })
@@ -124,9 +124,12 @@ export class ConceptsComponent implements OnInit {
 
   submit(event:any) {
     console.log({event});
+    this.backend.addConcepts(event);
   }
 
   deleteConcept(event:any) {
+    console.log({event});
+    console.log("Delete triggered");
     this.backend.deleteConcept(event);
   }
 

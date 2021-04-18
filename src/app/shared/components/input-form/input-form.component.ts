@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { IConcept } from 'src/app/core/models/concepts.model';
 import { IControlModel } from 'src/app/core/models/control.model';
 
 
@@ -17,7 +18,7 @@ export class InputFormComponent implements OnInit {
 
  controlsCreated:FormArray = new FormArray([]);
 
- submission:any;
+ submission:any = {} as IConcept;
 
 
 
@@ -76,8 +77,9 @@ export class InputFormComponent implements OnInit {
   }
 
   submit() {
+    console.log("Submit entered");
     this.controlsToCreate.forEach((control, i) => {
-      this.submission[control.name] = this.controlsCreated.controls[i]
+      this.submission[control.name.toLowerCase()] = this.controlsCreated.controls[i].value;
     });
     console.dir(this.submission);
     this.onSubmit.emit(this.submission);

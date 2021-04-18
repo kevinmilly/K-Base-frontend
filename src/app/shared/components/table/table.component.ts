@@ -98,7 +98,7 @@ export class TableComponent implements OnInit {
     if(type==='zoom') {
       this.rowClick(event);
     } else {
-       this.onDelete.emit({event:event});
+       this.onDelete.emit(event);
     }
   }
 
