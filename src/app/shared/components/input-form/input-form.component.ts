@@ -79,6 +79,7 @@ export class InputFormComponent implements OnInit {
   submit() {
     console.log("Submit entered");
     this.controlsToCreate.forEach((control, i) => {
+      console.dir(this.controlsCreated.controls[i]);
       this.submission[control.name.toLowerCase()] = this.controlsCreated.controls[i].value;
     });
     console.dir(this.submission);

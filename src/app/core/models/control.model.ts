@@ -5,5 +5,5 @@ export interface IControlModel {
     default:any,
     numberMax?:number,
     numberMin?:number,
-    stringChoices?:string[],
+    stringChoices?:any[],
   };

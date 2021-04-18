@@ -51,6 +51,21 @@ export class ConceptsComponent implements OnInit {
     ]
   ]
 
+  necessityChoices = [
+    {name: "Frivolous", value:0},
+    {name:"Somewhat Useful", value:1},
+    {name: "Very Useful", value:2},
+    {name:"Need to Know", value: 3}
+  ]
+
+  levelChoices = [
+    {name: "Nincompoop", value:0},
+    {name:"Beginner", value:1},
+    {name: "Intermediate", value:2},
+    {name:"Expert", value: 3},
+    {name:"1%", value: 4}
+  ]
+
   filters:string[] = ["necessity", "level"];
 
   displayNames:string[] = ["Actions","Title", "Necessity","Level", "Tag", "Notes",];
@@ -68,14 +83,14 @@ export class ConceptsComponent implements OnInit {
       type:"stringChoice", 
       required:true, 
       default:1,
-      stringChoices:this.filterChoices[0]
+      stringChoices:this.necessityChoices
     },
     {
       name:"Level", 
       type:"stringChoice", 
       required:true, 
       default:1,
-      stringChoices:this.filterChoices[1]
+      stringChoices:this.levelChoices
     },
   ];
 

@@ -31,9 +31,9 @@
                 <div *ngSwitchCase="'stringChoice'">
                     <mat-form-field class="medium">
                         <mat-label>{{controlsToCreate[i].name}}</mat-label>
-                        <mat-select>
-                          <mat-option value="{{c}}" *ngFor="let c of controlsToCreate[i].stringChoices; index as j">
-                            {{c}}
+                        <mat-select [formControl]="indexedCreatedControls(i)">
+                          <mat-option value="{{c.value}}" *ngFor="let c of controlsToCreate[i].stringChoices; index as j">
+                            {{c.name}}
                           </mat-option>
                         </mat-select>
                       </mat-form-field> 
