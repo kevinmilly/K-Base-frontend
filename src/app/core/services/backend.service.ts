@@ -10,15 +10,17 @@ import { IResource } from '../models/resource.model';
 })
 export class BackendService {
   
+  private  BASE_URL:string = `http://localhost:3000`;
 
-  private conceptsUpdated:BehaviorSubject<IConcept[]> = new BehaviorSubject<IConcept[]>([]);
-  public concepts$:Observable<IConcept[]> = this.conceptsUpdated.asObservable();
+  private conceptsUpdated:BehaviorSubject<IConcept[]> = new BehaviorSubject<any>([]);
+  public readonly concepts$:Observable<IConcept[]> = this.conceptsUpdated.asObservable();
+  
 
   private notesUpdated:BehaviorSubject<INote[]> = new BehaviorSubject<INote[]>([]);
-  private notes$:Observable<INote[]> = this.notesUpdated.asObservable();
+  public readonly notes$:Observable<INote[]> = this.notesUpdated.asObservable();
 
   private resourcesUpdated:BehaviorSubject<IResource[]> = new BehaviorSubject<IResource[]>([]);
-  public resources$:Observable<IResource[]> = this.resourcesUpdated.asObservable();
+  public  readonly resources$:Observable<IResource[]> = this.resourcesUpdated.asObservable();
 
   private concepts:IConcept[] = [];
   private notes:INote[] = [];
@@ -31,7 +33,7 @@ export class BackendService {
   /*NoteS*/
 
   addNotes(t:INote) {
-    this.http.post<{m: string}>('http://localhost:3000/api/notes', t)
+    this.http.post<{m: string}>(`${this.BASE_URL}/api/notes`, t)
       .subscribe((response) => {
         this.notes.push(t);
         this.notesUpdated.next([...this.notes]);
@@ -39,11 +41,11 @@ export class BackendService {
   }
 
   getNotesByConcept(relatedConcept?:string) {
-    return this.http.get<{message:string,notes:INote[]}>(`http://localhost:3000/api/notes/${relatedConcept}`);
+    return this.http.get<{message:string,notes:INote[]}>(`${this.BASE_URL}/api/notes/${relatedConcept}`);
   }
 
   editNotes(note:INote) {
-    this.http.put<{note:INote}>(`http://localhost:3000/api/notes/${note._id}`, note);
+    this.http.put<{note:INote}>(`${this.BASE_URL}/api/notes/${note._id}`, note);
   }
 
 
@@ -51,42 +53,44 @@ export class BackendService {
   /*CONCEPTS*/
 
   addConcepts(c:IConcept) {
-    this.http.post<{m: string}>('http://localhost:3000/api/concepts', c)
+    console.log("add Concept on the front end");
+    console.log({c});
+    this.http.post<{m: string}>(`${this.BASE_URL}/api/concepts`, c)
       .subscribe((response) => {
+        console.log({response})
         this.concepts.push(c);
         this.conceptsUpdated.next([...this.concepts]);
       })
   }
 
   getConcepts() {
-    // this.http.get<{m:string,c:IConcept[]}>('http://localhost:3000/api/concepts')
-    //   .subscribe((data) => { 
-    //     this.concepts = data.c;
-    //   });
-    return this.http.get<{message:string,concepts:IConcept[]}>('http://localhost:3000/api/concepts');
+     this.http.get<{message:string,concepts:IConcept[]}>(`${this.BASE_URL}/api/concepts`)
+      .subscribe( c => this.conceptsUpdated.next(c.concepts))
   }
 
   editConcept(concept:IConcept) {
-    this.http.put<{concept:IConcept}>(`http://localhost:3000/api/concepts/${concept._id}`, concept);
+    this.http.put<{concept:IConcept}>(`${this.BASE_URL}/api/concepts/${concept._id}`, concept);
   }
 
   deleteConcept(concept:IConcept) {
-    console.log("delete on the front end")
-    this.http.delete(`http://localhost:3000/api/concepts/${concept._id}`);
+
+    this.http.delete<{concept:IConcept}>(`${this.BASE_URL}/api/concepts/${concept._id}`)
+      .subscribe(r => console.log({r}));
   }
 
    /*RESOURCES*/
 
    getResources(concept:IConcept) {
-    return this.http.get<{message:string,resources:IResource[]}>(`http://localhost:3000/api/resources/${concept._id}`);
+    return this.http.get<{message:string,resources:IResource[]}>(`${this.BASE_URL}/api/resources/${concept._id}`);
    }
 
    editResources(resource:IResource) {
-      this.http.put<{resource:IResource}>(`http://localhost:3000/api/resources/${resource._id}`, resource);
+      this.http.put<{resource:IResource}>(`${this.BASE_URL}/api/resources/${resource._id}`, resource)
+        .subscribe(r => console.log({r}));
     }
 
     addResources(r:IResource) {
-      this.http.post<{m: string}>('http://localhost:3000/api/resources', r)
+      this.http.post<{m: string}>(`${this.BASE_URL}/api/resources`, r)
         .subscribe((response) => {
           this.resources.push(r);
           this.resourcesUpdated.next([...this.resources]);

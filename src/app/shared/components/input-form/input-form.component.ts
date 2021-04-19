@@ -52,6 +52,12 @@ export class InputFormComponent implements OnInit {
             new FormControl(c.default,vals)
           )
           break;
+        case "stringChoiceSet":
+          if(c.required) vals.push(Validators.required);
+            this.controlsCreated.push(
+              new FormControl(c.default,vals)
+            )
+          break;
         case "number":
           if(c.required) vals.push(Validators.required);
           if(!c.numberMax && !c.numberMin) {
@@ -79,11 +85,12 @@ export class InputFormComponent implements OnInit {
   submit() {
     console.log("Submit entered");
     this.controlsToCreate.forEach((control, i) => {
-      console.dir(this.controlsCreated.controls[i]);
+      // console.dir(this.controlsCreated.controls[i]);
       this.submission[control.name.toLowerCase()] = this.controlsCreated.controls[i].value;
     });
     console.dir(this.submission);
     this.onSubmit.emit(this.submission);
+    this.controlsCreated.clear();
   }
 
   get createdControls() {

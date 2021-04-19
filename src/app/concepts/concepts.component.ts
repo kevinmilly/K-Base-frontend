@@ -56,7 +56,7 @@ export class ConceptsComponent implements OnInit {
     {name:"Somewhat Useful", value:1},
     {name: "Very Useful", value:2},
     {name:"Need to Know", value: 3}
-  ]
+  ] 
 
   levelChoices = [
     {name: "Nincompoop", value:0},
@@ -64,6 +64,13 @@ export class ConceptsComponent implements OnInit {
     {name: "Intermediate", value:2},
     {name:"Expert", value: 3},
     {name:"1%", value: 4}
+  ]
+
+  tagChoices = [
+    "Bible",
+    "Programming",
+    "Language Studies",
+    "Potpourri"
   ]
 
   filters:string[] = ["necessity", "level"];
@@ -92,6 +99,13 @@ export class ConceptsComponent implements OnInit {
       default:1,
       stringChoices:this.levelChoices
     },
+    {
+      name:"Tag", 
+      type:"stringChoiceSet", 
+      required:true, 
+      default:1,
+      stringChoices:this.tagChoices
+    },
   ];
 
   
@@ -100,15 +114,14 @@ export class ConceptsComponent implements OnInit {
   constructor(private backend:BackendService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.subs.sink = this.backend.getConcepts()
-      .subscribe(conceptAndMessage => {
-        this.concepts = conceptAndMessage.concepts;
+    this.backend.getConcepts();
+    this.subs.sink = this.backend.concepts$
+      .subscribe(concepts => {;
+        this.concepts = concepts;
         // console.dir(this.concepts);
       
         this.filterChoices[1].forEach((choice, i) => {
           this.filteredConcepts.push(this.concepts.filter(concept => {
-            // console.log(`i is ${i} and concept level is ${concept.level}`);
-            // console.dir(concept);
             return concept.level === i;
        }))
         })

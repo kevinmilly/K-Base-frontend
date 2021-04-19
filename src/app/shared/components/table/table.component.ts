@@ -135,9 +135,10 @@ export class TableComponent implements OnInit {
     });
   }
 
-  categoryFilter(category:string) {
+  categoryFilter(category:any) {
+    console.log(category);
    
-    switch (category) {
+    switch (category.cat) {
       case "Bible":
         this.data = this.dataSaved.filter(d => d.tag === "Bible"  );
         break;
