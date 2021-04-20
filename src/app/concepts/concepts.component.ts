@@ -4,6 +4,7 @@ import { Observable, Subscription } from 'rxjs';
 import { SubSink } from 'subsink';
 import { IConcept } from '../core/models/concepts.model';
 import { IControlModel } from '../core/models/control.model';
+import { INote } from '../core/models/note.model';
 import { BackendService } from '../core/services/backend.service';
 import { ConceptDetailComponent } from './concept-detail/concept-detail.component';
 
@@ -24,8 +25,7 @@ export class ConceptsComponent implements OnInit {
     "title",
     "necessity",
     "level",
-    "tag",
-    "notes" ,
+    "tag"
   ]
 
   boxDetails:string[] = [
@@ -75,7 +75,7 @@ export class ConceptsComponent implements OnInit {
 
   filters:string[] = ["necessity", "level"];
 
-  displayNames:string[] = ["Actions","Title", "Necessity","Level", "Tag", "Notes",];
+  displayNames:string[] = ["Actions","Title", "Necessity","Level", "Tag"];
 
   addConceptControls:IControlModel[] = [
     {
@@ -113,33 +113,31 @@ export class ConceptsComponent implements OnInit {
 
   constructor(private backend:BackendService, public dialog: MatDialog) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void { //put the method in the constructor
     this.backend.getConcepts();
     this.subs.sink = this.backend.concepts$
       .subscribe(concepts => {;
         this.concepts = concepts;
-        // console.dir(this.concepts);
-      
+        console.dir(this.concepts);
         this.filterChoices[1].forEach((choice, i) => {
-          this.filteredConcepts.push(this.concepts.filter(concept => {
-            return concept.level === i;
-       }))
-        })
-      // console.dir(this.filteredConcepts);
- 
 
+          this.filteredConcepts.push(this.concepts.filter(concept => concept.level === i));
+         
+        })
+       
       })
 
   }
 
   detail(row:IConcept) {
-    this.subs.sink = this.backend.getNotesByConcept(row._id || "")
-      .subscribe(noteAndMessage => {
+    this.backend.getNotesByConcept(row._id || "");
+    this.subs.sink = this.backend.notes$
+                      .subscribe(n => {
         // console.dir(noteAndMessage);
 
         const dialogRef = this.dialog.open(ConceptDetailComponent, {
           width: '250px',
-          data: { concept: row, notes:noteAndMessage.notes} 
+          data: { concept: row, notes:n} 
         });
     
         this.subs.sink = dialogRef.afterClosed().subscribe(result => {
@@ -156,8 +154,6 @@ export class ConceptsComponent implements OnInit {
   }
 
   deleteConcept(event:any) {
-    console.log({event});
-    console.log("Delete triggered");
     this.backend.deleteConcept(event);
   }
 

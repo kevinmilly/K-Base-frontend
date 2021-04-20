@@ -41,11 +41,23 @@ export class BackendService {
   }
 
   getNotesByConcept(relatedConcept?:string) {
-    return this.http.get<{message:string,notes:INote[]}>(`${this.BASE_URL}/api/notes/${relatedConcept}`);
+   this.http.get<{message:string,notes:INote[]}>(`${this.BASE_URL}/api/notes/${relatedConcept}`)
+            .subscribe( c => {
+              this.notes = c.notes;
+              this.notesUpdated.next(this.notes);
+          })
   }
 
   editNotes(note:INote) {
-    this.http.put<{note:INote}>(`${this.BASE_URL}/api/notes/${note._id}`, note);
+    this.http.put<{note:INote}>(`${this.BASE_URL}/api/notes/${note._id}`, note)
+    .subscribe(r => {
+      this.notesUpdated.next(
+        this.notes.splice(
+          this.notes.findIndex(c => c._id === note._id), 
+          1, 
+          r.note
+      ))
+    })
   }
 
 
@@ -65,17 +77,31 @@ export class BackendService {
 
   getConcepts() {
      this.http.get<{message:string,concepts:IConcept[]}>(`${this.BASE_URL}/api/concepts`)
-      .subscribe( c => this.conceptsUpdated.next(c.concepts))
+      .subscribe( c => {
+        this.concepts = c.concepts;
+        this.conceptsUpdated.next(this.concepts);
+    })
   }
 
   editConcept(concept:IConcept) {
-    this.http.put<{concept:IConcept}>(`${this.BASE_URL}/api/concepts/${concept._id}`, concept);
+    this.http.put<{concept:IConcept}>(`${this.BASE_URL}/api/concepts/${concept._id}`, concept)
+      .subscribe(r => {
+        this.conceptsUpdated.next(
+          this.concepts.splice(
+            this.concepts.findIndex(c => c._id === concept._id), 
+            1, 
+            r.concept
+        ))
+      })
   }
 
   deleteConcept(concept:IConcept) {
 
     this.http.delete<{concept:IConcept}>(`${this.BASE_URL}/api/concepts/${concept._id}`)
-      .subscribe(r => console.log({r}));
+      .subscribe(r => {
+        this.conceptsUpdated.next( this.concepts.filter(c => c._id !== concept._id));
+        console.log({r})
+      });
   }
 
    /*RESOURCES*/

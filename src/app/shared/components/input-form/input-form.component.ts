@@ -90,7 +90,9 @@ export class InputFormComponent implements OnInit {
     });
     console.dir(this.submission);
     this.onSubmit.emit(this.submission);
-    this.controlsCreated.clear();
+    this.controlsCreated.controls.forEach((control, i) => {
+      control.setValue(this.controlsToCreate[i].default)
+    });
   }
 
   get createdControls() {

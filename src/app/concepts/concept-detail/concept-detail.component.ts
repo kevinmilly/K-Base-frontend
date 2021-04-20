@@ -34,7 +34,29 @@ export class ConceptDetailComponent implements OnInit {
       "Not Started",
       "In Progress",
       "Done"
-    ]
+    ] 
+  ]
+
+  necessityChoices = [
+    {name: "Frivolous", value:0},
+    {name:"Somewhat Useful", value:1},
+    {name: "Very Useful", value:2},
+    {name:"Need to Know", value: 3}
+  ] 
+
+  levelChoices = [
+    {name: "Nincompoop", value:0},
+    {name:"Beginner", value:1},
+    {name: "Intermediate", value:2},
+    {name:"Expert", value: 3},
+    {name:"1%", value: 4}
+  ]
+
+  tagChoices = [
+    "Bible",
+    "Programming",
+    "Language Studies",
+    "Potpourri"
   ]
 
   noteChoices:string[] = ['Random', 'Fundamental', 'Question']
@@ -46,7 +68,7 @@ export class ConceptDetailComponent implements OnInit {
   editControls:IControlModel[] = [];
   addNoteControls:IControlModel[] = [];
 
-  
+   
 
   messages:string[] = [
     `Small steps motivate. Big steps overwhelm. - Maxime Lagacé`,
@@ -81,13 +103,14 @@ export class ConceptDetailComponent implements OnInit {
     private _snackBar: MatSnackBar,
     public dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: {concept:IConcept, notes$:Observable<INote[]>},
-    private dialogRef: MatDialogRef<ConceptDetailComponent>
+    private dialogRef: MatDialogRef<ConceptDetailComponent>,
+    private backend:BackendService
   ) { }
 
   ngOnInit(): void {
     
     this.concept = this.data.concept;
-    this.subs.sink = this.data.notes$
+    this.subs.sink = this.backend.notes$
                 .subscribe(notes => {
                   this.notes = notes;
                 })
@@ -105,15 +128,22 @@ export class ConceptDetailComponent implements OnInit {
         type:"stringChoice", 
         required:true, 
         default:this.concept.necessity,
-        stringChoices:this.filterChoices[0]
+        stringChoices:this.necessityChoices
       },
       {
         name:"Level", 
         type:"stringChoice", 
         required:true, 
         default:this.concept.level,
-        stringChoices:this.filterChoices[1]
-      }
+        stringChoices:this.levelChoices
+      },
+      {
+        name:"Tag", 
+        type:"stringChoiceSet", 
+        required:true, 
+        default:this.concept.tag,
+        stringChoices:this.tagChoices
+      },
     ]
 
     this.addNoteControls = [

@@ -7,7 +7,7 @@
     </div>
     <div id="second" class="tab-content">
       <kb-table
-      *ngIf="concepts.length > 0"
+      *ngIf="concepts.length > 0; else noData"
       [data]="concepts"
       [columns]="columns"
       [filterChoices]="filterChoices"
@@ -19,6 +19,11 @@
       (onDelete)="deleteConcept($event)"
   >
   </kb-table>
+  <ng-template #noData>
+    <div  fxLayout="row" fxLayoutAlign="center center" [style.margin-top.rem]="5" >
+        No Concepts Available.  You need to start learning something!  Add a Concept!
+    </div>
+</ng-template>
     </div>
     <div id="third" class="tab-content">
       <kb-kanban

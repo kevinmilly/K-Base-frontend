@@ -26,6 +26,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import {MatTooltipModule} from '@angular/material/tooltip';
 
+import {FlexLayoutModule, BREAKPOINT} from '@angular/flex-layout';
+
 
 const modules = [        
     MatTableModule,
@@ -49,7 +51,8 @@ const modules = [
     MatSelectModule,
     MatGridListModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FlexLayoutModule
 ]
 
 @NgModule({
