@@ -19,6 +19,7 @@
       (onDelete)="deleteConcept($event)"
   >
   </kb-table>
+  <ngx-spinner></ngx-spinner>
   <ng-template #noData>
     <div  fxLayout="row" fxLayoutAlign="center center" [style.margin-top.rem]="5" >
         No Concepts Available.  You need to start learning something!  Add a Concept!
@@ -33,4 +34,5 @@
         [translators]="filterChoices"
       >
       </kb-kanban>
+      <ngx-spinner></ngx-spinner>
     </div>

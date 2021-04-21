@@ -12,6 +12,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { debounce, debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'kb-resource-curate-display',
@@ -50,7 +51,8 @@ export class ResourceCurateDisplayComponent implements OnInit {
     private backendService: BackendService,
     private learningService: LearningService,
     @Inject(MAT_DIALOG_DATA) public data:any,
-    private dialogRef: MatDialogRef<ResourceCurateDisplayComponent>
+    private dialogRef: MatDialogRef<ResourceCurateDisplayComponent>,
+    private spinner: NgxSpinnerService
     
   ) {
     console.dir(this.data);
@@ -73,6 +75,8 @@ export class ResourceCurateDisplayComponent implements OnInit {
         break;
     }
 
+    this.spinner.show();
+
     this.subs.sink = this.searchControl.valueChanges
       .pipe(
         debounceTime(1000),
@@ -91,6 +95,11 @@ export class ResourceCurateDisplayComponent implements OnInit {
                             .subscribe((results:ISearchResult[]) => {
                               console.log({results});
                               this.prospectResources = results;
+
+                              setTimeout(() => {
+                                /** spinner ends after 5 seconds */
+                                this.spinner.hide();
+                              }, 1000);
                        });
   }
 
@@ -98,20 +107,21 @@ export class ResourceCurateDisplayComponent implements OnInit {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
-        if(event.container.id === 'cdk-drop-list-5') {
-              this.currentResources.push({
-                title: event.container.data.title,
-                link: event.container.data.link,
-                level: this.concept.level,
-                concept: this.concept._id,
-              } as IResource)
-        }
+        // if(event.container.id === 'cdk-drop-list-5') {
+        //       this.currentResources.push({
+        //         title: event.container.data.title,
+        //         link: event.container.data.link,
+        //         level: this.concept.level,
+        //         concept: this.concept._id,
+        //       } as IResource)
+        // }
         transferArrayItem(event.previousContainer.data,
           event.container.data,
           event.previousIndex,
           event.currentIndex); 
     
     }
+    console.dir(this.currentResources);
   }
 
   // this.backendService.addResources({

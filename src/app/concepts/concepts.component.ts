@@ -8,6 +8,8 @@ import { INote } from '../core/models/note.model';
 import { BackendService } from '../core/services/backend.service';
 import { ConceptDetailComponent } from './concept-detail/concept-detail.component';
 
+import { NgxSpinnerService } from "ngx-spinner";
+
 @Component({
   selector: 'kb-concepts',
   templateUrl: './concepts.component.html',
@@ -111,19 +113,30 @@ export class ConceptsComponent implements OnInit {
   
   
 
-  constructor(private backend:BackendService, public dialog: MatDialog) { }
+  constructor(
+    private backend:BackendService, 
+    public dialog: MatDialog,
+    private spinner: NgxSpinnerService
+    ) { }
 
   ngOnInit(): void { //put the method in the constructor
+    this.spinner.show();
+
     this.backend.getConcepts();
     this.subs.sink = this.backend.concepts$
       .subscribe(concepts => {;
         this.concepts = concepts;
         console.dir(this.concepts);
-        this.filterChoices[1].forEach((choice, i) => {
+        if(concepts.length > 0) {
+          this.filterChoices[1].forEach((choice, i) => {
+            this.filteredConcepts.push(this.concepts.filter(concept => concept.level === i));
+          })
+        }
 
-          this.filteredConcepts.push(this.concepts.filter(concept => concept.level === i));
-         
-        })
+        setTimeout(() => {
+          /** spinner ends after 5 seconds */
+          this.spinner.hide();
+        }, 2000);
        
       })
 

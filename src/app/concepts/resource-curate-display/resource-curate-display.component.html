@@ -11,7 +11,9 @@
         </div>
     </div>
 
-   <div class="resource-container" cdkDropListGroup>
+    <ngx-spinner></ngx-spinner>
+
+   <div class="resource-container" cdkDropListGroup *ngIf="prospectResources.length > 0">
         <!-- <div class="resource-container__current__buttons">
 
         </div> -->
@@ -34,7 +36,9 @@
                 [cdkDropListData]="prospectResources"
                 (cdkDropListDropped)="drop($event)"
             >
-                <div class="resource-container__prospective-list__box" *ngFor="let resource of prospectResources" cdkDrag>{{resource.title}}</div>
+                <div class="resource-container__prospective-list__box" *ngFor="let resource of prospectResources" cdkDrag>
+                    <a href="{{resource.link}}" target="_blank">{{resource.title}}</a>
+                </div>
             </div>
             <ng-template #noProspects>No Results</ng-template>
         </div>

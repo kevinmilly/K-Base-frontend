@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -28,6 +28,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 
 import {FlexLayoutModule, BREAKPOINT} from '@angular/flex-layout';
 
+import { NgxSpinnerModule } from "ngx-spinner";
+
 
 const modules = [        
     MatTableModule,
@@ -52,12 +54,14 @@ const modules = [
     MatGridListModule,
     FormsModule,
     ReactiveFormsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    NgxSpinnerModule
 ]
 
 @NgModule({
     declarations:[],
     imports:modules,
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
     exports: modules
 })
 export class MaterialModule {
