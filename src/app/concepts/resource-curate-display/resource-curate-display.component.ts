@@ -13,6 +13,8 @@ import { debounce, debounceTime, distinctUntilChanged, tap } from 'rxjs/operator
 
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { AbstractExtendedWebDriver } from 'protractor/built/browser';
+import { throwError } from 'rxjs';
 
 @Component({
   selector: 'kb-resource-curate-display',
@@ -26,7 +28,10 @@ export class ResourceCurateDisplayComponent implements OnInit {
   concept:IConcept = {} as IConcept;
 
   prospectResources:ISearchResult[] = [];
-  currentResources:IResource[] =[];
+  currentResources:IResource[] = [];
+  originalResources:IResource[] = [];
+  resourcesToAdd:IResource[] = [];
+  resourcesToDelete:IResource[] = [];
 
   searchControl:FormControl = new FormControl('',[Validators.required]);
   searchTerm:string = '';
@@ -88,7 +93,10 @@ export class ResourceCurateDisplayComponent implements OnInit {
     });
 
     this.subs.sink = this.backendService.getResources(this.concept)
-                        .subscribe(resourceData => this.currentResources = resourceData.resources);
+                        .subscribe(resourceData => {
+                          this.currentResources = resourceData.resources;
+                          this.originalResources = [...this.currentResources];
+                        });
 
     this.learningService.getSearchResources(this.searchTerm);
     this.subs.sink =  this.learningService.resultObs 
@@ -107,14 +115,7 @@ export class ResourceCurateDisplayComponent implements OnInit {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
-        // if(event.container.id === 'cdk-drop-list-5') {
-        //       this.currentResources.push({
-        //         title: event.container.data.title,
-        //         link: event.container.data.link,
-        //         level: this.concept.level,
-        //         concept: this.concept._id,
-        //       } as IResource)
-        // }
+        this.searchOrignal(event.container);
         transferArrayItem(event.previousContainer.data,
           event.container.data,
           event.previousIndex,
@@ -124,12 +125,40 @@ export class ResourceCurateDisplayComponent implements OnInit {
     console.dir(this.currentResources);
   }
 
-  // this.backendService.addResources({
-  //   title: event.container.data.title,
-  //   link: event.container.data.link,
-  //   level: this.concept.level,
-  //   concept: this.concept._id,
-  // } as IResource)
+
+  searchOrignal(currentStack:any) {
+    if(currentStack.id === 'cdk-drop-list-5') { //if we moved it in the current stack
+      /*if it's in the delete stack that means it was moved from the original
+      just checking if it's in there allows us to see that it doesn't need to be added to the
+      resourcesToAdd array and we don't have to track the original state of the currentResources
+      */
+      const resourceMarkedForDeletionIdx = this.resourcesToDelete.findIndex(r => r._id === currentStack.data._id)
+      if(resourceMarkedForDeletionIdx === -1) { //wasn't part of the original
+        this.resourcesToAdd.push({
+          title: currentStack.data.title,
+          link: currentStack.data.link,
+          level: this.concept.level,
+          concept: this.concept._id,
+        } as IResource)
+      } else {
+          this.resourcesToDelete.splice(resourceMarkedForDeletionIdx,1);
+      }
+   
+    } else {
+        const resourceMarkedForAddIdx = this.resourcesToAdd.findIndex(r => r._id === currentStack.data._id);
+        if(resourceMarkedForAddIdx === -1) { //was part of the original
+          this.resourcesToDelete.push({
+            title: currentStack.data.title,
+            link: currentStack.data.link,
+            level: this.concept.level,
+            concept: this.concept._id,
+          } as IResource)
+
+        } else {
+          this.resourcesToAdd.splice(resourceMarkedForAddIdx,1);
+         }
+    }
+  }
 
   ngOnDestroy() {
     this.subs.unsubscribe();

@@ -51,7 +51,7 @@ export class KanbanComponent implements OnInit {
     private backend:BackendService
   ) {
     
-   }
+   } 
 
   ngOnInit(): void {
    console.dir(this.kanbanFilteredDatasets);
