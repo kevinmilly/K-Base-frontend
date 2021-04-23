@@ -160,6 +160,13 @@ export class ResourceCurateDisplayComponent implements OnInit {
     }
   }
 
+  save(t) {
+    this.dialogRef.close({
+      delete: this.resourcesToDelete,
+      add:this.resourcesToAdd
+    })
+  }
+
   ngOnDestroy() {
     this.subs.unsubscribe();
   }
