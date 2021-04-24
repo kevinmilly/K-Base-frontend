@@ -1,9 +1,11 @@
-<kb-tab [labels]="['Add Concept','Table View','Kanban View']">
+<kb-tab [labels]="['Add Concept','Concept Table','Concept Kanban']">
     <div id="first" class="tab-content">
       <kb-input-form 
           [controlsToCreate]="addConceptControls"
           (onSubmit)="submit($event)"
-      ></kb-input-form>
+      >
+      What would you like to learn more about?
+    </kb-input-form>
     </div>
     <div id="second" class="tab-content">
       <kb-table

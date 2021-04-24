@@ -1,6 +1,6 @@
 <div class="edit__container" >
     <div class="edit__container__header"  fxLayout="row" fxLayoutAlign="center" >
-      What would you like to learn more about?
+     <ng-content></ng-content>
     </div>
     <div class="edit__container__content"  fxLayout="row" fxLayoutAlign="center" >
             <div *ngFor="let control of createdControls; index as i" [ngSwitch]="controlsToCreate[i].type">
@@ -61,6 +61,7 @@
             [size]="'big'"
         >
         Save
+        <mat-icon>save</mat-icon>
         </kb-shared-button>
      </div>
 </div>

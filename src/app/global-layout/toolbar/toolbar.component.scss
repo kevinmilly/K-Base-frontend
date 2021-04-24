@@ -11,15 +11,17 @@
 
 a {
   font-size: 1.2rem;
+  font-family: 'Merriweather Sans', sans-serif, "Helvetica Neue", sans-serif;
 }
 
 h1.title {
   font-size: 2rem;
   text-transform: uppercase;
+  font-family: 'Abril Fatface', cursive;
 }
 
 .router-link-active {
-  color: rgb(255, 169, 234);
+  color: rgb(46, 6, 36);
   font-size: 1.3rem;
   text-decoration: underline;
 }

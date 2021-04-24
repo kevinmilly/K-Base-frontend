@@ -4,11 +4,15 @@
         <kb-input-form 
           [controlsToCreate]="editControls"
           (onSubmit)="submit($event)"
-        ></kb-input-form>
+        >
+    Any Changes?
+    </kb-input-form>
 
     </div>
     <div id="second" class="tab-content">
-        <kb-input-form [controlsToCreate]="addNoteControls"></kb-input-form>
+        <kb-input-form [controlsToCreate]="addNoteControls">
+            What have you learned?
+        </kb-input-form>
 
     </div>
     <div id="third" class="tab-content">
