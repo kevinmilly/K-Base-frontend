@@ -115,12 +115,21 @@ export class BackendService {
         .subscribe(r => console.log({r}));
     }
 
-    addResources(r:IResource) {
-      this.http.post<{m: string}>(`${this.BASE_URL}/api/resources`, r)
+    addResources(resourcesToAdd:IResource[]) {
+      this.http.post<{m: string}>(`${this.BASE_URL}/api/resources`, resourcesToAdd)
         .subscribe((response) => {
-          this.resources.push(r);
+          this.resources = [...this.resources, ...resourcesToAdd];
           this.resourcesUpdated.next([...this.resources]);
         })
+    }
+
+    deleteResources(resourcesToDelete:any[]) {
+      this.http.delete<{concept:IConcept}>(`${this.BASE_URL}/api/resources/${resourcesToDelete}`)
+      .subscribe(r => {
+        const updatedResources = this.resources.filter(resource => !resourcesToDelete.includes(resource._id));
+        this.resourcesUpdated.next(updatedResources);
+        console.log({r})
+      });
     }
 
   

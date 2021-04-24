@@ -6,6 +6,7 @@ import { ConceptDetailComponent } from 'src/app/concepts/concept-detail/concept-
 import { IConcept } from 'src/app/core/models/concepts.model';
 import { INote } from 'src/app/core/models/note.model';
 import { ResourceCurateDisplayComponent } from 'src/app/concepts/resource-curate-display/resource-curate-display.component';
+import { SubSink } from 'subsink';
 
 @Component({
   selector: 'kb-kanban',
@@ -24,6 +25,8 @@ export class KanbanComponent implements OnInit {
   
   dragData:[IConcept[]] = [[]];
   dragDataSaved:[IConcept[]] = [[]];
+
+  private subs = new SubSink();
 
   categories:any[] = [
     {
@@ -117,6 +120,16 @@ export class KanbanComponent implements OnInit {
         concept
       }
     });
+
+    this.subs.sink = dialogResourceRef.afterClosed()
+                        .subscribe( result => { 
+                          if(result) {
+                            console.log({result});
+                              this.backend.addResources(result.add);
+                              this.backend.deleteResources(result.delete);
+
+                          }
+                        })
   }
 
   

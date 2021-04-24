@@ -6,17 +6,3 @@ $header-button-margin: 1rem;
 $header-button-width: 2rem;
 $header-button-background: rgb(62, 131, 143);
 
-@mixin small-button {
-  width: $header-button-width;
-  margin: $header-button-margin;
-}
-
-@mixin reg-button {
-  width: calc(#{$header-button-width} * 2.5);
-  margin: $header-button-margin;
-}
-
-@mixin big-button {
-  width: calc(#{$header-button-width} * 4);
-  margin: $header-button-margin;
-}

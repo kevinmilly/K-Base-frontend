@@ -1,3 +1,5 @@
+
+    
     <div class="resource-header">
         <h2>Current Resources</h2>
         <div class="resource-header__prospective__search">
@@ -43,11 +45,10 @@
             <ng-template #noProspects>No Results</ng-template>
         </div>
     </div>
-    <div class="save-button">
-        <kb-shared-button
-            [type]="big"
-            (click)="save()"
-        >
-        SAVE
-        </kb-shared-button>
-    </div>
+    <kb-shared-button
+        [size]="'big'"
+        (clicked)="save()"
+      
+    >
+    SAVE
+    </kb-shared-button>

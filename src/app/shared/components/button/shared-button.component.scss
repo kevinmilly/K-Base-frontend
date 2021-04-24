@@ -12,3 +12,15 @@
 .big {
   @include big-button;
 }
+.reg-icon {
+  width: 100%;
+  @include reg-button-icon;
+}
+
+.small-icon {
+  @include small-button-icon;
+}
+
+.big-icon {
+  @include big-button-icon;
+}

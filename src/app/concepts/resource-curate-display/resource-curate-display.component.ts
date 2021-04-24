@@ -160,9 +160,9 @@ export class ResourceCurateDisplayComponent implements OnInit {
     }
   }
 
-  save(t) {
+  save() {
     this.dialogRef.close({
-      delete: this.resourcesToDelete,
+      delete: this.resourcesToDelete.map(resource => resource._id),
       add:this.resourcesToAdd
     })
   }

@@ -4,10 +4,10 @@
      mat-raised-button 
      [ngClass]="{'reg': size==='reg', 'small': size==='small', 'big': size==='big'}"
      (click)="clicked.emit()"
-     color="primary"
+     color="accent"
      >
-     <ng-content *ngIf="content === ''; else noContent"></ng-content>
-     <ng-template #noContent>{{content}}</ng-template>
+     <ng-content></ng-content>
+     
     </button>
    <button 
     *ngSwitchCase="'cancel'" 
@@ -16,12 +16,12 @@
      (click)="clicked.emit()"
      color="warn"
      >
-     <ng-content *ngIf="content === ''; else noContent"></ng-content>
-     <ng-template #noContent>{{content}}</ng-template>
+     <!-- <ng-content *ngIf="content === ''; else noContent"></ng-content>
+     <ng-template #noContent>{{content}}</ng-template> -->
   </button>
   <button 
     *ngSwitchCase="'fab'" 
-     mat-fab color="primary"
+     mat-fab color="accent"
      [ngClass]="{'reg': size==='reg', 'small': size==='small', 'big': size==='big'}"
      (click)="clicked.emit()"
      >
@@ -31,7 +31,7 @@
     *ngSwitchCase="'icon'"
      color="accent"
      mat-icon-button
-     [ngClass]="{'reg': size==='reg', 'small': size==='small', 'big': size==='big'}"
+     [ngClass]="{'reg-icon': size==='reg', 'small-icon': size==='small', 'big-icon': size==='big'}"
      (click)="clicked.emit()"
   >
       <mat-icon>{{content}}</mat-icon>

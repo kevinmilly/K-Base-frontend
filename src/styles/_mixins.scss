@@ -49,3 +49,47 @@
       }
     }
   }
+
+  @mixin small-button {
+    width: $header-button-width;
+    margin: $header-button-margin;
+    background-color: antiquewhite;
+    color: darkslategrey;
+  }
+  
+  
+  @mixin reg-button {
+    width: calc(#{$header-button-width} * 2.5);
+    margin: $header-button-margin;
+    color: darkslategrey;
+    background-color: antiquewhite;
+  
+  }
+  
+  @mixin big-button {
+    width: calc(#{$header-button-width} * 4);
+    margin: $header-button-margin;
+    color: darkslategrey;
+    background-color: antiquewhite;
+  }
+  
+  
+  @mixin small-button-icon {
+    width: $header-button-width;
+    margin: $header-button-margin;
+    color: darkslategrey;
+  }
+  
+  
+  @mixin reg-button-icon {
+    width: calc(#{$header-button-width} * 2.5);
+    margin: $header-button-margin;
+    color: darkslategrey;
+  }
+  
+  @mixin big-button-icon {
+    width: calc(#{$header-button-width} * 4);
+    margin: $header-button-margin;
+    color: darkslategrey;
+  }
+  

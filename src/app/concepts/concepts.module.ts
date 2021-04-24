@@ -15,7 +15,8 @@ import { ResourceCurateDisplayComponent } from './resource-curate-display/resour
     SharedModule
   ],
   entryComponents:[
-    ConceptDetailComponent
+    ConceptDetailComponent,
+    ResourceCurateDisplayComponent
   ]
 })
 export class ConceptsModule { }
