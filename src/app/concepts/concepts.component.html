@@ -28,11 +28,17 @@
     </div>
     <div id="third" class="tab-content">
       <kb-kanban
+        *ngIf="concepts.length > 0; else noDataKanBan"
         [kanbanFilteredDatasets]="filteredConcepts"
         [labels]="filterChoices[1]"
         [boxDetails]="boxDetails"
         [translators]="filterChoices"
       >
       </kb-kanban>
+      <ng-template #noDataKanBan>
+        <div  fxLayout="row" fxLayoutAlign="center center" [style.margin-top.rem]="5" >
+            No Concepts Available.  You need to start learning something!  Add a Concept!
+        </div>
+    </ng-template>
       <ngx-spinner></ngx-spinner>
     </div>

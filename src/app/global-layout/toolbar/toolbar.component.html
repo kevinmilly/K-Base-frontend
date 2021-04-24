@@ -1,9 +1,12 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row>
-      <button mat-icon-button>
-        <mat-icon (click)="onToggle()">menu</mat-icon>
-      </button>
-      <h1 class="title">K-Base</h1>
+       <div class="title-elements" fxLayout="row" fxLayoutAlign="space-evenly center" >
+          <button mat-icon-button>
+            <mat-icon (click)="onToggle()">menu</mat-icon>
+          </button>
+          <h1 class="title">K-Base</h1>
+          <img src="../../../assets/images/brain-pixabay.png" alt="KBase Brain Logo">
+      </div>
       <span class="menu-spacer"></span>
       <div>
         <a mat-button [routerLink]="'/dashboard'"  routerLinkActive="router-link-active" > Dashboard </a>

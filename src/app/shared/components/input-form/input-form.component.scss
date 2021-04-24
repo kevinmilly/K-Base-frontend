@@ -2,12 +2,23 @@
 
     margin-top: 5rem;
 
-    &_content {
+    &__header {
+        font-size: 2rem;
+        text-transform: uppercase;
+        margin-bottom: 3.5rem;
+    }
 
+    &__content {
+        .mat-form-field {
+            display: flex;
+            justify-content: space-evenly;
+            margin: 3rem;
+        }
+     
     }
     
-    &_buttons {
-        margin-top: 10rem;
+    &__buttons {
+        margin-bottom: 10rem;
     }
     
   

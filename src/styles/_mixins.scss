@@ -1,36 +1,40 @@
 @mixin mat-forms {
     ::ng-deep .mat-form-field {
       width: 75%;
+      margin-bottom: 1.5rem;
   
       .mat-input-element {
-        color: slategray;
+        color: rgb(80, 71, 77);
+       
       }
       .mat-form-field-label {
-        color: slategray;
+        color: rgb(80, 71, 77);
+        margin-bottom: 1.5rem;
+
       }
       .mat-form-field-underline {
-        background-color: slategray;
+        background-color: rgb(80, 71, 77);
       }
       .mat-form-field-ripple {
-        background-color: slategray;
+        background-color: rgb(80, 71, 77);
       }
       .mat-form-field-required-marker {
-        color: slategray;
+        color: rgb(80, 71, 77);
       }
     }
   
     ::ng-deep .mat-form-field.mat-focused {
       .mat-form-field-label {
-        color: #ff884d;
+        color: #5a0956;
       }
       .mat-form-field-ripple {
-        background-color: #ff884d;
+        background-color: #5a0956;
       }
       .mat-form-field-required-marker {
-        color: #ff884d;
+        color: #5a0956;
       }
       .mat-input-element {
-        color: #ff884d;
+        color: #5a0956;
       }
     }
   
@@ -59,7 +63,7 @@
   
   
   @mixin reg-button {
-    width: calc(#{$header-button-width} * 2.5);
+    width: calc(#{$header-button-width} * 4);
     margin: $header-button-margin;
     color: darkslategrey;
     background-color: antiquewhite;
@@ -67,7 +71,9 @@
   }
   
   @mixin big-button {
-    width: calc(#{$header-button-width} * 4);
+    width: calc(#{$header-button-width} * 8);
+    font-size: 2rem;
+    letter-spacing: .3rem;
     margin: $header-button-margin;
     color: darkslategrey;
     background-color: antiquewhite;

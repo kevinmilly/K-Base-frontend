@@ -45,10 +45,9 @@
             <ng-template #noProspects>No Results</ng-template>
         </div>
     </div>
-    <kb-shared-button
-        [size]="'big'"
-        (clicked)="save()"
-      
-    >
-    SAVE
-    </kb-shared-button>
+    <div  fxLayout="row" fxLayoutAlign="space-around center">
+        <kb-shared-button [size]="'big'" (clicked)="save()">
+            SAVE
+        </kb-shared-button>
+    </div>
+
