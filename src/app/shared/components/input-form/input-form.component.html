@@ -1,67 +1,72 @@
 <div class="edit__container" >
-    <div class="edit__container__header"  fxLayout="row" fxLayoutAlign="center" >
-     <ng-content></ng-content>
-    </div>
-    <div class="edit__container__content"  fxLayout="row" fxLayoutAlign="center" >
-            <div *ngFor="let control of createdControls; index as i" [ngSwitch]="controlsToCreate[i].type">
-                <div *ngSwitchCase="'string'">
-                    <mat-form-field class="medium">
-                        <mat-label>{{controlsToCreate[i].name}}</mat-label>
-                          <input matInput type="text" [formControl]="indexedCreatedControls(i)" />
-                    </mat-form-field>
-                </div>
-                <div *ngSwitchCase="'longString'">
-                    <mat-form-field class="big">
-                        <mat-label>{{controlsToCreate[i].name}}</mat-label>
-                          <textarea matInput type="text" [formControl]="indexedCreatedControls(i)" ></textarea>
-                    </mat-form-field>
-                </div>
-                <div *ngSwitchCase="'number'">
-                    <mat-form-field class="small"> 
-                        <mat-label>{{controlsToCreate[i].name}}</mat-label>
-                             <input matInput type="number" [formControl]="indexedCreatedControls(i)" />
-                    </mat-form-field>
-                </div>
-                <div *ngSwitchCase="'boolean'">
-                    <mat-form-field class="small">
-                        <mat-label>{{controlsToCreate[i].name}}</mat-label>
-                            <input matInput type="boolean" [formControl]="indexedCreatedControls(i)" />
-                    </mat-form-field>
-                </div>
-                <div *ngSwitchCase="'stringChoice'">
-                    <mat-form-field class="medium">
-                        <mat-label>{{controlsToCreate[i].name}}</mat-label>
-                        <mat-select [formControl]="indexedCreatedControls(i)">
-                          <mat-option [value]="c.value" *ngFor="let c of controlsToCreate[i].stringChoices; index as j">
-                            {{c.name}}
-                          </mat-option>
-                        </mat-select>
-                      </mat-form-field> 
-                </div>
 
-                <div *ngSwitchCase="'stringChoiceSet'">
-                    <mat-form-field class="medium">
-                        <mat-label>{{controlsToCreate[i].name}}</mat-label>
-                        <mat-select [formControl]="indexedCreatedControls(i)">
-                          <mat-option [value]="c" *ngFor="let c of controlsToCreate[i].stringChoices; index as j">
-                            {{c}}
-                          </mat-option>
-                        </mat-select>
-                      </mat-form-field> 
-                </div>
+      <div class="edit__container__header"  fxLayout="row" fxLayoutAlign="center" >
+        <ng-content></ng-content>
+      </div>
+      
+      <div class="edit__container__content"  fxLayout="row" fxLayoutAlign="center" >
+              <div *ngFor="let control of createdControls; index as i" [ngSwitch]="controlsToCreate[i].type">
+                  <div *ngSwitchCase="'string'">
+                      <mat-form-field class="medium">
+                          <mat-label>{{controlsToCreate[i].name}}</mat-label>
+                            <input matInput type="text" [formControl]="indexedCreatedControls(i)" />
+                      </mat-form-field>
+                  </div>
+                  <div *ngSwitchCase="'longString'">
+                      <mat-form-field class="big">
+                          <mat-label>{{controlsToCreate[i].name}}</mat-label>
+                            <textarea matInput type="text" [formControl]="indexedCreatedControls(i)" ></textarea>
+                      </mat-form-field>
+                  </div>
+                  <div *ngSwitchCase="'number'">
+                      <mat-form-field class="small"> 
+                          <mat-label>{{controlsToCreate[i].name}}</mat-label>
+                                <input matInput type="number" [formControl]="indexedCreatedControls(i)" />
+                      </mat-form-field>
+                  </div>
+                  <div *ngSwitchCase="'boolean'">
+                      <mat-form-field class="small">
+                          <mat-label>{{controlsToCreate[i].name}}</mat-label>
+                              <input matInput type="boolean" [formControl]="indexedCreatedControls(i)" />
+                      </mat-form-field>
+                  </div>
+                  <div *ngSwitchCase="'stringChoice'">
+                      <mat-form-field class="medium">
+                          <mat-label>{{controlsToCreate[i].name}}</mat-label>
+                          <mat-select [formControl]="indexedCreatedControls(i)">
+                            <mat-option [value]="c.value" *ngFor="let c of controlsToCreate[i].stringChoices; index as j">
+                              {{c.name}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field> 
+                  </div>
+  
+                  <div *ngSwitchCase="'stringChoiceSet'">
+                      <mat-form-field class="medium">
+                          <mat-label>{{controlsToCreate[i].name}}</mat-label>
+                          <mat-select [formControl]="indexedCreatedControls(i)">
+                            <mat-option [value]="c" *ngFor="let c of controlsToCreate[i].stringChoices; index as j">
+                              {{c}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field> 
+                  </div>
+  
+              </div>
+      </div>
+  
+      <div class="edit__container__buttons"  fxLayout="row" fxLayoutAlign="center" >
+          <kb-shared-button
+              mat-raised-button
+              (clicked)="submit()"
+              color="primary"
+              [size]="'big'"
+        
+          >
+          Save
+          <mat-icon>save</mat-icon>
+          </kb-shared-button>
+        </div>
 
-            </div>
-    </div>
-
-    <div class="edit__container__buttons"  fxLayout="row" fxLayoutAlign="center" >
-        <kb-shared-button
-            mat-raised-button
-            (clicked)="submit()"
-            color="primary"
-            [size]="'big'"
-        >
-        Save
-        <mat-icon>save</mat-icon>
-        </kb-shared-button>
-     </div>
+   
 </div>

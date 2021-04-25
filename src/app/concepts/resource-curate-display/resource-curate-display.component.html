@@ -42,12 +42,13 @@
                     <a href="{{resource.link}}" target="_blank">{{resource.title}}</a>
                 </div>
             </div>
-            <ng-template #noProspects>No Results</ng-template>
+          
         </div>
     </div>
+    <ng-template #noProspects>No Results</ng-template>
     <div  fxLayout="row" fxLayoutAlign="space-around center">
-        <kb-shared-button [size]="'big'" (clicked)="save()">
+        <kb-shared-button [size]="'big'" (clicked)="save()" *ngIf="prospectResources.length > 0">
             SAVE
         </kb-shared-button>
     </div>
-
+    
