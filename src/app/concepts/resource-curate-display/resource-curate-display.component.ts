@@ -95,6 +95,7 @@ export class ResourceCurateDisplayComponent implements OnInit {
     this.subs.sink = this.backendService.getResources(this.concept)
                         .subscribe(resourceData => {
                           this.currentResources = resourceData.resources;
+                          console.dir(this.currentResources);
                           this.originalResources = [...this.currentResources];
                         });
 
@@ -115,14 +116,16 @@ export class ResourceCurateDisplayComponent implements OnInit {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
-        this.searchOrignal(event.container);
+        console.dir(event.container.data);
         transferArrayItem(event.previousContainer.data,
           event.container.data,
           event.previousIndex,
           event.currentIndex); 
+
+          this.searchOrignal(event.container);
     
     }
-    console.dir(this.currentResources);
+
   }
 
 
@@ -134,12 +137,15 @@ export class ResourceCurateDisplayComponent implements OnInit {
       */
       const resourceMarkedForDeletionIdx = this.resourcesToDelete.findIndex(r => r._id === currentStack.data._id)
       if(resourceMarkedForDeletionIdx === -1) { //wasn't part of the original
+        const latestResourceAdded = currentStack.data[currentStack.data.length - 1];
+        console.log({latestResourceAdded});
         this.resourcesToAdd.push({
-          title: currentStack.data.title,
-          link: currentStack.data.link,
+          title: latestResourceAdded.title,
+          link: latestResourceAdded.link,
           level: this.concept.level,
           concept: this.concept._id,
         } as IResource)
+        console.dir(this.resourcesToAdd);
       } else {
           this.resourcesToDelete.splice(resourceMarkedForDeletionIdx,1);
       }
