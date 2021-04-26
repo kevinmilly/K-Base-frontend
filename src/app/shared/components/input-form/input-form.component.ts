@@ -16,9 +16,13 @@ export class InputFormComponent implements OnInit {
   @Output() onSubmit = new EventEmitter();
 
 
- controlsCreated:FormArray = new FormArray([]);
+
 
  submission:any = {} as IConcept;
+
+ inputForm:FormGroup = new FormGroup({
+  controlsCreated: new FormArray([])
+});;
 
 
 
@@ -27,6 +31,8 @@ export class InputFormComponent implements OnInit {
   ngOnInit(): void {
     console.dir(this.controlsToCreate);
     this.generateControls(this.controlsToCreate);
+
+
   }
 
   generateControls(controlsToCreate:IControlModel[]) {
@@ -79,26 +85,26 @@ export class InputFormComponent implements OnInit {
      
       }
     });
-    console.dir(this.controlsCreated);
+    console.log(this.inputForm)
   }
 
   submit() {
     console.log("Submit entered");
     this.controlsToCreate.forEach((control, i) => {
-      // console.dir(this.controlsCreated.controls[i]);
-      this.submission[control.name.toLowerCase()] = this.controlsCreated.controls[i].value;
+      // console.dir(this.controlsCreated[i]);
+      this.submission[control.name.toLowerCase()] = this.controlsCreated[i].value;
     });
     console.dir(this.submission);
     this.onSubmit.emit(this.submission);
-    this.controlsCreated.controls.forEach((control, i) => {
+    this.controlsCreated.forEach((control, i) => {
       control.setValue(this.controlsToCreate[i].default)
     });
   }
 
-  get createdControls() {
-    return this.controlsCreated.controls;
+  get controlsCreated() {
+    return (this.inputForm.controls['controlsCreated'] as FormArray).controls;
   }
 
-  indexedCreatedControls(i:number) { return this.createdControls[i] as FormControl}
+  indexedCreatedControls(i:number) { return this.controlsCreated[i] as FormControl}
 
 }

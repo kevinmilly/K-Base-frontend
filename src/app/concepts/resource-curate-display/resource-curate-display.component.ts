@@ -9,12 +9,12 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { IConcept } from 'src/app/core/models/concepts.model';
 import { LearningService } from 'src/app/core/services/learning.service';
 import { FormControl, Validators } from '@angular/forms';
-import { debounce, debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
+import { debounce, debounceTime, distinctUntilChanged, map, tap } from 'rxjs/operators';
 
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AbstractExtendedWebDriver } from 'protractor/built/browser';
-import { throwError } from 'rxjs';
+import { combineLatest, throwError } from 'rxjs';
 
 @Component({
   selector: 'kb-resource-curate-display',
@@ -92,24 +92,47 @@ export class ResourceCurateDisplayComponent implements OnInit {
        this.learningService.getSearchResources(this.searchTerm);
     });
 
-    this.subs.sink = this.backendService.getResources(this.concept)
-                        .subscribe(resourceData => {
-                          this.currentResources = resourceData.resources;
-                          console.dir(this.currentResources);
-                          this.originalResources = [...this.currentResources];
-                        });
+    //only include amoung the prospect resources ones not in the current
+    combineLatest([
+      this.backendService.getResources(this.concept),
+      this.learningService.resultObs
+    ])
+    .pipe(
+       map(([original,prospect]) => {
+         original.resources.forEach( o => {
+           const idx = prospect.findIndex(p => p.link === o.link)
+           if(idx !== -1) prospect.splice(idx,1);
+         })
+       }),
+      )
+      .subscribe((response) => {
+          console.log([response]);
 
-    this.learningService.getSearchResources(this.searchTerm);
-    this.subs.sink =  this.learningService.resultObs 
-                            .subscribe((results:ISearchResult[]) => {
-                              console.log({results});
-                              this.prospectResources = results;
+          setTimeout(() => {
+            /** spinner ends after 5 seconds */
+            this.spinner.hide();
+          }, 1000);
+    })
 
-                              setTimeout(() => {
-                                /** spinner ends after 5 seconds */
-                                this.spinner.hide();
-                              }, 1000);
-                       });
+
+    // this.subs.sink = this.backendService.getResources(this.concept)
+    //                     .subscribe(resourceData => {
+    //                       this.currentResources = resourceData.resources;
+    //                       console.dir(this.currentResources);
+    //                       this.originalResources = [...this.currentResources];
+    //                     });
+
+    // this.learningService.getSearchResources(this.searchTerm);
+    // this.subs.sink =  this.learningService.resultObs 
+    //                         .subscribe((results:ISearchResult[]) => {
+    //                           console.log({results});
+    //                           this.prospectResources = results;
+
+    //                           setTimeout(() => {
+    //                             /** spinner ends after 5 seconds */
+    //                             this.spinner.hide();
+    //                           }, 1000);
+    //                    });
   }
 
   drop(event: CdkDragDrop<any>) {

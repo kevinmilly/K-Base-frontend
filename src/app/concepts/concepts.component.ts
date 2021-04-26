@@ -105,7 +105,7 @@ export class ConceptsComponent implements OnInit {
       name:"Tag", 
       type:"stringChoiceSet", 
       required:true, 
-      default:1,
+      default:"Programming",
       stringChoices:this.tagChoices
     },
   ];

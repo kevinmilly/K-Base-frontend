@@ -72,7 +72,7 @@
   
   @mixin big-button {
     width: calc(#{$header-button-width} * 8);
-    font-size: 2rem;
+    font-size: 1.5rem;
     letter-spacing: .3rem;
     margin: $header-button-margin;
     color: darkslategrey;

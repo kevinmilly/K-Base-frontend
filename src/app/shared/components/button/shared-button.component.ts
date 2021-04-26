@@ -12,6 +12,7 @@ export class SharedButtonComponent implements OnInit {
 
   @Input() type: string = 'regular';
   @Input() content: string = '';
+  @Input() disabled: boolean = false;
   @Output() clicked = new EventEmitter();
   @Input() size: string = 'reg';
 
