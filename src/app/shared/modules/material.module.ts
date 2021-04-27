@@ -13,7 +13,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatDividerModule} from '@angular/material/divider';
 
-import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatFormFieldDefaultOptions, MatFormFieldModule, MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
 import {MatGridListModule} from '@angular/material/grid-list';
@@ -30,7 +30,10 @@ import {FlexLayoutModule, BREAKPOINT} from '@angular/flex-layout';
 
 import { NgxSpinnerModule } from "ngx-spinner";
 
-
+const appearance: MatFormFieldDefaultOptions = {
+    appearance: 'outline'
+  };
+  
 const modules = [        
     MatTableModule,
     MatPaginatorModule,
@@ -62,6 +65,12 @@ const modules = [
     declarations:[],
     imports:modules,
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    providers:[
+        {
+            provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+            useValue: appearance
+          }
+    ],
     exports: modules
 })
 export class MaterialModule {

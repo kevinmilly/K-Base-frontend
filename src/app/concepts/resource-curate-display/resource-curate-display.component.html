@@ -39,7 +39,11 @@
                 (cdkDropListDropped)="drop($event)"
             >
                 <div class="resource-container__prospective-list__box" *ngFor="let resource of prospectResources" cdkDrag>
-                    <a href="{{resource.link}}" target="_blank">{{resource.title}}</a>
+                    <a 
+                        href="{{resource.link}}" 
+                        target="_blank"
+                        matTooltip="{{resource.content}}"
+                        >{{resource.title}}</a>
                 </div>
             </div>
           

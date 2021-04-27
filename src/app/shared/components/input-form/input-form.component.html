@@ -1,85 +1,166 @@
 <div class="edit__container" >
-
-      <div class="edit__container__header"  fxLayout="row" fxLayoutAlign="center" >
-        <ng-content></ng-content>
-      </div>
-      <form [formGroup]="inputForm">
-
-        <div class="edit__container__content"  fxLayout="row" fxLayoutAlign="center" >
-          <div *ngFor="let control of controlsCreated; index as i" [ngSwitch]="controlsToCreate[i].type">
-              <div *ngSwitchCase="'string'">
-                  <mat-form-field class="medium">
-                      <mat-label>{{controlsToCreate[i].name}}</mat-label>
-                        <input matInput type="text" [formControl]="indexedCreatedControls(i)" />
-                          <mat-error *ngIf="indexedCreatedControls(i).invalid">
-                            Please check {{controlsToCreate[i].name}}
-                          </mat-error>
-                      </mat-form-field>
-              </div>
-              <div *ngSwitchCase="'longString'">
-                  <mat-form-field class="big">
-                      <mat-label>{{controlsToCreate[i].name}}</mat-label>
-                        <textarea matInput type="text" [formControl]="indexedCreatedControls(i)" ></textarea>
-                          <mat-error *ngIf="indexedCreatedControls(i).invalid">
-                            Please check {{controlsToCreate[i].name}}
-                          </mat-error>
-                      </mat-form-field>
-              </div>
-              <div *ngSwitchCase="'number'">
-                  <mat-form-field class="small"> 
-                      <mat-label>{{controlsToCreate[i].name}}</mat-label>
-                            <input matInput type="number" [formControl]="indexedCreatedControls(i)" />
-                          <mat-error *ngIf="indexedCreatedControls(i).invalid">
-                            Please check {{controlsToCreate[i].name}}
-                          </mat-error>
-                          </mat-form-field>
-              </div>
-              <div *ngSwitchCase="'boolean'">
-                  <mat-form-field class="small">
-                      <mat-label>{{controlsToCreate[i].name}}</mat-label>
-                          <input matInput type="boolean" [formControl]="indexedCreatedControls(i)" />
-                          <mat-error *ngIf="indexedCreatedControls(i).invalid">
-                            Please check {{controlsToCreate[i].name}}
-                          </mat-error>
-                        </mat-form-field>
-              </div>
-              <div *ngSwitchCase="'stringChoice'">
-                  <mat-form-field class="medium">
-                      <mat-label>{{controlsToCreate[i].name}}</mat-label>
-                      <mat-select [formControl]="indexedCreatedControls(i)">
-                        <mat-option [value]="c.value" *ngFor="let c of controlsToCreate[i].stringChoices; index as j">
-                          {{c.name}}
-                        </mat-option>
-                      </mat-select>
-                            <mat-error *ngIf="indexedCreatedControls(i).invalid">
-                              Please check {{controlsToCreate[i].name}}
-                            </mat-error>
-                    </mat-form-field>
-
-              </div>
-
-              <div *ngSwitchCase="'stringChoiceSet'">
-                  <mat-form-field class="medium">
-                      <mat-label>{{controlsToCreate[i].name}}</mat-label>
-                      <mat-select [formControl]="indexedCreatedControls(i)">
-                        <mat-option [value]="c" *ngFor="let c of controlsToCreate[i].stringChoices; index as j">
-                          {{c}}
-                        </mat-option>
-                      </mat-select>
-                            <mat-error *ngIf="indexedCreatedControls(i).invalid">
-                              Please check {{controlsToCreate[i].name}}
-                            </mat-error>
-                    </mat-form-field>
-
-              </div>
-
-          </div>
-        </div>
-
-      </form>
+        <ng-container *ngIf="orientation === 'horizontal'; else vertical">
+            <div class="edit__container__header"  fxLayout="row" fxLayoutAlign="center" >
+              <ng-content select="[horizontal]"></ng-content>
+            </div>
+            <form [formGroup]="inputForm" fxLayout="row" fxLayoutAlign="center">
       
-  
-     
+              <div class="edit__container__horiz-content"  fxLayout="row" fxLayoutAlign="center" >
+                <div *ngFor="let control of controlsCreated; index as i" [ngSwitch]="controlsToCreate[i].type">
+                    <div *ngSwitchCase="'string'">
+                        <mat-form-field class="medium">
+                          
+                              <input matInput type="text" [formControl]="indexedCreatedControls(i)" />
+                                <mat-error *ngIf="indexedCreatedControls(i).invalid">
+                                  Please check {{controlsToCreate[i].name}}
+                                </mat-error>
+                                <mat-label>{{controlsToCreate[i].name}}</mat-label>
+                            </mat-form-field>
+                    </div>
+                    <div *ngSwitchCase="'longString'">
+                        <mat-form-field class="big">
+                            <mat-label>{{controlsToCreate[i].name}}</mat-label>
+                              <textarea matInput type="text" [formControl]="indexedCreatedControls(i)" ></textarea>
+                                <mat-error *ngIf="indexedCreatedControls(i).invalid">
+                                  Please check {{controlsToCreate[i].name}}
+                                </mat-error>
+                            </mat-form-field>
+                    </div>
+                    <div *ngSwitchCase="'number'">
+                        <mat-form-field class="small"> 
+                            <mat-label>{{controlsToCreate[i].name}}</mat-label>
+                                  <input matInput type="number" [formControl]="indexedCreatedControls(i)" />
+                                <mat-error *ngIf="indexedCreatedControls(i).invalid">
+                                  Please check {{controlsToCreate[i].name}}
+                                </mat-error>
+                                </mat-form-field>
+                    </div>
+                    <div *ngSwitchCase="'boolean'">
+                        <mat-form-field class="small">
+                            <mat-label>{{controlsToCreate[i].name}}</mat-label>
+                                <input matInput type="boolean" [formControl]="indexedCreatedControls(i)" />
+                                <mat-error *ngIf="indexedCreatedControls(i).invalid">
+                                  Please check {{controlsToCreate[i].name}}
+                                </mat-error>
+                              </mat-form-field>
+                    </div>
+                    <div *ngSwitchCase="'stringChoice'">
+                        <mat-form-field class="medium">
+                            <mat-label>{{controlsToCreate[i].name}}</mat-label>
+                            <mat-select [formControl]="indexedCreatedControls(i)">
+                              <mat-option [value]="c.value" *ngFor="let c of controlsToCreate[i].stringChoices; index as j">
+                                {{c.name}}
+                              </mat-option>
+                            </mat-select>
+                                  <mat-error *ngIf="indexedCreatedControls(i).invalid">
+                                    Please check {{controlsToCreate[i].name}}
+                                  </mat-error>
+                          </mat-form-field>
+      
+                    </div>
+      
+                    <div *ngSwitchCase="'stringChoiceSet'">
+                        <mat-form-field class="medium">
+                            <mat-label>{{controlsToCreate[i].name}}</mat-label>
+                            <mat-select [formControl]="indexedCreatedControls(i)">
+                              <mat-option [value]="c" *ngFor="let c of controlsToCreate[i].stringChoices; index as j">
+                                {{c}}
+                              </mat-option>
+                            </mat-select>
+                                  <mat-error *ngIf="indexedCreatedControls(i).invalid">
+                                    Please check {{controlsToCreate[i].name}}
+                                  </mat-error>
+                          </mat-form-field>
+      
+                    </div>
+      
+                </div>
+              </div>
+      
+            </form>
+        </ng-container>
+
+        <ng-template #vertical>
+            <div class="edit__container__header"  fxLayout="row" fxLayoutAlign="center" >
+              <ng-content select="[vertical]"></ng-content>
+            </div>
+            <form [formGroup]="inputForm" fxLayout="row" fxLayoutAlign="center">
+      
+              <div class="edit__container__vert-content" >
+                <div *ngFor="let control of controlsCreated; index as i" [ngSwitch]="controlsToCreate[i].type">
+                    <div *ngSwitchCase="'string'">
+                        <mat-form-field class="medium">
+                            <mat-label>{{controlsToCreate[i].name}}</mat-label>
+                              <input matInput type="text" [formControl]="indexedCreatedControls(i)" />
+                                <mat-error *ngIf="indexedCreatedControls(i).invalid">
+                                  Please check {{controlsToCreate[i].name}}
+                                </mat-error>
+                            </mat-form-field>
+                    </div>
+                    <div *ngSwitchCase="'longString'">
+                        <mat-form-field class="big">
+                            <mat-label>{{controlsToCreate[i].name}}</mat-label>
+                              <textarea matInput type="text" [formControl]="indexedCreatedControls(i)" ></textarea>
+                                <mat-error *ngIf="indexedCreatedControls(i).invalid">
+                                  Please check {{controlsToCreate[i].name}}
+                                </mat-error>
+                            </mat-form-field>
+                    </div>
+                    <div *ngSwitchCase="'number'">
+                        <mat-form-field class="small"> 
+                            <mat-label>{{controlsToCreate[i].name}}</mat-label>
+                                  <input matInput type="number" [formControl]="indexedCreatedControls(i)" />
+                                <mat-error *ngIf="indexedCreatedControls(i).invalid">
+                                  Please check {{controlsToCreate[i].name}}
+                                </mat-error>
+                                </mat-form-field>
+                    </div>
+                    <div *ngSwitchCase="'boolean'">
+                        <mat-form-field class="small">
+                            <mat-label>{{controlsToCreate[i].name}}</mat-label>
+                                <input matInput type="boolean" [formControl]="indexedCreatedControls(i)" />
+                                <mat-error *ngIf="indexedCreatedControls(i).invalid">
+                                  Please check {{controlsToCreate[i].name}}
+                                </mat-error>
+                              </mat-form-field>
+                    </div>
+                    <div *ngSwitchCase="'stringChoice'">
+                        <mat-form-field class="medium">
+                            <mat-label>{{controlsToCreate[i].name}}</mat-label>
+                            <mat-select [formControl]="indexedCreatedControls(i)">
+                              <mat-option [value]="c.value" *ngFor="let c of controlsToCreate[i].stringChoices; index as j">
+                                {{c.name}}
+                              </mat-option>
+                            </mat-select>
+                                  <mat-error *ngIf="indexedCreatedControls(i).invalid">
+                                    Please check {{controlsToCreate[i].name}}
+                                  </mat-error>
+                          </mat-form-field>
+      
+                    </div>
+      
+                    <div *ngSwitchCase="'stringChoiceSet'">
+                        <mat-form-field class="medium">
+                            <mat-label>{{controlsToCreate[i].name}}</mat-label>
+                            <mat-select [formControl]="indexedCreatedControls(i)">
+                              <mat-option [value]="c" *ngFor="let c of controlsToCreate[i].stringChoices; index as j">
+                                {{c}}
+                              </mat-option>
+                            </mat-select>
+                                  <mat-error *ngIf="indexedCreatedControls(i).invalid">
+                                    Please check {{controlsToCreate[i].name}}
+                                  </mat-error>
+                          </mat-form-field>
+      
+                    </div>
+      
+                </div>
+              </div>
+      
+            </form>
+          
+        </ng-template>
+ 
   
       <div class="edit__container__buttons"  fxLayout="row" fxLayoutAlign="center" >
           <kb-shared-button
@@ -87,8 +168,6 @@
               (clicked)="submit()"
               color="primary"
               [size]="'big'"
-              
-        
           >
           Save
           <mat-icon>save</mat-icon>

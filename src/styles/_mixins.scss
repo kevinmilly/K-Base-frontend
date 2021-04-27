@@ -1,11 +1,13 @@
 @mixin mat-forms {
     ::ng-deep .mat-form-field {
-      width: 75%;
-      margin-bottom: 1.5rem;
-  
+      width: 100%;
+      height: auto;
+    
       .mat-input-element {
         color: rgb(80, 71, 77);
        
+        line-height: normal !important;
+   
       }
       .mat-form-field-label {
         color: rgb(80, 71, 77);
@@ -22,6 +24,10 @@
         color: rgb(80, 71, 77);
       }
     }
+
+    ::ng-deep mat-form-field.mat-form-field-appearance-outline .mat-form-field-wrapper {
+      margin: 0;
+    }
   
     ::ng-deep .mat-form-field.mat-focused {
       .mat-form-field-label {
@@ -35,6 +41,7 @@
       }
       .mat-input-element {
         color: #5a0956;
+        margin-bottom: 1rem;
       }
     }
   

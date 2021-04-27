@@ -1,10 +1,11 @@
 <kb-tab [labels]="['Add Concept','Concept Table','Concept Kanban']">
     <div id="first" class="tab-content">
       <kb-input-form 
+          [orientation]="'horizontal'"
           [controlsToCreate]="addConceptControls"
           (onSubmit)="submit($event)"
       >
-      What would you like to learn more about?
+      <div horizontal> What would you like to learn more about?</div>
     </kb-input-form>
     </div>
     <div id="second" class="tab-content">

@@ -1,29 +1,41 @@
 .edit__container {
 
-    margin-top: 5rem;
+    margin-top: 2rem;
 
     &__header {
-        font-size: 2rem;
+        font-size: 1.5rem;
         text-transform: uppercase;
         margin-bottom: 3.5rem;
         font-family: 'Merriweather Sans', sans-serif;
     }
 
-    &__content {
-        .mat-form-field {
+    &__horiz-content {
+
+        ::ng-deep .mat-form-field {
             display: flex;
             justify-content: space-evenly;
-            margin: 3rem;
+            margin: 1rem;
+            height: auto;
+            font-size: 1rem;
         }
-     
+      
+    }
+
+    &__vert-content {
+
+        ::ng-deep .mat-form-field {
+            height: auto;
+            font-size: 1rem;
+        }
+      
     }
     
     &__buttons {
-        margin-bottom: 10rem;
-    }
+ 
+
+        width: 25rem;
+        margin: auto;
     
-  
-        .big {
             width: 40%;
         };
         .med {
@@ -33,4 +45,8 @@
             width: 15%;
         };
     
+}
+
+input {
+    width: 10rem;
 }

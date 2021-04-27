@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { IConcept } from '../models/concepts.model';
@@ -124,7 +124,14 @@ export class BackendService {
     }
 
     deleteResources(resourcesToDelete:any[]) {
-      this.http.delete<{concept:IConcept}>(`${this.BASE_URL}/api/resources/${resourcesToDelete}`)
+      console.log({resourcesToDelete});
+      const options = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        }),
+        body: resourcesToDelete
+      }
+      return this.http.delete<{concept:IConcept}>(`${this.BASE_URL}/api/resources`, options)
       .subscribe(r => {
         const updatedResources = this.resources.filter(resource => !resourcesToDelete.includes(resource._id));
         this.resourcesUpdated.next(updatedResources);

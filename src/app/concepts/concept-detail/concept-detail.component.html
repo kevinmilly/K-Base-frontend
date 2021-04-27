@@ -4,14 +4,19 @@
         <kb-input-form 
           [controlsToCreate]="editControls"
           (onSubmit)="submit($event)"
+          [orientation]="'vertical'"
         >
-    Any Changes?
+        <div vertical>Any Changes?</div>
     </kb-input-form>
 
     </div>
     <div id="second" class="tab-content">
-        <kb-input-form [controlsToCreate]="addNoteControls">
-            What have you learned?
+        <kb-input-form 
+
+            [controlsToCreate]="addNoteControls"
+            [orientation]="'vertical'"
+        >
+           <div vertical>What have you learned?</div>
         </kb-input-form>
 
     </div>

@@ -82,6 +82,7 @@ export class ResourceCurateDisplayComponent implements OnInit {
 
     this.spinner.show();
 
+    //for search new prospective resources
     this.subs.sink = this.searchControl.valueChanges
       .pipe(
         debounceTime(1000),
@@ -92,47 +93,31 @@ export class ResourceCurateDisplayComponent implements OnInit {
        this.learningService.getSearchResources(this.searchTerm);
     });
 
+    this.learningService.getSearchResources(this.searchTerm);
     //only include amoung the prospect resources ones not in the current
     combineLatest([
       this.backendService.getResources(this.concept),
       this.learningService.resultObs
     ])
     .pipe(
-       map(([original,prospect]) => {
-         original.resources.forEach( o => {
-           const idx = prospect.findIndex(p => p.link === o.link)
-           if(idx !== -1) prospect.splice(idx,1);
-         })
-       }),
+      tap(([original,prospect]) => {
+          return (
+            original.resources.forEach( o => {
+              const idx = prospect.findIndex(p => p.link === o.link)
+              if(idx !== -1) prospect.splice(idx,1);
+            })
+          )
+         }),
       )
-      .subscribe((response) => {
-          console.log([response]);
+      .subscribe(([curr, changedProspective]) => {
+        this.currentResources = curr.resources;
+        this.prospectResources = changedProspective;
 
           setTimeout(() => {
             /** spinner ends after 5 seconds */
             this.spinner.hide();
           }, 1000);
     })
-
-
-    // this.subs.sink = this.backendService.getResources(this.concept)
-    //                     .subscribe(resourceData => {
-    //                       this.currentResources = resourceData.resources;
-    //                       console.dir(this.currentResources);
-    //                       this.originalResources = [...this.currentResources];
-    //                     });
-
-    // this.learningService.getSearchResources(this.searchTerm);
-    // this.subs.sink =  this.learningService.resultObs 
-    //                         .subscribe((results:ISearchResult[]) => {
-    //                           console.log({results});
-    //                           this.prospectResources = results;
-
-    //                           setTimeout(() => {
-    //                             /** spinner ends after 5 seconds */
-    //                             this.spinner.hide();
-    //                           }, 1000);
-    //                    });
   }
 
   drop(event: CdkDragDrop<any>) {
@@ -145,14 +130,14 @@ export class ResourceCurateDisplayComponent implements OnInit {
           event.previousIndex,
           event.currentIndex); 
 
-          this.searchOrignal(event.container);
+          this.searchOriginal(event.container,event.currentIndex);
     
     }
 
   }
 
 
-  searchOrignal(currentStack:any) {
+  searchOriginal(currentStack:any, index:number) {
     if(currentStack.id === 'cdk-drop-list-5') { //if we moved it in the current stack
       /*if it's in the delete stack that means it was moved from the original
       just checking if it's in there allows us to see that it doesn't need to be added to the
@@ -161,27 +146,29 @@ export class ResourceCurateDisplayComponent implements OnInit {
       const resourceMarkedForDeletionIdx = this.resourcesToDelete.findIndex(r => r._id === currentStack.data._id)
       if(resourceMarkedForDeletionIdx === -1) { //wasn't part of the original
         const latestResourceAdded = currentStack.data[currentStack.data.length - 1];
-        console.log({latestResourceAdded});
         this.resourcesToAdd.push({
           title: latestResourceAdded.title,
           link: latestResourceAdded.link,
           level: this.concept.level,
           concept: this.concept._id,
         } as IResource)
-        console.dir(this.resourcesToAdd);
+      
       } else {
           this.resourcesToDelete.splice(resourceMarkedForDeletionIdx,1);
       }
    
     } else {
-        const resourceMarkedForAddIdx = this.resourcesToAdd.findIndex(r => r._id === currentStack.data._id);
+        const resourceMarkedForAddIdx = this.resourcesToAdd.findIndex(r => r._id === currentStack.data[index]._id);
         if(resourceMarkedForAddIdx === -1) { //was part of the original
           this.resourcesToDelete.push({
-            title: currentStack.data.title,
-            link: currentStack.data.link,
+            _id: currentStack.data[index]._id,
+            title: currentStack.data[index].title,
+            link: currentStack.data[index].link,
             level: this.concept.level,
             concept: this.concept._id,
           } as IResource)
+
+          console.dir(this.resourcesToDelete);
 
         } else {
           this.resourcesToAdd.splice(resourceMarkedForAddIdx,1);

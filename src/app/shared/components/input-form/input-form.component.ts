@@ -13,6 +13,7 @@ import { IControlModel } from 'src/app/core/models/control.model';
 export class InputFormComponent implements OnInit {
 
   @Input() controlsToCreate:IControlModel[] = [];
+  @Input() orientation:string = 'horizontal';
   @Output() onSubmit = new EventEmitter();
 
 
