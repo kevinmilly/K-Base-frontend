@@ -1,6 +1,18 @@
-mat-label {
-    font-size: .7rem;
-    opacity: .8;
-    margin-bottom: .3rem;
+.concept__form {
+       margin: 2rem, 0, 0, 10rem;
+        font-size: 1rem;
+    
+        .mat-form-field {
+            width: 100%;
+        }
+
+    
+
+        mat-label {
+            font-size: .7rem;
+            opacity: .8;
+            margin-bottom: .3rem;
+        }
 }
+
 

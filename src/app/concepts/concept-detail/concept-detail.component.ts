@@ -181,17 +181,17 @@ export class ConceptDetailComponent implements OnInit {
   deleteNotes(eventObj:any) {
     console.dir(eventObj);
     eventObj.event.completed = true;
-    this.dialogRef.close({event:eventObj.event, type:'delete'});
+    this.dialogRef.close({event:eventObj.event, action:'delete', type:'note'});
   }
 
 
 
   submit(eventObj:any) {
-    this._snackBar.open(this.messages[Math.floor(Math.random() * this.messages.length)], `${eventObj.length} more to go!`, {
+    this._snackBar.open(this.messages[Math.floor(Math.random() * this.messages.length)], `Good Job!`, {
       duration: 4000,
     });
-    console.dir(eventObj);
-    this.dialogRef.close({event:eventObj, type:'update'});
+    eventObj["_id"] = this.concept._id;
+    this.dialogRef.close({event:eventObj, action:'update', type:'concept'});
   }
 
   ngOnDestroy() {this.subs.unsubscribe()}

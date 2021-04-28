@@ -1,16 +1,16 @@
 import { Pipe, PipeTransform } from "@angular/core";
 
 @Pipe({
-    name: 'difficultyStatus'
+    name: 'levelStatus'
   })
-  export class DifficultyPipe implements PipeTransform {
+  export class LevelPipe implements PipeTransform {
     transform(value:number, type:string): any {
       console.dir(arguments);
-      return "difficulty" === type ? difficulty[value] : necessity[value];
+      return "level" === type ? level[value] : necessity[value];
     }
   }
 
-  const difficulty:string[] = [
+  const level:string[] = [
     "Nincompoop",
     "Beginner",
     "Intermediate",

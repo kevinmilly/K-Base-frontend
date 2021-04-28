@@ -84,15 +84,17 @@ export class BackendService {
   }
 
   editConcept(concept:IConcept) {
+    console.dir(concept);
     this.http.put<{concept:IConcept}>(`${this.BASE_URL}/api/concepts/${concept._id}`, concept)
-      .subscribe(r => {
-        this.conceptsUpdated.next(
-          this.concepts.splice(
-            this.concepts.findIndex(c => c._id === concept._id), 
-            1, 
-            r.concept
-        ))
-      })
+           .subscribe(r => {
+            console.dir(r);
+            this.concepts.splice(
+              this.concepts.findIndex(c => c._id === concept._id), 
+              1, 
+              r.concept
+          )
+            this.conceptsUpdated.next([...this.concepts]);
+          })
   }
 
   deleteConcept(concept:IConcept) {

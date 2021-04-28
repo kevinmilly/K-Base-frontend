@@ -45,7 +45,7 @@
                             <ng-container matColumnDef="{{c}}">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header> {{displayedColumns[i]}} </th>
                                 <td mat-cell *matCellDef="let row">
-                                    {{row[c] | difficultyStatus:c}}
+                                    {{row[c] | levelStatus:c}}
                             </td>
                             </ng-container>
                         </ng-container>

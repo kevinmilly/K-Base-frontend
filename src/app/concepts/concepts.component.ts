@@ -125,9 +125,10 @@ export class ConceptsComponent implements OnInit {
     this.backend.getConcepts();
     this.subs.sink = this.backend.concepts$
       .subscribe(concepts => {;
-        this.concepts = concepts;
+        this.concepts = [...concepts];
         console.dir(this.concepts);
         if(concepts.length > 0) {
+          this.filteredConcepts = [];
           this.filterChoices[1].forEach((choice, i) => {
             this.filteredConcepts.push(this.concepts.filter(concept => concept.level === i));
           })

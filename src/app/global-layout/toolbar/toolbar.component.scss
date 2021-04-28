@@ -1,27 +1,36 @@
-.title-elements {
-  img {
-    width: 3.5rem;
-    margin-left: .5rem;
+  .toolbar {
+    &__title-elements {
+      img {
+        width: 3.5rem;
+        margin-left: .5rem;
+      }
+    }
+
+    &__menu-spacer {
+      margin-right: 25rem;
+    }
+
+    a {
+      font-size: 1.2rem;
+      font-family: 'Merriweather Sans', sans-serif, "Helvetica Neue", sans-serif;
+    }
+
+    h1.title {
+      font-size: 2rem;
+      text-transform: uppercase;
+      font-family: 'Abril Fatface', cursive;
+    }
+
+    .router-link-active {
+      color: rgb(46, 6, 36);
+      font-size: 1.3rem;
+      text-decoration: underline;
+    }
+
+    &__concept-input {
+      margin-top: 3rem;
+      margin-left: 5rem;
+    }
+
   }
-}
-
-.menu-spacer {
-  margin-right: 25rem;
-}
-
-a {
-  font-size: 1.2rem;
-  font-family: 'Merriweather Sans', sans-serif, "Helvetica Neue", sans-serif;
-}
-
-h1.title {
-  font-size: 2rem;
-  text-transform: uppercase;
-  font-family: 'Abril Fatface', cursive;
-}
-
-.router-link-active {
-  color: rgb(46, 6, 36);
-  font-size: 1.3rem;
-  text-decoration: underline;
-}
+   

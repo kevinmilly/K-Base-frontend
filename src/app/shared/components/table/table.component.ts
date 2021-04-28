@@ -68,15 +68,20 @@ export class TableComponent implements OnInit {
    }
 
   ngOnInit(): void {    
-    console.dir(this.data);
-    this.dataSaved = [...this.data];
-    this.dataSource = new MatTableDataSource([...this.data]);
+    this.resetTableAndFilter(this.data);
+  }
+
+  ngOnChanges(): void {
+    this.resetTableAndFilter(this.data);
+  }
+
+  resetTableAndFilter(data:IConcept[]) {
+    this.dataSource = new MatTableDataSource([...data]);
     this.setupSortAndPagination();
       
     this.displayedColumns = this.displayNames;
     this.columns = this.columns.filter(c => c !== "_id");
     console.dir(this.columns);
-
   }
 
   applySearchFilter(event: Event) {
@@ -97,15 +102,17 @@ export class TableComponent implements OnInit {
   onClicked(type:string,event:any) {
     if(type==='zoom') {
       this.rowClick(event);
-    } else {
-       this.onDelete.emit(event);
+    } else if(type==='delete') {
+       if(confirm("Are you sure you wanted to delete this concept?")) {
+         this.onDelete.emit(event);
+       }
     }
   }
 
   setupSortAndPagination() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-  }
+  } 
 
   rowClick(event:IConcept) {
     const dialogRef = this.dialog.open(ConceptDetailComponent, {
@@ -118,17 +125,18 @@ export class TableComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      console.log({result});
       if(result.action === 'update') {
-        if (result.action === 'concept') {
-          this.backend.editConcept(result as IConcept);
+        if (result.type === 'concept') {
+          this.backend.editConcept(result.event as IConcept);
         } else { //note
-           this.backend.editNotes(result as INote);
+           this.backend.editNotes(result.event as INote);
         }
       } else { //add
-        if (result.action === 'concept') {
-          this.backend.addConcepts(result as IConcept);
+        if (result.type === 'concept') {
+          this.backend.addConcepts(result.event as IConcept);
         } else { //note
-            this.backend.addNotes(result as INote);
+            this.backend.addNotes(result.event as INote);
         }
       }
 

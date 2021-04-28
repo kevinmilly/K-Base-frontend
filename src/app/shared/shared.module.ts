@@ -5,7 +5,7 @@ import { MaterialModule } from './modules/material.module';
 import { TableComponent } from './components/table/table.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { SharedButtonComponent } from './components/button/shared-button.component';
-import { DifficultyPipe } from './pipes/difficulty-status.pipe';
+import { LevelPipe } from './pipes/level-status.pipe';
 import { TabComponent } from './components/tab/tab.component';
 import { InputFormComponent } from './components/input-form/input-form.component';
 import { KanbanComponent } from './components/kanban/kanban.component';
@@ -16,7 +16,7 @@ const components = [
   DropdownComponent,
   SharedButtonComponent,
   TabComponent,
-  DifficultyPipe,
+  LevelPipe,
   InputFormComponent,
   KanbanComponent
 ];
