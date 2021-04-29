@@ -3,7 +3,7 @@
        
         <kb-input-form 
           [controlsToCreate]="editControls"
-          (onSubmit)="submit($event)"
+          (onSubmit)="editConcept($event)"
           [orientation]="'vertical'"
         >
         <div vertical>Any Changes?</div>
@@ -15,25 +15,37 @@
 
             [controlsToCreate]="addNoteControls"
             [orientation]="'vertical'"
+            (onSubmit)="addNote($event)"
         >
            <div vertical>What have you learned?</div>
         </kb-input-form>
 
     </div>
     <div id="third" class="tab-content">
-        <kb-table
-            *ngIf="notes.length > 0"
-            [data]="notes"
-            [columns]="columns"
-            [filterChoices]="filterChoices"
-            [filters]="filters"
-            [displayNames]="displayNames"
-            [action]="true"
-            [deleteable]="true"
-            [actionButtonIcon]="'zoom_in'"
-            (onDelete)="deleteNotes($event)"
-         ></kb-table>
+        <mat-accordion class="accordion" multi>
+            <mat-expansion-panel class="accordion__panel" *ngFor="let note of notes">
+              <mat-expansion-panel-header class="accordion__panel-header">
+                <mat-panel-title class="accordion__panel-header__title">
+                  {{note.title}}
+                </mat-panel-title>
+                <mat-panel-description class="accordion__panel-header__description">
+                    {{note.type}}
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <div class="accordion__panel-body">
+                  <mat-card>
+        
+                        <div class="accordion__panel-body__content">
+                            {{note.content}}
+                        </div>
+
+                        <div class="accordion__panel-body__source">
+                            Based on: <a href="{{note.source}}">{{note.source}}</a>
+                           </div>
+                  </mat-card>
+                </div>
+            </mat-expansion-panel>
+          </mat-accordion>
     </div>
 </kb-tab> 
 
-<!-- (onZoom)="" -->

@@ -136,7 +136,7 @@ export class TableComponent implements OnInit {
         if (result.type === 'concept') {
           this.backend.addConcepts(result.event as IConcept);
         } else { //note
-            this.backend.addNotes(result.event as INote);
+            this.backend.addNote(result.event as INote);
         }
       }
 

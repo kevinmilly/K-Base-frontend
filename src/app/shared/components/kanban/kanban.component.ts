@@ -96,15 +96,16 @@ export class KanbanComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if(result.action === 'update') {
         if (result.action === 'concept') {
-          this.backend.editConcept(result as IConcept);
+          this.backend.editConcept(result.event as IConcept);
         } else { //task
-           this.backend.editNotes(result as INote);
+           this.backend.editNotes(result.event as INote);
         }
       } else { //add
         if (result.action === 'concept') {
-          this.backend.addConcepts(result as IConcept);
+          this.backend.addConcepts(result.event as IConcept);
         } else { //task
-            this.backend.addNotes(result as INote);
+            
+            this.backend.addNote(result.event as INote);
         }
       }
 

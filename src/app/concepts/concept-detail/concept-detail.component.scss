@@ -7,3 +7,30 @@
         margin-top: 1rem;
     }
   }
+
+
+  .accordion {
+      
+
+      &__panel {
+        background-color: #ffeafd;
+          &-header {
+      
+              &__title{
+
+              }
+              &__description {
+
+              }
+          }
+          &-body {
+            &__source {
+                margin-top: 2rem;
+            }
+            &__content {
+                font-family: 'Reenie Beanie', cursive;
+                font-size: 2rem;
+            }
+          }
+      }
+  }

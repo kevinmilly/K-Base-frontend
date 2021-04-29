@@ -110,6 +110,7 @@ export class ConceptDetailComponent implements OnInit {
   ngOnInit(): void {
     
     this.concept = this.data.concept;
+    this.backend.getNotesByConcept(this.concept._id);
     this.subs.sink = this.backend.notes$
                 .subscribe(notes => {
                   this.notes = notes;
@@ -161,7 +162,7 @@ export class ConceptDetailComponent implements OnInit {
         default: '',
   
       },
-      {
+      { 
         name:"Source", 
         type:"string", 
         required:false, 
@@ -170,7 +171,7 @@ export class ConceptDetailComponent implements OnInit {
       },
       {
         name:"Type", 
-        type:"stringChoice", 
+        type:"stringChoiceSet", 
         required:true, 
         default:0,
         stringChoices:this.noteChoices
@@ -186,13 +187,23 @@ export class ConceptDetailComponent implements OnInit {
 
 
 
-  submit(eventObj:any) {
+  editConcept(eventObj:any) {
     this._snackBar.open(this.messages[Math.floor(Math.random() * this.messages.length)], `Good Job!`, {
       duration: 4000,
     });
     eventObj["_id"] = this.concept._id;
     this.dialogRef.close({event:eventObj, action:'update', type:'concept'});
   }
+
+  addNote(eventObj:any) {
+    this._snackBar.open(this.messages[Math.floor(Math.random() * this.messages.length)], `Good Job!`, {
+      duration: 4000,
+    });
+    eventObj["relatedConcept"] = this.concept._id;
+    this.dialogRef.close({event:eventObj, action:'add', type:'note'});
+  }
+
+
 
   ngOnDestroy() {this.subs.unsubscribe()}
 

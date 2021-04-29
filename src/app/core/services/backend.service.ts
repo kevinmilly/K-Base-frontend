@@ -32,7 +32,7 @@ export class BackendService {
 
   /*NoteS*/
 
-  addNotes(t:INote) {
+  addNote(t:INote) {
     this.http.post<{m: string}>(`${this.BASE_URL}/api/notes`, t)
       .subscribe((response) => {
         this.notes.push(t);
@@ -41,9 +41,11 @@ export class BackendService {
   }
 
   getNotesByConcept(relatedConcept?:string) {
+    console.log([relatedConcept]);
    this.http.get<{message:string,notes:INote[]}>(`${this.BASE_URL}/api/notes/${relatedConcept}`)
             .subscribe( c => {
               this.notes = c.notes;
+              console.dir(this.notes);
               this.notesUpdated.next(this.notes);
           })
   }
