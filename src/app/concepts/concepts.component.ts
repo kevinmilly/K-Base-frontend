@@ -9,6 +9,8 @@ import { BackendService } from '../core/services/backend.service';
 import { ConceptDetailComponent } from './concept-detail/concept-detail.component';
 
 import { NgxSpinnerService } from "ngx-spinner";
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { GamificationServiceService } from '../core/services/gamification-service.service';
 
 @Component({
   selector: 'kb-concepts',
@@ -116,7 +118,9 @@ export class ConceptsComponent implements OnInit {
   constructor(
     private backend:BackendService, 
     public dialog: MatDialog,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private gamifyService:GamificationServiceService,
+    private _snackBar: MatSnackBar
     ) { }
 
   ngOnInit(): void { //put the method in the constructor
@@ -147,8 +151,6 @@ export class ConceptsComponent implements OnInit {
     this.backend.getNotesByConcept(row._id || "");
     this.subs.sink = this.backend.notes$
                       .subscribe(n => {
-        // console.dir(noteAndMessage);
-
         const dialogRef = this.dialog.open(ConceptDetailComponent, {
           width: '250px',
           data: { concept: row, notes:n} 
@@ -165,6 +167,9 @@ export class ConceptsComponent implements OnInit {
   submit(event:any) {
     console.log({event});
     this.backend.addConcepts(event);
+    this._snackBar.open(this.gamifyService.getQuoteMessage(), `Successfully Added!`, {
+      duration: 4000,
+    });
   }
 
   deleteConcept(event:any) {

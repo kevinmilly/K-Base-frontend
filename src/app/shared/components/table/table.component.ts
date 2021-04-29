@@ -117,7 +117,7 @@ export class TableComponent implements OnInit {
   rowClick(event:IConcept) {
     const dialogRef = this.dialog.open(ConceptDetailComponent, {
       width: '40rem',
-      height: '40rem',
+      height: '45rem',
       data: {
         concept:event,
         notes$:this.backend.getNotesByConcept(event._id)

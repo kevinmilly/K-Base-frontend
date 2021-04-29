@@ -69,10 +69,12 @@ export class BackendService {
   addConcepts(c:IConcept) {
     console.log("add Concept on the front end");
     console.log({c});
-    this.http.post<{m: string}>(`${this.BASE_URL}/api/concepts`, c)
+    this.http.post<IConcept>(`${this.BASE_URL}/api/concepts`, c)
       .subscribe((response) => {
         console.log({response})
-        this.concepts.push(c);
+        console.dir(this.concepts);
+        this.concepts.push(response);
+        console.dir(this.concepts);
         this.conceptsUpdated.next([...this.concepts]);
       })
   }
@@ -81,7 +83,7 @@ export class BackendService {
      this.http.get<{message:string,concepts:IConcept[]}>(`${this.BASE_URL}/api/concepts`)
       .subscribe( c => {
         this.concepts = c.concepts;
-        this.conceptsUpdated.next(this.concepts);
+        this.conceptsUpdated.next([...this.concepts]);
     })
   }
 
@@ -103,7 +105,8 @@ export class BackendService {
 
     this.http.delete<{concept:IConcept}>(`${this.BASE_URL}/api/concepts/${concept._id}`)
       .subscribe(r => {
-        this.conceptsUpdated.next( this.concepts.filter(c => c._id !== concept._id));
+        this.concepts = this.concepts.filter(c => c._id !== concept._id);
+        this.conceptsUpdated.next([...this.concepts]);
         console.log({r})
       });
   }
