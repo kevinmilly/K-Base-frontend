@@ -2,6 +2,7 @@ import {AfterViewInit, Component, ViewChild, OnInit, Input, Output, EventEmitter
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import { Observable, Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -38,7 +39,8 @@ export class TableComponent implements OnInit {
   refColumns:string[] = []
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatSort)
+  sort: MatSort = new MatSort;
 
   categories:any[] = [
     {
@@ -56,6 +58,10 @@ export class TableComponent implements OnInit {
     {
       icon:'psychology',
       cat:'Potpourri'
+    },
+    {
+      icon:'restart_alt',
+      cat:'Reset'
     }
   ]
 
@@ -68,6 +74,13 @@ export class TableComponent implements OnInit {
    }
 
   ngOnInit(): void {    
+   
+    this.displayedColumns = this.displayNames;
+    this.columns = this.columns.filter(c => c !== "_id");
+    this.dataSaved = [...this.data];
+  }
+
+  ngAfterViewInit() {
     this.resetTableAndFilter(this.data);
   }
 
@@ -79,9 +92,7 @@ export class TableComponent implements OnInit {
     this.dataSource = new MatTableDataSource([...data]);
     this.setupSortAndPagination();
       
-    this.displayedColumns = this.displayNames;
-    this.columns = this.columns.filter(c => c !== "_id");
-    console.dir(this.columns);
+
   }
 
   applySearchFilter(event: Event) {
@@ -93,10 +104,13 @@ export class TableComponent implements OnInit {
     }
   }
 
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.columns, event.previousIndex, event.currentIndex);
+  }
+
   onFilter(filterType:string, filterChoice:string) {
     this.data = this.dataSaved.filter(d => d[`${filterType}`] === filterChoice );
-    this.dataSource = new MatTableDataSource(this.data);
-    this.setupSortAndPagination();
+    this.resetTableAndFilter(this.data);
   }
 
   onClicked(type:string,event:any) {
@@ -148,7 +162,7 @@ export class TableComponent implements OnInit {
    
     switch (category.cat) {
       case "Bible":
-        this.data = this.dataSaved.filter(d => d.tag === "Bible"  );
+        this.data = this.dataSaved.filter(d => d.tag === "Bible");
         break;
     
        case "Programming":
@@ -160,10 +174,10 @@ export class TableComponent implements OnInit {
         case "Potpourri":
           this.data = this.dataSaved.filter(d => "Potpourri");
         break;
+        case "Reset":
+          this.data = [...this.dataSaved];
     }
-
-    this.dataSource = new MatTableDataSource(this.data);
-      this.setupSortAndPagination();
+    this.resetTableAndFilter(this.data);
 
   }
 

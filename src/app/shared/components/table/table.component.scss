@@ -3,7 +3,7 @@
   overflow: auto;
 
   .mat-form-field {
-    font-size: 1.4rem;
+    font-size: 1rem;
     width: 100%;
   }
 
@@ -13,39 +13,50 @@
     margin-bottom: 2rem;
   }
   
-  
-  .mat-table {
-    width: 100%;
 
-    .mat-cell,
-    .mat-header-cell {
-      word-wrap: initial;
-      display: table-cell;
-      padding: 0px 5px;
-      line-break: unset;
-      width: 50%;
-      width: auto;
-      white-space: nowrap;
-      overflow: hidden;
-      vertical-align: middle;
-      font-size: 1.2rem;
-    }
+     table {
+      width: 100%;
   
-    tr:nth-child(even) {
-      background-color: var(--off-white);
-    }
+      td,
+      th {
+        word-wrap: initial;
+        display: table-cell;
+        padding: 0px 5px;
+        line-break: unset;
+        width: 50%;
+        width: auto;
+        white-space: nowrap;
+        overflow: hidden;
+        vertical-align: middle;
+        font-size: 1.2rem;
+        
+     
+      }
     
-    tr:hover {
-      animation: myfirst 4s 1;
-      -webkit-animation: myfirst 4s 1; /* Safari and Chrome */
-    }
-
-    th {
-      text-transform: uppercase;
+      tr:nth-child(even) {
+        background-color: var(--off-white);
+      }
+  
+      
+      tr:hover {
+        animation: myfirst 4s 1;
+        -webkit-animation: myfirst 4s 1; /* Safari and Chrome */
+      }
+  
+      th {
+        text-transform: uppercase;
+      }
     }
   
+ 
+  
 
-  }
+  
+}
+
+.table-container {
+  height: 400px;
+   overflow: auto;
 }
 
 

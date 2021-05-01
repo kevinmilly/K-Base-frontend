@@ -22,7 +22,7 @@
 
     </div>
     <div id="third" class="tab-content">
-        <mat-accordion class="accordion" multi>
+        <mat-accordion class="accordion" multi *ngIf="notes.length > 0; else noData">
             <mat-expansion-panel class="accordion__panel" *ngFor="let note of notes">
               <mat-expansion-panel-header class="accordion__panel-header">
                 <mat-panel-title class="accordion__panel-header__title">
@@ -46,6 +46,11 @@
                 </div>
             </mat-expansion-panel>
           </mat-accordion>
+          <ng-template #noData>
+            <div  fxLayout="row" fxLayoutAlign="center center" [style.margin-top.rem]="5" >
+                No Notes Available.  You need to start learning something!  Add a Note!
+            </div>
+        </ng-template>
     </div>
 </kb-tab> 
 
