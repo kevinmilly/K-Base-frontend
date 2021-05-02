@@ -19,6 +19,8 @@
       font-size: 2rem;
       text-transform: uppercase;
       font-family: 'Abril Fatface', cursive;
+      display: flex;
+      justify-content: center;
     }
 
     .router-link-active {

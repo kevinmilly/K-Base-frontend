@@ -1,6 +1,6 @@
-.horiz-scroll {
-  width: var(--semi-full-width);
-  overflow: auto;
+// .horiz-scroll {
+//   width: var(--semi-full-width);
+//   overflow: auto;
 
   .mat-form-field {
     font-size: 1rem;
@@ -16,6 +16,7 @@
 
      table {
       width: 100%;
+      border-radius: 5%;
   
       td,
       th {
@@ -52,7 +53,7 @@
   
 
   
-}
+// }
 
 .table-container {
   height: 400px;

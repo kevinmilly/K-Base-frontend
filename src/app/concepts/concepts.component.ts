@@ -11,6 +11,8 @@ import { ConceptDetailComponent } from './concept-detail/concept-detail.componen
 import { NgxSpinnerService } from "ngx-spinner";
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { GamificationServiceService } from '../core/services/gamification-service.service';
+import { MediaObserver, MediaChange } from '@angular/flex-layout';
+
 
 @Component({
   selector: 'kb-concepts',
@@ -18,6 +20,8 @@ import { GamificationServiceService } from '../core/services/gamification-servic
   styleUrls: ['./concepts.component.scss']
 })
 export class ConceptsComponent implements OnInit {
+
+  private media$!: Observable<MediaChange[]>;
 
   private subs = new SubSink();
 
@@ -123,6 +127,11 @@ columns:string[] =[
     },
   ];
 
+  mediaSize:string = '';
+
+  sizes:string[] = ['xs','sm','md','lg','xl','lt-sm',
+  'lt-md','lt-lg','lt-xl','gt-xs','gt-sm','gt-md','gt-lg'];
+
   
   
  
@@ -131,12 +140,17 @@ columns:string[] =[
     public dialog: MatDialog,
     private spinner: NgxSpinnerService,
     private gamifyService:GamificationServiceService,
-    private _snackBar: MatSnackBar
-    ) { }
+    private _snackBar: MatSnackBar,
+    private media:MediaObserver
+    ) {
+        this.media$ = media.asObservable();
+     }
 
   ngOnInit(): void { //put the method in the constructor
-    this.spinner.show();
 
+    this.subs.sink = this.media$.subscribe(m => this.mediaSize = m[0].mqAlias);
+
+    this.spinner.show();
     this.backend.getConcepts();
     this.subs.sink = this.backend.concepts$
       .subscribe(concepts => {;
@@ -152,6 +166,8 @@ columns:string[] =[
         }, 2000);
        
       })
+
+    
 
   }
 
