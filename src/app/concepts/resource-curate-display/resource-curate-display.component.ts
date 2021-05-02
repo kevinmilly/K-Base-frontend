@@ -94,15 +94,16 @@ export class ResourceCurateDisplayComponent implements OnInit {
     });
 
     this.learningService.getSearchResources(this.searchTerm);
+    this.backendService.getResources(this.concept);
     //only include amoung the prospect resources ones not in the current
     combineLatest([
-      this.backendService.getResources(this.concept),
+      this.backendService.resources$,
       this.learningService.resultObs
     ])
     .pipe(
       tap(([original,prospect]) => {
           return (
-            original.resources.forEach( o => {
+            original.forEach( o => {
               const idx = prospect.findIndex(p => p.link === o.link)
               if(idx !== -1) prospect.splice(idx,1);
             })
@@ -110,7 +111,7 @@ export class ResourceCurateDisplayComponent implements OnInit {
          }),
       )
       .subscribe(([curr, changedProspective]) => {
-        this.currentResources = curr.resources;
+        this.currentResources = curr;
         this.prospectResources = changedProspective;
 
           setTimeout(() => {
@@ -120,30 +121,29 @@ export class ResourceCurateDisplayComponent implements OnInit {
     })
   }
 
-  drop(event: CdkDragDrop<any>) {
+  drop(event: CdkDragDrop<any>, stack:string) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
-        console.dir(event.container.data);
         transferArrayItem(event.previousContainer.data,
           event.container.data,
           event.previousIndex,
           event.currentIndex); 
 
-          this.searchOriginal(event.container,event.currentIndex);
+          this.searchOriginal(event.container,event.currentIndex,stack);
     
-    }
+    } 
 
   }
 
 
-  searchOriginal(currentStack:any, index:number) {
-    if(currentStack.id === 'cdk-drop-list-5') { //if we moved it in the current stack
+  searchOriginal(currentStack:any, index:number, droppedStackName:string) {
+    if(droppedStackName === 'save') { //if we moved it in the current stack
       /*if it's in the delete stack that means it was moved from the original
       just checking if it's in there allows us to see that it doesn't need to be added to the
       resourcesToAdd array and we don't have to track the original state of the currentResources
       */
-      const resourceMarkedForDeletionIdx = this.resourcesToDelete.findIndex(r => r._id === currentStack.data._id)
+      const resourceMarkedForDeletionIdx = this.resourcesToDelete.findIndex(r => r._id === currentStack.data._id);
       if(resourceMarkedForDeletionIdx === -1) { //wasn't part of the original
         const latestResourceAdded = currentStack.data[currentStack.data.length - 1];
         this.resourcesToAdd.push({
@@ -152,7 +152,7 @@ export class ResourceCurateDisplayComponent implements OnInit {
           level: this.concept.level,
           concept: this.concept._id,
         } as IResource)
-      
+        console.log(`${latestResourceAdded.title} added for saving`);
       } else {
           this.resourcesToDelete.splice(resourceMarkedForDeletionIdx,1);
       }
@@ -171,7 +171,7 @@ export class ResourceCurateDisplayComponent implements OnInit {
           console.dir(this.resourcesToDelete);
 
         } else {
-          this.resourcesToAdd.splice(resourceMarkedForAddIdx,1);
+            this.resourcesToAdd.splice(resourceMarkedForAddIdx,1);
          }
     }
   }

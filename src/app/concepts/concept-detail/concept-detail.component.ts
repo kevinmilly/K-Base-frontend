@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { IConcept } from 'src/app/core/models/concepts.model';
 import { IControlModel } from 'src/app/core/models/control.model';
 import { INote } from 'src/app/core/models/note.model';
@@ -93,8 +94,10 @@ export class ConceptDetailComponent implements OnInit {
     this.backend.getNotesByConcept(this.concept._id);
     this.subs.sink = this.backend.notes$
                 .subscribe(notes => {
-                  this.notes = notes;
+                  this.notes = notes; 
                 })
+
+    this.backend.getResources(this.concept);
 
     this.editControls = [
       {
@@ -143,10 +146,12 @@ export class ConceptDetailComponent implements OnInit {
   
       },
       { 
-        name:"Source", 
-        type:"string", 
+        name:"Resource", 
+        type:"autocomplete-select", 
         required:false, 
-        default: '',
+        default: 'http://www.google.com',
+        autoCompleteOptions:this.backend.resources$.pipe(map(resources => resources.map(r => r.title)))
+        
   
       },
       {

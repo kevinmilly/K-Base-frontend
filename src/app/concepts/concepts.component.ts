@@ -24,22 +24,21 @@ export class ConceptsComponent implements OnInit {
   concepts:IConcept[] = [];
   filteredConcepts:any = [];
 
-  columns:string[] =[
-    "action",
-    "title",
-    "necessity",
-    "level",
-    "tag"
-  ]
+
+  //kanban tab
+
+  selectedFilter: string = 'level';
 
   boxDetails:string[] = [
-    "notes",
     "necessity",
     "level" ,
     "tag"
   ];
 
-  filterChoices:string[][] = [
+  kanbanLabels:string[] = [];
+  kanbanHeaders:string[] = [];
+
+  filterChoices:string[][] = [ 
     [
       "Frivolous",
       "Somewhat Useful",
@@ -55,6 +54,30 @@ export class ConceptsComponent implements OnInit {
     ]
   ]
 
+//table tab
+
+columns:string[] =[
+  "action",
+  "title",
+  "necessity",
+  "level",
+  "tag"
+]
+
+  tagChoices = [
+    "Bible",
+    "Programming",
+    "Language Studies",
+    "Potpourri"
+  ]
+
+  filters:string[] = ["necessity", "level"];
+
+  displayNames:string[] = ["Actions","Title", "Necessity","Level", "Tag"];
+
+
+  //add Concept tab
+
   necessityChoices = [
     {name: "Frivolous", value:0},
     {name:"Somewhat Useful", value:1},
@@ -68,19 +91,7 @@ export class ConceptsComponent implements OnInit {
     {name: "Intermediate", value:2},
     {name:"Expert", value: 3},
     {name:"1%", value: 4}
-  ]
-
-  tagChoices = [
-    "Bible",
-    "Programming",
-    "Language Studies",
-    "Potpourri"
-  ]
-
-  filters:string[] = ["necessity", "level"];
-
-  displayNames:string[] = ["Actions","Title", "Necessity","Level", "Tag"];
-
+  ] 
   addConceptControls:IControlModel[] = [
     {
       name:"Title", 
@@ -132,10 +143,7 @@ export class ConceptsComponent implements OnInit {
         this.concepts = [...concepts];
         console.dir(this.concepts);
         if(concepts.length > 0) {
-          this.filteredConcepts = [];
-          this.filterChoices[1].forEach((choice, i) => {
-            this.filteredConcepts.push(this.concepts.filter(concept => concept.level === i));
-          })
+          this.filterConceptsForKanban(this.selectedFilter);
         }
 
         setTimeout(() => {
@@ -146,6 +154,42 @@ export class ConceptsComponent implements OnInit {
       })
 
   }
+
+  filterConceptsForKanban(selectedFilter:string) {
+    this.filteredConcepts = [];
+    switch (selectedFilter) {
+      case 'level':
+        this.filterChoices[1].forEach((choice, i) => {
+          this.filteredConcepts.push(this.concepts.filter(concept => concept.level === i));
+        })
+        this.kanbanLabels = this.boxDetails.filter(detail => detail !== 'level');
+        this.kanbanHeaders = this.filterChoices[1];
+        break;
+
+      case 'necessity':
+        this.filterChoices[0].forEach((choice, i) => {
+          this.filteredConcepts.push(this.concepts.filter(concept => concept.necessity === i));
+        })
+        this.kanbanLabels = this.boxDetails.filter(detail => detail !== 'necessity');
+        this.kanbanHeaders = this.filterChoices[0];
+        break;
+
+      case 'tag':
+        this.tagChoices.forEach((choice, i) => {
+          this.filteredConcepts.push(this.concepts.filter(concept => concept.tag === this.tagChoices[i]));
+        })
+        this.kanbanLabels = this.boxDetails.filter(detail => detail !== 'tag');
+        this.kanbanHeaders= this.tagChoices;
+        break;
+      case 'all':
+        this.filteredConcepts = [...this.concepts];
+        this.kanbanLabels = this.boxDetails.filter(detail => detail !== 'tag');
+        this.kanbanHeaders= this.tagChoices;
+        break;
+    }
+  }
+
+
 
   detail(row:IConcept) {
     this.backend.getNotesByConcept(row._id || "");

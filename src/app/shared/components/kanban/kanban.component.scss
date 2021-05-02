@@ -1,3 +1,18 @@
+.mat-chip-container {
+  margin: 3rem 0 3rem 80%;
+  .mat-chip {
+    background-color: rgb(247, 192, 205);
+    font-size: 1.3rem;
+    font-family: 'Righteous', cursive;
+    box-shadow: 10px 5px 5px rgb(168, 44, 141);
+
+    &:active {
+      text-decoration: underline;
+      
+    }
+  }
+}
+
 .kanban-container {
   display: flex;
   justify-content: center;
@@ -40,14 +55,14 @@
     
         
         &-header {
-          font-size: 1.4rem;
+          font-size: 1.1rem;
           margin: .3rem;
         }
 
         &-content {
           
           &__details {
-            font-size: 1rem;
+            font-size: .8rem;
             margin: .3rem;
             color: purple;
             margin-left: .5rem;

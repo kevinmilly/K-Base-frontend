@@ -1,10 +1,19 @@
+<div class="mat-chip-container">
+    <mat-chip-list aria-label="Filter Selection">
+        <mat-chip (click)="updateFilter('level')">Level</mat-chip>
+        <mat-chip (click)="updateFilter('necessity')">Necessity</mat-chip>
+        <mat-chip (click)="updateFilter('tag')">Tag</mat-chip>
+    </mat-chip-list>
+</div>
+
+
 <div class="kanban-container" cdkDropListGroup>
-    <div class="kanban-container__kanban" *ngFor="let label of labels; index as i">
-        <div class="kanban-container__kanban__header">{{labels[i]}}</div>
+    <div class="kanban-container__kanban" *ngFor="let header of headers; index as i">
+        <div class="kanban-container__kanban__header" sticky>{{headers[i]}}</div>
         <div 
             cdkDropList 
             class="kanban-container__kanban-list" 
-            (cdkDropListDropped)="drop($event)"
+            (cdkDropListDropped)="drop($event,i)"
             [cdkDropListData]="kanbanFilteredDatasets[i]"
         >
             <div 
@@ -16,7 +25,7 @@
                 </div>
                 <div class="kanban-container__kanban-list__box-content">
                     <ul [style.list-style]="'none'" >
-                        <li *ngFor="let boxContent of boxDetails">
+                        <li *ngFor="let boxContent of labels">
                             <div class="kanban-container__kanban-list__box-content__details">
                                 <ng-container *ngIf="boxContent === 'necessity'">
                                     <span [style.text-transform]="'capitalize'"> </span>

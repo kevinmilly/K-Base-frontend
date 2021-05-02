@@ -33,9 +33,11 @@
       <kb-kanban
         *ngIf="concepts.length > 0; else noDataKanBan"
         [kanbanFilteredDatasets]="filteredConcepts"
-        [labels]="filterChoices[1]"
+        [labels]="kanbanLabels"
+        [headers]="kanbanHeaders"
         [boxDetails]="boxDetails"
         [translators]="filterChoices"
+        (filterKanban)="filterConceptsForKanban($event)"
       >
       </kb-kanban>
       <ng-template #noDataKanBan>

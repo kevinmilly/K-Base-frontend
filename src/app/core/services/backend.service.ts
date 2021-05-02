@@ -45,7 +45,6 @@ export class BackendService {
    this.http.get<{message:string,notes:INote[]}>(`${this.BASE_URL}/api/notes/${relatedConcept}`)
             .subscribe( c => {
               this.notes = c.notes;
-              console.dir(this.notes);
               this.notesUpdated.next(this.notes);
           })
   }
@@ -114,7 +113,13 @@ export class BackendService {
    /*RESOURCES*/
 
    getResources(concept:IConcept) {
-    return this.http.get<{message:string,resources:IResource[]}>(`${this.BASE_URL}/api/resources/${concept._id}`);
+     console.log({concept});
+    this.http.get<{message:string,resources:IResource[]}>(`${this.BASE_URL}/api/resources/${concept._id}`)
+    .subscribe( c => {
+      this.resources = c.resources;
+      console.dir(this.resources);
+      this.resourcesUpdated.next([...this.resources]);
+  })
    }
 
    editResources(resource:IResource) {

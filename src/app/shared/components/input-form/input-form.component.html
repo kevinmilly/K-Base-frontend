@@ -153,7 +153,24 @@
                           </mat-form-field>
       
                     </div>
-      
+                    <div *ngSwitchCase="'autocomplete-select'">
+                        <mat-form-field class="big">
+                          <mat-label>{{controlsToCreate[i].name}}</mat-label>
+                          <input type="text"
+                                 aria-label="Resource"
+                                 matInput
+                                 [formControl]="indexedCreatedControls(i)"
+                                 [matAutocomplete]="auto">
+                          <mat-autocomplete #auto="matAutocomplete">
+                            <mat-option *ngFor="let option of controlsToCreate[i].autoCompleteOptions | async" [value]="option">
+                              {{option}}
+                            </mat-option>
+                          </mat-autocomplete>
+                          <mat-error *ngIf="indexedCreatedControls(i).invalid">
+                            Please check {{controlsToCreate[i].name}}
+                          </mat-error>
+                        </mat-form-field>
+                  </div>
                 </div>
               </div>
       

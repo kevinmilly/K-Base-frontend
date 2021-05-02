@@ -83,6 +83,12 @@ export class InputFormComponent implements OnInit {
             new FormControl(c.default,vals)
           )
           break;
+        case "autocomplete-select":
+          if(c.required) vals.push(Validators.required);
+          this.controlsCreated.push(
+            new FormControl(c.default,vals)
+          )
+          break;
      
       }
     });

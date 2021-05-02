@@ -13,15 +13,17 @@ import { SubSink } from 'subsink';
   templateUrl: './kanban.component.html',
   styleUrls: ['./kanban.component.scss']
 })
-export class KanbanComponent implements OnInit {
+export class KanbanComponent {
 
   @Input() kanbanFilteredDatasets:any = [];
   @Input() labels:string[] = [];
+  @Input() headers:string[] = [];
   @Input() translators:string[][] = []; //options the below filters can be, order of this filter Choices array based on order of filters array
   @Input() filters:string[] = []; //different things you can filter by
   @Input() boxDetails:string[] = [];
 
   @Output() onZoom = new EventEmitter();
+  @Output() filterKanban = new EventEmitter();
   
   dragData:[IConcept[]] = [[]];
   dragDataSaved:[IConcept[]] = [[]];
@@ -30,8 +32,8 @@ export class KanbanComponent implements OnInit {
 
   categories:any[] = [
     {
-      icon:'book',
-      cat:'Bible'
+      icon:'local_library',
+      cat:'Level'
     },
     {
       icon:'keyboard',
@@ -47,7 +49,7 @@ export class KanbanComponent implements OnInit {
     }
   ]
 
-
+  currentFilterType:string = 'level';
 
   constructor(
     public dialog: MatDialog,
@@ -56,19 +58,35 @@ export class KanbanComponent implements OnInit {
     
    } 
 
-  ngOnInit(): void {
-   console.dir(this.kanbanFilteredDatasets);
-
+  ngOnChanges(): void {
+    this.updateFilter(this.currentFilterType);
   }
 
-  drop(event: CdkDragDrop<string[]>) {
+  drop(event: CdkDragDrop<IConcept[]>, column:number) {
+
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
-      transferArrayItem(event.previousContainer.data,
-                        event.container.data,
-                        event.previousIndex,
-                        event.currentIndex);
+        transferArrayItem(event.previousContainer.data,
+                          event.container.data,
+                          event.previousIndex,
+                          event.currentIndex);
+      }
+  
+      this.updateConcept(event.container.data[event.currentIndex], column);
+      
+  }
+
+  updateConcept(concept:IConcept, index:number) {
+    if(this.currentFilterType === 'level') {
+     concept['level'] = index;
+      this.backend.editConcept(concept as IConcept);
+    } else if(this.currentFilterType === 'necessity') {
+       concept['necessity'] = index;
+        this.backend.editConcept(concept as IConcept);
+    } else { //tag
+       concept['tag'] = this.headers[index];
+        this.backend.editConcept(concept as IConcept);
     }
   }
 
@@ -112,6 +130,12 @@ export class KanbanComponent implements OnInit {
     });
   }
 
+  updateFilter(event:string) {
+    this.filterKanban.emit(event);
+    this.currentFilterType = event;
+  }
+
+
 
   openResources(concept:IConcept) {
     const dialogResourceRef = this.dialog.open(ResourceCurateDisplayComponent, {
@@ -126,9 +150,12 @@ export class KanbanComponent implements OnInit {
                         .subscribe( result => { 
                           if(result) {
                             console.log({result});
-                              this.backend.addResources(result.add);
-                              this.backend.deleteResources(result.delete);
-
+                              if(result.add.length > 0) {
+                                this.backend.addResources(result.add);
+                              } 
+                              if(result.delete[0]) {
+                                this.backend.deleteResources(result.delete);
+                              }
                           }
                         })
   }
