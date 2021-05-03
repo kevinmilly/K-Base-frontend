@@ -1,0 +1,33 @@
+<mat-grid-list cols="2" rowHeight="2:1">
+    <mat-grid-tile>
+        <mat-card [class.mat-elevation-z8]="true"> 
+          <mat-button-toggle-group name="pieFilter" aria-label="Filter Button for Pie Chart" >
+            <mat-button-toggle value="level" (change)="filterPie($event.value)">Level</mat-button-toggle>
+            <mat-button-toggle value="necessity" (change)="filterPie($event.value)">Necessity</mat-button-toggle>
+          </mat-button-toggle-group>
+          <canvas baseChart 
+            [data]="pieChartData" 
+            [labels]="pieChartLabels" 
+            [chartType]="pieChartType"
+            [options]="pieChartOptions"
+            [plugins]="pieChartPlugins"
+            [legend]="pieChartLegend">
+        </canvas>
+        </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-card [class.mat-elevation-z8]="true">
+          
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-card [class.mat-elevation-z8]="true">
+          
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-card [class.mat-elevation-z8]="true">
+          
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>

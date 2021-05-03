@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
-import { DashboardComponent } from './dashboard/dashboard.component';
 
 import { Router, RouterModule, Routes } from '@angular/router';
 import { ToolbarComponent } from './toolbar/toolbar.component';
@@ -10,7 +9,6 @@ import { AddConceptComponent } from '../concepts/quick-add-concept/quick-add-con
 
 @NgModule({
   declarations: [
-    DashboardComponent,
     ToolbarComponent,
     SidenavComponent,
     AddConceptComponent
@@ -20,7 +18,6 @@ import { AddConceptComponent } from '../concepts/quick-add-concept/quick-add-con
     RouterModule
   ],
   exports: [
-    DashboardComponent,
     ToolbarComponent,
     SidenavComponent
    
