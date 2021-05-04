@@ -35,7 +35,7 @@ export class DashboardComponent implements OnInit {
     ]
 
      // Pie
-     public pieChartOptions: ChartOptions = {
+     public pieOptions: ChartOptions = {
       responsive: true,
     };
     public pieLabels: Label[] = [];
@@ -76,7 +76,10 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.backend.getConcepts();
     this.subs.sink = this.backend.concepts$
-                  .subscribe(concepts => this.concept = concepts);
+                  .subscribe(concepts => {
+                    this.concept = concepts;
+                    this.filterPie('level');
+                  });
   }
 
   // this.filterChoices[1].forEach((choice,i) => {

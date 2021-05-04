@@ -4,9 +4,10 @@ import { SharedModule } from '../shared/shared.module';
 import { DashboardComponent } from './dashboard.component';
 
 import { ChartsModule } from 'ng2-charts';
+import { DashboardRoutingModule } from './dashboard.routing';
 
 const components = [DashboardComponent];
-const modules = [SharedModule, ChartsModule];
+const modules = [SharedModule, ChartsModule, DashboardRoutingModule];
 
 
 @NgModule({
