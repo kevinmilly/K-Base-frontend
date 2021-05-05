@@ -1,37 +1,44 @@
 
-<mat-grid-list cols="2" rowHeight="15rem">
+<mat-grid-list cols="2" rowHeight="45rem">
     <mat-grid-tile>
         <mat-card [class.mat-elevation-z8]="true"> 
-          <mat-button-toggle-group name="pieFilter" aria-label="Filter Button for Pie Chart" >
-            <mat-button-toggle value="level" (change)="filterPie($event.value)">Level</mat-button-toggle>
-            <mat-button-toggle value="necessity" (change)="filterPie($event.value)">Necessity</mat-button-toggle>
-          </mat-button-toggle-group> 
-          <div class="graph-container">
-              <canvas baseChart 
-                height="100"
-                width="100"
-                [data]="pieData" 
-                [labels]="pieLabels" 
-                [chartType]="pieType"
-                [options]="pieOptions"
-                [legend]="pieLegend"> 
-            </canvas>
+          <div class="card-container">
+            <mat-button-toggle-group name="pieFilter" aria-label="Filter Button for Pie Chart" >
+              <mat-button-toggle value="level" (change)="filterPie($event.value)">Level</mat-button-toggle>
+              <mat-button-toggle value="necessity" (change)="filterPie($event.value)">Necessity</mat-button-toggle>
+            </mat-button-toggle-group> 
+            <div class="card-container__title">Level and Necessity Distribution</div>
+            <div class="card-container__graph-container" fxLayout="row" fxAlign="center center">
+                <canvas baseChart 
+                  height="100"
+                  width="100"
+                  [data]="pieData" 
+                  [labels]="pieLabels" 
+                  [chartType]="pieType"
+                  [options]="pieOptions"
+                  [colors]="chartColors"
+                  [legend]="pieLegend"> 
+              </canvas>
+            </div>
           </div>
+          
         </mat-card>
     </mat-grid-tile>
     <mat-grid-tile>
       <mat-card [class.mat-elevation-z8]="true">
-          
-      </mat-card>
-    </mat-grid-tile>
-    <mat-grid-tile>
-      <mat-card [class.mat-elevation-z8]="true">
-          
-      </mat-card>
-    </mat-grid-tile>
-    <mat-grid-tile>
-      <mat-card [class.mat-elevation-z8]="true">
-          
+            <div class="card-container">
+              <div class="card-container__title">Top 10 Most Impactful Concepts to Learn</div>
+              <div class="card-container__bar-graph-container" fxLayout="row" fxAlign="center center">
+                <canvas baseChart 
+                  [datasets]="barChartData"
+                  [labels]="barChartLabels"
+                  [options]="barChartOptions"
+               
+                  [legend]="barChartLegend"
+                  [chartType]="barChartType">
+              </canvas>
+            </div>
+        </div>
       </mat-card>
     </mat-grid-tile>
   </mat-grid-list>

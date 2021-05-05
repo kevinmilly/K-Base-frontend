@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ChartOptions, ChartType } from 'chart.js';
-import { SingleDataSet, Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip } from 'ng2-charts';
+import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
+import { SingleDataSet, Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip,  Color } from 'ng2-charts';
 import { IConcept } from '../core/models/concepts.model';
 import { SubSink } from 'subsink';
 import { BackendService } from '../core/services/backend.service';
@@ -42,31 +42,24 @@ export class DashboardComponent implements OnInit {
     public pieData: SingleDataSet = [];
     public pieType: ChartType = 'pie';
     public pieLegend = true;
+  
+    public chartColors: Color[] = [
+      { backgroundColor: ['#f54298' , '#dd42f' ,'#ffa3f3', '#42f5da' ]}
+    ]
 
-    public stackedBarLabel: string[] = [];
-    public stackedData: number[] = [];
-    public stackedNonData: number[] = [];
-    public stackedBarLegend = true;
-    public stackedBarType: ChartType = 'bar';
-    public stackedBarChartOptions: ChartOptions = {
-      responsive: true,
-      animation: {
-          duration: 10,
-      },
-      tooltips: {
-                  mode: 'label'
-      },
-      scales: {
-          xAxes: [{ 
-              stacked: true, 
-              gridLines: { display: false },
-            }],
-          yAxes: [{ 
-              stacked: true, 
-          }]
-      }
+    public barChartColors: Color[] = [{ backgroundColor: ['#42f5da', '#f54298']}];
+
+    public barChartLabels: string[] = [];
+    public barChartOptions: ChartOptions = {
+      responsive: true
     };
-    public stackedBillableDataSets:any[] = [];
+    public barChartType: ChartType = 'horizontalBar';
+    public barChartLegend = true;
+  
+    public barChartData: ChartDataSets[] = [
+      { data: [], label: 'Level', stack: 'a' },
+      { data: [], label: 'Necessity', stack: 'a' },
+    ];
 
   constructor(private backend:BackendService) {
     monkeyPatchChartJsTooltip(); 
@@ -79,15 +72,15 @@ export class DashboardComponent implements OnInit {
                   .subscribe(concepts => {
                     this.concept = concepts;
                     this.filterPie('level');
+                    this.buildLeaderChart();
                   });
   }
 
-  // this.filterChoices[1].forEach((choice,i) => {
-  //   this.pieLabels.push(choice);
-  //   this.pieData.push(this.concept.reduce((acc, curr) => acc + curr.level,0))
-  // })
+
 
   filterPie(filterType:string) {
+    this.pieLabels = [];
+    this.pieData = [];
     switch (filterType) {
       case 'level':
         this.filterChoices[1].forEach((choice,i) => {
@@ -103,5 +96,27 @@ export class DashboardComponent implements OnInit {
       break;
     }
   }
+
+  buildLeaderChart() {
+   
+    //for each concept add the necessity and level and get top 10
+    const sortedLevel = this.concept.sort((a,b) => b.level - a.level)
+                                    .slice(0,9);
+    const sortedNecessity = this.concept.sort((a,b) => b.necessity - a.necessity)
+                                        .slice(0,9);
+
+    console.dir(sortedNecessity);
+
+    //pump the data into the datasets and the concept titles into the labels
+    sortedLevel.forEach( (c, index) => {
+      this.barChartData[0].data?.push(c.level);
+      this.barChartLabels.push(c.title);
+      this.barChartData[1].data?.push(sortedNecessity[index].necessity)
+    })
+    
+
+  }
+
+
 
 }
