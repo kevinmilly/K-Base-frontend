@@ -2,6 +2,17 @@
   <kb-tab [labels]="['Add Concept','Concept Table','Concept Kanban']">
     <div id="first" class="tab-content">
       <mat-card  [class.mat-elevation-z8]="true">
+           <!-- <kb-popup-example [gifImage]></kb-popup-example> -->
+           <kb-shared-button
+              [type]="'icon'" 
+              [content]="'info'"
+              (clicked)="howToAddConcept()"
+              matTooltip="How To Add A Concept"
+              [matTooltipPosition]="'below'"
+              matTooltipHideDelay="1000"
+            >
+              <mat-icon>info</mat-icon>
+            </kb-shared-button>
            <kb-input-form 
                 [orientation]="'horizontal'"
                 [controlsToCreate]="addConceptControls"

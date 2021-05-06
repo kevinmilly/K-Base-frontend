@@ -236,6 +236,13 @@ columns:string[] =[
     this.backend.deleteConcept(event);
   }
 
+  howToAddConcept() {
+    const dialogRef = this.dialog.open(ConceptDetailComponent, {
+      width: '50rem',
+      data: '../../assets/images/instructional/howtoaddconcept.gif'
+    });
+  }
+
   ngOnDestroy() {
     this.subs.unsubscribe();
   }
