@@ -12,6 +12,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { GamificationServiceService } from '../core/services/gamification-service.service';
 import { MediaObserver, MediaChange } from '@angular/flex-layout';
+import { PopupExampleComponent } from '../shared/components/popup-example/popup-example.component';
 
 
 @Component({
@@ -237,7 +238,7 @@ columns:string[] =[
   }
 
   howToAddConcept() {
-    const dialogRef = this.dialog.open(ConceptDetailComponent, {
+    const dialogRef = this.dialog.open(PopupExampleComponent, {
       width: '50rem',
       data: '../../assets/images/instructional/howtoaddconcept.gif'
     });

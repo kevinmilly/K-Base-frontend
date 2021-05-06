@@ -9,6 +9,7 @@ import { LevelPipe } from './pipes/level-status.pipe';
 import { TabComponent } from './components/tab/tab.component';
 import { InputFormComponent } from './components/input-form/input-form.component';
 import { KanbanComponent } from './components/kanban/kanban.component';
+import { PopupExampleComponent } from './components/popup-example/popup-example.component';
 
 
 const components = [
@@ -18,7 +19,8 @@ const components = [
   TabComponent,
   LevelPipe,
   InputFormComponent,
-  KanbanComponent
+  KanbanComponent,
+  PopupExampleComponent
 ];
 const modules = [
   CommonModule,
