@@ -31,6 +31,7 @@ const modules = [
 @NgModule({
   declarations: components,
   imports: modules,
-  exports: [...components,...modules]
+  exports: [...components,...modules],
+  entryComponents: [PopupExampleComponent]
 })
 export class SharedModule { }

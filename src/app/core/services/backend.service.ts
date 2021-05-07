@@ -41,7 +41,6 @@ export class BackendService {
   }
 
   getNotesByConcept(relatedConcept?:string) {
-    console.log([relatedConcept]);
    this.http.get<{message:string,notes:INote[]}>(`${this.BASE_URL}/api/notes/${relatedConcept}`)
             .subscribe( c => {
               this.notes = c.notes;
@@ -61,19 +60,22 @@ export class BackendService {
     })
   }
 
+  deleteNote(relatedConcept?:string) {
+
+    this.http.delete<{note:INote}>(`${this.BASE_URL}/api/notes/${relatedConcept}`)
+      .subscribe(r => {
+        this.notes = this.notes.filter(n => n.relatedConcept !== relatedConcept);
+        this.notesUpdated.next([...this.notes]);
+      });
+  }
+
 
 
   /*CONCEPTS*/
 
   addConcepts(c:IConcept) {
-    console.log("add Concept on the front end");
-    console.log({c});
     this.http.post<IConcept>(`${this.BASE_URL}/api/concepts`, c)
       .subscribe((response) => {
-        console.log({response})
-        console.dir(this.concepts);
-        this.concepts.push(response);
-        console.dir(this.concepts);
         this.conceptsUpdated.next([...this.concepts]);
       })
   }
@@ -105,15 +107,16 @@ export class BackendService {
     this.http.delete<{concept:IConcept}>(`${this.BASE_URL}/api/concepts/${concept._id}`)
       .subscribe(r => {
         this.concepts = this.concepts.filter(c => c._id !== concept._id);
+
+        this.deleteNote(concept._id)
+
         this.conceptsUpdated.next([...this.concepts]);
-        console.log({r})
       });
   }
 
    /*RESOURCES*/
 
    getResources(concept:IConcept) {
-     console.log({concept});
     this.http.get<{message:string,resources:IResource[]}>(`${this.BASE_URL}/api/resources/${concept._id}`)
     .subscribe( c => {
       this.resources = c.resources;
@@ -136,7 +139,6 @@ export class BackendService {
     }
 
     deleteResources(resourcesToDelete:any[]) {
-      console.log({resourcesToDelete});
       const options = {
         headers: new HttpHeaders({
           'Content-Type': 'application/json'
@@ -147,7 +149,7 @@ export class BackendService {
       .subscribe(r => {
         const updatedResources = this.resources.filter(resource => !resourcesToDelete.includes(resource._id));
         this.resourcesUpdated.next(updatedResources);
-        console.log({r})
+     
       });
     }
 

@@ -152,7 +152,7 @@ export class ResourceCurateDisplayComponent implements OnInit {
           level: this.concept.level,
           concept: this.concept._id,
         } as IResource)
-        console.log(`${latestResourceAdded.title} added for saving`);
+     
       } else {
           this.resourcesToDelete.splice(resourceMarkedForDeletionIdx,1);
       }
@@ -167,9 +167,6 @@ export class ResourceCurateDisplayComponent implements OnInit {
             level: this.concept.level,
             concept: this.concept._id,
           } as IResource)
-
-          console.dir(this.resourcesToDelete);
-
         } else {
             this.resourcesToAdd.splice(resourceMarkedForAddIdx,1);
          }

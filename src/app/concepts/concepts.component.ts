@@ -226,7 +226,7 @@ columns:string[] =[
   }
 
   submit(event:any) {
-    console.log({event});
+
     this.backend.addConcepts(event);
     this._snackBar.open(this.gamifyService.getQuoteMessage(), `Successfully Added!`, {
       duration: 4000,
@@ -239,8 +239,9 @@ columns:string[] =[
 
   howToAddConcept() {
     const dialogRef = this.dialog.open(PopupExampleComponent, {
-      width: '50rem',
-      data: '../../assets/images/instructional/howtoaddconcept.gif'
+      width: 'auto',
+      height: 'auto',
+      data: '../../assets/images/howto/howtoaddconcept.gif'
     });
   }
 

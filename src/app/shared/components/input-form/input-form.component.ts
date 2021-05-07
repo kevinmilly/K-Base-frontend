@@ -92,20 +92,20 @@ export class InputFormComponent implements OnInit {
      
       }
     });
-    console.log(this.inputForm)
+
   }
 
   submit() {
-    console.log("Submit entered");
     this.controlsToCreate.forEach((control, i) => {
       // console.dir(this.controlsCreated[i]);
       this.submission[control.name.toLowerCase()] = this.controlsCreated[i].value;
     });
     console.dir(this.submission);
     this.onSubmit.emit(this.submission);
-    this.controlsCreated.forEach((control, i) => {
-      control.setValue(this.controlsToCreate[i].default)
-    });
+    // this.controlsCreated.forEach((control, i) => {
+    //   control.setValue(this.controlsToCreate[i].default)
+    // });
+    this.inputForm.reset();
   }
 
   get controlsCreated() {

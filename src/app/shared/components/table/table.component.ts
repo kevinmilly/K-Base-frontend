@@ -139,7 +139,7 @@ export class TableComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log({result});
+    
       if(result.action === 'update') {
         if (result.type === 'concept') {
           this.backend.editConcept(result.event as IConcept);
@@ -158,8 +158,7 @@ export class TableComponent implements OnInit {
   }
 
   categoryFilter(category:any) {
-    console.log(category);
-   
+
     switch (category.cat) {
       case "Bible":
         this.data = this.dataSaved.filter(d => d.tag === "Bible");

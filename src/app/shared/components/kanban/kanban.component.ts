@@ -149,7 +149,6 @@ export class KanbanComponent {
     this.subs.sink = dialogResourceRef.afterClosed()
                         .subscribe( result => { 
                           if(result) {
-                            console.log({result});
                               if(result.add.length > 0) {
                                 this.backend.addResources(result.add);
                               } 
