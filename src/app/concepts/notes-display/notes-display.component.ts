@@ -61,7 +61,7 @@ export class NotesDisplayComponent implements OnInit {
 
 
   submit(eventObj: any) {
-    console.dir(eventObj);
+
     this.dialogRef.close({event:eventObj, type:'update'});
   }
 

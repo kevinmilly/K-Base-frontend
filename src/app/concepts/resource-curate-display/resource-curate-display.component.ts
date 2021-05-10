@@ -60,7 +60,7 @@ export class ResourceCurateDisplayComponent implements OnInit {
     private spinner: NgxSpinnerService
     
   ) {
-    console.dir(this.data);
+
     this.concept = this.data.concept;
    }
 

@@ -105,7 +105,6 @@ export class DashboardComponent implements OnInit {
     const sortedNecessity = this.concept.sort((a,b) => b.necessity - a.necessity)
                                         .slice(0,9);
 
-    // console.dir(sortedNecessity);
 
     //pump the data into the datasets and the concept titles into the labels
     this.barChartData[0].data = [];

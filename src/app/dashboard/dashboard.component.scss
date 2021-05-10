@@ -1,26 +1,47 @@
-.card-container {
-    &__title {
-        display: flex;
-        justify-content: center;
-        font-size: 1rem;
-        text-transform: uppercase;
-        margin-top: 2rem;
-        margin-bottom: .5rem;
-    }
-    &__graph-container {
-   
-        height: 30rem;
-        width:   35rem;
-        margin: 2rem auto;
-     
+
+.dashboard-container{
+
+    padding-right: 10rem;
+
+    mat-grid-list {
+            
+        margin-bottom: 2rem;
+
+        mat-grid-tile {
+
+            .card-container {
+                
+                padding: 1rem;
+    
+                &__title {
+                    display: flex;
+                    justify-content: center;
+                    font-size: 1.5rem;
+                    text-transform: uppercase;
+                    margin-top: 2rem;
+                    margin-bottom: 2rem;
+                }
+                &__graph-container {
+            
+                    height: 20rem;
+                    width:   26rem;
+        
+                
+                }
+        
+                &__bar-graph-container {
+        
+                    // width: 20rem;
+            
+                    height: 28rem;
+                    // width:   45rem;
+                    margin: 5rem auto;
+                
+                }
+            }
+        }
     }
 
-    &__bar-graph-container {
-   
-        height: 50rem;
-        // width:   45rem;
-        margin: 5rem auto;
-     
-    }
 }
+    
 

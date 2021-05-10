@@ -165,7 +165,7 @@ export class ConceptDetailComponent implements OnInit {
   }
 
   deleteNotes(eventObj:any) {
-    console.dir(eventObj);
+
     eventObj.event.completed = true;
     this.dialogRef.close({event:eventObj.event, action:'delete', type:'note'});
   }

@@ -30,7 +30,7 @@ export class InputFormComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.dir(this.controlsToCreate);
+
     this.generateControls(this.controlsToCreate);
 
 
@@ -68,7 +68,7 @@ export class InputFormComponent implements OnInit {
         case "number":
           if(c.required) vals.push(Validators.required);
           if(!c.numberMax && !c.numberMin) {
-            console.error("You need to specify min or max with number");
+       
             break;
           }
           vals.push(Validators.min(c.numberMin || 0));
@@ -97,10 +97,10 @@ export class InputFormComponent implements OnInit {
 
   submit() {
     this.controlsToCreate.forEach((control, i) => {
-      // console.dir(this.controlsCreated[i]);
+ 
       this.submission[control.name.toLowerCase()] = this.controlsCreated[i].value;
     });
-    console.dir(this.submission);
+
     this.onSubmit.emit(this.submission);
     // this.controlsCreated.forEach((control, i) => {
     //   control.setValue(this.controlsToCreate[i].default)

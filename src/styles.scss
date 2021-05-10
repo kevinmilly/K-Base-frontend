@@ -149,7 +149,7 @@ $mat-dark-theme-background: (
 // Theme Config
 
 body {
-  --primary-color: #ffbaf7;
+  --primary-color: #e464d5;
   --primary-lighter-color: #ffeafd;
   --primary-darker-color: #ffa3f3;
   --text-primary-color: #{$dark-primary-text};
@@ -251,7 +251,7 @@ $altTheme: mat-dark-theme($theme-primary, $theme-accent, $theme-warn);
 mat-card {
   border-radius: 3%;
   border-width: 1rem;
-  width: 96%;
+  width: 75%;
   height: 95%;
   margin: 2rem 1rem;
 }

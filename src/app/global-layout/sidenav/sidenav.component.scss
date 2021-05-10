@@ -1,0 +1,28 @@
+mat-sidenav-container {
+   
+
+    mat-icon {
+        margin-top: .4rem;
+    }
+  
+    a {
+      font-size: 1.5rem;
+      margin: 1rem 2rem;
+  
+      .link-text {
+          margin: .5rem 0 0 .5rem;
+          
+      }
+    }
+  
+  img {
+  //   margin-left: 4rem;
+    width: 15rem;
+  }
+
+  .logout {
+      position: absolute;
+      top: 80%;
+  }
+}
+

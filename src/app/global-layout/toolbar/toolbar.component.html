@@ -1,14 +1,13 @@
-<mat-toolbar color="primary" class="toolbar">
+<mat-toolbar color="primary" class="toolbar mat-elevation-z6">
     <mat-toolbar-row>
        <div class="toolbar__title-elements" fxLayout="row" fxLayoutAlign="space-evenly center" >
           <button mat-icon-button>
             <mat-icon (click)="onToggle()">menu</mat-icon>
           </button>
           <h1 class="title">K-Base</h1>
-          <img src="../../../assets/images/brain-pixabay.png" alt="KBase Brain Logo">
       </div>
       <span class="toolbar__menu-spacer"></span>
-      <div fxHide.sm fxShow >
+      <!-- <div fxHide.sm fxShow >
         <a mat-button [routerLink]="'/dashboard'"  routerLinkActive="router-link-active" > Dashboard </a>
         <a mat-button [routerLink]="'/concepts'"  routerLinkActive="router-link-active" > Concepts </a>
         <a mat-button> Logout </a>
@@ -16,12 +15,9 @@
       </div>
       <div class="toolbar__concept-input" fxHide.md fxShow>
         <kb-quick-add-concept></kb-quick-add-concept>
-      </div>
+      </div> -->
     </mat-toolbar-row>
   
-    <mat-toolbar-row>
-        <span style="font-size: 12px;">Actionable Knowledgebase</span>
-      </mat-toolbar-row>
   </mat-toolbar>
   <ng-content>
 

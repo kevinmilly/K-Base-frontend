@@ -5,7 +5,6 @@ import { Pipe, PipeTransform } from "@angular/core";
   })
   export class LevelPipe implements PipeTransform {
     transform(value:number, type:string): any {
-      console.dir(arguments);
       return "level" === type ? level[value] : necessity[value];
     }
   }

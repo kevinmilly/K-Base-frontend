@@ -89,10 +89,10 @@ export class BackendService {
   }
 
   editConcept(concept:IConcept) {
-    console.dir(concept);
+
     this.http.put<{concept:IConcept}>(`${this.BASE_URL}/api/concepts/${concept._id}`, concept)
            .subscribe(r => {
-            console.dir(r);
+      
             this.concepts.splice(
               this.concepts.findIndex(c => c._id === concept._id), 
               1, 
@@ -120,7 +120,7 @@ export class BackendService {
     this.http.get<{message:string,resources:IResource[]}>(`${this.BASE_URL}/api/resources/${concept._id}`)
     .subscribe( c => {
       this.resources = c.resources;
-      console.dir(this.resources);
+
       this.resourcesUpdated.next([...this.resources]);
   })
    }

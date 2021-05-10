@@ -156,7 +156,6 @@ columns:string[] =[
     this.subs.sink = this.backend.concepts$
       .subscribe(concepts => {;
         this.concepts = [...concepts];
-        console.dir(this.concepts);
         if(concepts.length > 0) {
           this.filterConceptsForKanban(this.selectedFilter);
         }
@@ -218,7 +217,7 @@ columns:string[] =[
         });
     
         this.subs.sink = dialogRef.afterClosed().subscribe(result => {
-          // console.dir(result);
+
         });
         
       })
