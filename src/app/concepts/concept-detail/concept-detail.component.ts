@@ -17,7 +17,7 @@ import { SubSink } from 'subsink';
 })
 export class ConceptDetailComponent implements OnInit {
 
-  columns:string[] =[
+  columns: string[] = [
     "title",
     "difficulty",
     "lastRecalled",
@@ -25,7 +25,7 @@ export class ConceptDetailComponent implements OnInit {
     "completed"
   ]
 
-  filterChoices:string[][] = [
+  filterChoices: string[][] = [
     [
       "Cake",
       "Average",
@@ -36,22 +36,22 @@ export class ConceptDetailComponent implements OnInit {
       "Not Started",
       "In Progress",
       "Done"
-    ] 
+    ]
   ]
 
   necessityChoices = [
-    {name: "Frivolous", value:0},
-    {name:"Somewhat Useful", value:1},
-    {name: "Very Useful", value:2},
-    {name:"Need to Know", value: 3}
-  ] 
+    { name: "Frivolous", value: 0 },
+    { name: "Somewhat Useful", value: 1 },
+    { name: "Very Useful", value: 2 },
+    { name: "Need to Know", value: 3 }
+  ]
 
   levelChoices = [
-    {name: "Nincompoop", value:0},
-    {name:"Beginner", value:1},
-    {name: "Intermediate", value:2},
-    {name:"Expert", value: 3},
-    {name:"1%", value: 4}
+    { name: "Nincompoop", value: 0 },
+    { name: "Beginner", value: 1 },
+    { name: "Intermediate", value: 2 },
+    { name: "Expert", value: 3 },
+    { name: "1%", value: 4 }
   ]
 
   tagChoices = [
@@ -61,132 +61,132 @@ export class ConceptDetailComponent implements OnInit {
     "Potpourri"
   ]
 
-  noteChoices:string[] = ['Random', 'Fundamental', 'Question']
+  noteChoices: string[] = ['Random', 'Fundamental', 'Question']
 
-  displayNames:string[] = ["Title","Difficulty","Last Recalled", "Status", "Completed"];
+  displayNames: string[] = ["Title", "Difficulty", "Last Recalled", "Status", "Completed"];
 
-  filters:string[] = ["difficulty", "status"];
+  filters: string[] = ["difficulty", "status"];
 
-  editControls:IControlModel[] = [];
-  addNoteControls:IControlModel[] = [];
-
-   
+  editControls: IControlModel[] = [];
+  addNoteControls: IControlModel[] = [];
 
 
 
-  concept:IConcept = {} as IConcept;
-  notes:INote[] = [];
-  
+
+
+  concept: IConcept = {} as IConcept;
+  notes: INote[] = [];
+
   private subs = new SubSink();
 
   constructor(
     private _snackBar: MatSnackBar,
     public dialog: MatDialog,
-    @Inject(MAT_DIALOG_DATA) public data: {concept:IConcept, notes$:Observable<INote[]>},
+    @Inject(MAT_DIALOG_DATA) public data: { concept: IConcept, notes$: Observable<INote[]> },
     private dialogRef: MatDialogRef<ConceptDetailComponent>,
-    private backend:BackendService,
-    private gamifyService:GamificationServiceService
+    private backend: BackendService,
+    private gamifyService: GamificationServiceService
   ) { }
 
   ngOnInit(): void {
-    
+
     this.concept = this.data.concept;
     this.backend.getNotesByConcept(this.concept._id);
     this.subs.sink = this.backend.notes$
-                .subscribe(notes => {
-                  this.notes = notes; 
-                })
+      .subscribe(notes => {
+        this.notes = notes;
+      })
 
     this.backend.getResources(this.concept);
 
     this.editControls = [
       {
-        name:"Title", 
-        type:"string", 
-        required:true, 
+        name: "Title",
+        type: "string",
+        required: true,
         default: this.concept.title,
-  
+
       },
       {
-        name:"Necessity", 
-        type:"stringChoice", 
-        required:true, 
-        default:this.concept.necessity,
-        stringChoices:this.necessityChoices
+        name: "Necessity",
+        type: "stringChoice",
+        required: true,
+        default: this.concept.necessity,
+        stringChoices: this.necessityChoices
       },
       {
-        name:"Level", 
-        type:"stringChoice", 
-        required:true, 
-        default:this.concept.level,
-        stringChoices:this.levelChoices
+        name: "Level",
+        type: "stringChoice",
+        required: true,
+        default: this.concept.level,
+        stringChoices: this.levelChoices
       },
       {
-        name:"Tag", 
-        type:"stringChoiceSet", 
-        required:true, 
-        default:this.concept.tag,
-        stringChoices:this.tagChoices
+        name: "Tag",
+        type: "stringChoiceSet",
+        required: true,
+        default: this.concept.tag,
+        stringChoices: this.tagChoices
       },
     ]
 
     this.addNoteControls = [
       {
-        name:"Title", 
-        type:"string", 
-        required:true, 
+        name: "Title",
+        type: "string",
+        required: true,
         default: '',
-  
+
       },
       {
-        name:"Content", 
-        type:"longString", 
-        required:true, 
+        name: "Content",
+        type: "longString",
+        required: true,
         default: '',
-  
+
       },
-      { 
-        name:"Resource", 
-        type:"autocomplete-select", 
-        required:false, 
+      {
+        name: "Resource",
+        type: "autocomplete-select",
+        required: false,
         default: 'http://www.google.com',
-        autoCompleteOptions:this.backend.resources$.pipe(map(resources => resources.map(r => r.title)))
-        
-  
+        autoCompleteOptions: this.backend.resources$.pipe(map(resources => resources.map(r => r.title)))
+
+
       },
       {
-        name:"Type", 
-        type:"stringChoiceSet", 
-        required:true, 
-        default:0,
-        stringChoices:this.noteChoices
+        name: "Type",
+        type: "stringChoiceSet",
+        required: true,
+        default: 0,
+        stringChoices: this.noteChoices
       }
     ]
   }
 
-  deleteNotes(eventObj:any) {
+  deleteNotes(eventObj: any) {
 
     eventObj.event.completed = true;
-    this.dialogRef.close({event:eventObj.event, action:'delete', type:'note'});
+    this.dialogRef.close({ event: eventObj.event, action: 'delete', type: 'note' });
   }
 
 
 
-  editConcept(eventObj:any) {
+  editConcept(eventObj: any) {
     eventObj["_id"] = this.concept._id;
-    this.dialogRef.close({event:eventObj, action:'update', type:'concept'});
+    this.dialogRef.close({ event: eventObj, action: 'update', type: 'concept' });
   }
 
-  addNote(eventObj:any) {
+  addNote(eventObj: any) {
     this._snackBar.open(this.gamifyService.getQuoteMessage(), `Good Job!`, {
       duration: 4000,
     });
     eventObj["relatedConcept"] = this.concept._id;
-    this.dialogRef.close({event:eventObj, action:'add', type:'note'});
+    this.dialogRef.close({ event: eventObj, action: 'add', type: 'note' });
   }
 
 
 
-  ngOnDestroy() {this.subs.unsubscribe()}
+  ngOnDestroy() { this.subs.unsubscribe() }
 
 }
