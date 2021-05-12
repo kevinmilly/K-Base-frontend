@@ -5,12 +5,14 @@ import { IConcept } from '../models/concepts.model';
 import { INote } from '../models/note.model';
 import { IResource } from '../models/resource.model';
 
+import { environment } from '../../../environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
 export class BackendService {
   
-  private  BASE_URL:string = `http://localhost:3000`;
+  private  BASE_URL:string = environment.apiUrl;
 
   private conceptsUpdated:BehaviorSubject<IConcept[]> = new BehaviorSubject<any>([]);
   public readonly concepts$:Observable<IConcept[]> = this.conceptsUpdated.asObservable();
