@@ -89,7 +89,18 @@ export class InputFormComponent implements OnInit {
             new FormControl(c.default,vals)
           )
           break;
-     
+        case "email": 
+          if(c.required) vals.push(Validators.required, Validators.email);
+            this.controlsCreated.push(
+              new FormControl(c.default,vals)
+            )
+          break;
+        case "password": 
+          if(c.required) vals.push(Validators.required); //@TODO: add custom validator for password strength
+            this.controlsCreated.push(
+              new FormControl(c.default,vals)
+            )
+          break;
       }
     });
 

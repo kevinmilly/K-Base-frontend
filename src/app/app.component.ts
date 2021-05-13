@@ -7,8 +7,10 @@ import { SidenavComponent } from 'src/app/global-layout/sidenav/sidenav.componen
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit{
-  
+export class AppComponent implements OnInit {
+
+  loggedIn: boolean = false;
+
   @ViewChild(SidenavComponent)
   sidenavComponent: SidenavComponent = new SidenavComponent;
 
@@ -21,6 +23,6 @@ export class AppComponent implements OnInit{
   }
 
   toggleSideNav() {
-      this.sidenavComponent.sidenav.toggle();
+    this.sidenavComponent.sidenav.toggle();
   }
 }

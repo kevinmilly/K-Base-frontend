@@ -1,6 +1,11 @@
-<kb-toolbar (clicked)="toggleSideNav()"></kb-toolbar>
-<kb-sidenav>
-    <div class="main-container">
-        <router-outlet></router-outlet>
-    </div>
-</kb-sidenav>
+<ng-container *ngIf="loggedIn; else loggedOut" (loggedIn)="loggedIn = true">
+    <kb-toolbar (clicked)="toggleSideNav()"></kb-toolbar>
+    <kb-sidenav>
+        <div class="main-container">
+            <router-outlet></router-outlet>
+        </div>
+    </kb-sidenav>
+</ng-container>
+<ng-template #loggedOut>
+    <kb-login></kb-login>
+</ng-template>
