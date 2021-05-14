@@ -2,7 +2,7 @@
     <div class="login-page__login-signup-container" >
         
         <ng-container *ngIf="signup; else login">
-            <mat-card  [class.mat-elevation-z2]="true">
+            <mat-card  [class.mat-elevation-z8]="true">
                 <ng-container *ngIf="signup; else loginButton">
                     <a  (click)="signup = !signup"> Already a User?  Login!</a>
                 </ng-container>
@@ -12,7 +12,7 @@
             <kb-input-form 
                 [orientation]="'vertical'"
                 [controlsToCreate]="signUpControls"
-                (onSubmit)="submit($event)"
+                (onSubmit)="onSignup($event)"
                 >
                 <div 
                 vertical
@@ -25,7 +25,7 @@
         </ng-container>
         <ng-template #login>
             
-            <mat-card  [class.mat-elevation-z2]="true">
+            <mat-card  [class.mat-elevation-z8]="true">
                 <ng-container *ngIf="signup; else loginButton">
                     <a  (click)="signup = !signup"> Already a User?  Login!</a>
                 </ng-container>
@@ -35,7 +35,7 @@
                 <kb-input-form 
                     [orientation]="'vertical'"
                     [controlsToCreate]="loginControls"
-                    (onSubmit)="submit($event)"
+                    (onSubmit)="onLogin($event)"
                     >
                     <div 
                     vertical

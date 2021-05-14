@@ -1,4 +1,8 @@
-<ng-container *ngIf="loggedIn; else loggedOut" (loggedIn)="loggedIn = true">
+<ng-container 
+    *ngIf="loggedIn; else loggedOut" 
+    (loggedIn)="loggedIn = true"
+    (onLoggedOut)="loggedIn = false"
+    >
     <kb-toolbar (clicked)="toggleSideNav()"></kb-toolbar>
     <kb-sidenav>
         <div class="main-container">

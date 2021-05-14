@@ -66,7 +66,7 @@ $header-button-width: 2.5rem;
   @mixin small-button {
     width: $header-button-width;
     margin: $header-button-margin;
-    background-color: antiquewhite;
+    background-color: blue;
     color: darkslategrey;
   }
   
@@ -75,7 +75,7 @@ $header-button-width: 2.5rem;
     width: calc(#{$header-button-width} * 4);
     margin: $header-button-margin;
     color: darkslategrey;
-    background-color: antiquewhite;
+    background-color: blue;
   
   }
   
@@ -85,7 +85,7 @@ $header-button-width: 2.5rem;
     letter-spacing: .3rem;
     margin: $header-button-margin;
     color: darkslategrey;
-    background-color: antiquewhite;
+    background-color: rgb(222, 222, 236);
   }
   
   

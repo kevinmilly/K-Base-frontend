@@ -6,6 +6,7 @@ import { INote } from '../models/note.model';
 import { IResource } from '../models/resource.model';
 
 import { environment } from '../../../environments/environment';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +29,7 @@ export class BackendService {
   private notes:INote[] = [];
   private resources:IResource[] = [];
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient, private authService:AuthService) { }
 
 
 

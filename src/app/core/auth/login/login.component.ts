@@ -1,6 +1,8 @@
 import { Output, EventEmitter } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
+import { Auth } from '../../models/auth.model';
 import { IControlModel } from '../../models/control.model';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'kb-login',
@@ -53,14 +55,18 @@ export class LoginComponent implements OnInit {
     }
   ];
 
-  constructor() { }
+  constructor(public authService:AuthService) { }
 
   ngOnInit(): void {
   }
 
-  submit(event: Event) {
-    console.log("Submit hit");
-    this.loggedIn.emit("loggedIn");
+  onSignup(event: Auth) {
+
+    this.authService.createUser(event.name, event.email, event.password)
+  }
+
+  onLogin(event: {email:string, password:string}) {
+    this.authService.loginUser(event.email,event.password);
   }
 
 }
