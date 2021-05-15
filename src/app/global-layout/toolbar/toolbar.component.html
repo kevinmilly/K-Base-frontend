@@ -16,7 +16,9 @@
       <div class="toolbar__concept-input" fxHide.md fxShow>
         <kb-quick-add-concept></kb-quick-add-concept>
       </div> -->
-      {{userIsAuthenticated && ""}}
+      <div *ngIf="userIsAuthenticated">
+        Hello {{loggedInUser.name}}
+      </div>
     </mat-toolbar-row>
   
   </mat-toolbar>

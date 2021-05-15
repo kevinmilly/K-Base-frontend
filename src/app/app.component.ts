@@ -1,6 +1,7 @@
 import { ViewChild } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { SidenavComponent } from 'src/app/global-layout/sidenav/sidenav.component';
+import { AuthService } from './core/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -12,14 +13,14 @@ export class AppComponent implements OnInit {
   loggedIn: boolean = false;
 
   @ViewChild(SidenavComponent)
-  sidenavComponent: SidenavComponent = new SidenavComponent;
+  sidenavComponent:any;
 
-  constructor() {
-
+  constructor(private authService:AuthService) {
+ 
   }
 
   ngOnInit() {
-
+    this.authService.autoAuthUser();
   }
 
   toggleSideNav() {

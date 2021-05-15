@@ -34,4 +34,6 @@ export class ToolbarComponent implements OnInit {
     this.clicked.emit("sidenav toggled from toolbar");
   }
 
+  ngOnDestroy() { this.subs.unsubscribe();}
+
 }
