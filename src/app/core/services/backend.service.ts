@@ -79,6 +79,7 @@ export class BackendService {
   addConcepts(c:IConcept) {
     this.http.post<IConcept>(`${this.BASE_URL}/api/concepts`, c)
       .subscribe((response) => {
+        this.concepts.push(response);
         this.conceptsUpdated.next([...this.concepts]);
       })
   }
@@ -130,7 +131,7 @@ export class BackendService {
 
    editResources(resource:IResource) {
       this.http.put<{resource:IResource}>(`${this.BASE_URL}/api/resources/${resource._id}`, resource)
-        .subscribe(r => console.log({r}));
+        .subscribe();
     }
 
     addResources(resourcesToAdd:IResource[]) {

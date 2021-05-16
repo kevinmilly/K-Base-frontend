@@ -1,9 +1,11 @@
 <ng-container 
-    *ngIf="loggedIn; else loggedOut" 
-    (loggedIn)="loggedIn = true"
-    (onLoggedOut)="loggedIn = false"
+    *ngIf="userIsAuthenticated; else loggedOut" 
+    (onLoggedOut)="userIsAuthenticated = false"
     >
-    <kb-toolbar (clicked)="toggleSideNav()"></kb-toolbar>
+    <kb-toolbar 
+        (clicked)="toggleSideNav()"
+        [username]="loggedInUser.name"
+    ></kb-toolbar>
     <kb-sidenav>
         <div class="main-container">
             <router-outlet></router-outlet>
@@ -11,5 +13,6 @@
     </kb-sidenav>
 </ng-container>
 <ng-template #loggedOut>
-    <kb-login></kb-login>
+    <kb-login
+    ></kb-login>
 </ng-template>

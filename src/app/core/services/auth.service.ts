@@ -1,7 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { Router } from "@angular/router";
-import { Subject } from "rxjs";
+import { BehaviorSubject } from "rxjs";
 
 import { environment } from "../../../environments/environment";
 import { Auth } from "../models/auth.model";
@@ -11,8 +12,8 @@ import { LoggedInUser } from "../models/loggedInUser.model";
     providedIn: 'root'
 })
 export class AuthService {
-    private token: string =';'
-    private authStatusListener = new Subject<boolean>();
+    private token: string ='';
+    private authStatusListener = new BehaviorSubject<boolean>(false);
     private tokenTimer: any;
 
     private user:LoggedInUser = {name: '', email:''};
@@ -20,15 +21,18 @@ export class AuthService {
 
     
 
-    constructor(private http:HttpClient, private router: Router) {}
+    constructor(
+        private http:HttpClient, 
+        private router: Router,
+        private _snackBar: MatSnackBar) {}
 
     createUser(name:string, email:string, password:string) {
         const authData:Auth = {name:name, email:email, password:password};
         const url = `${this.apiUrl}/api/user/signup`;
         this.http.post(url, authData)
             .subscribe( response => {
-                console.log(response);
-            })
+
+            }) 
     }
 
     loginUser(email:string, password:string) {
@@ -36,7 +40,17 @@ export class AuthService {
             .subscribe(response => {
                 const token = response.token;
                 this.token = token;
+                if(!token) {
+                    this._snackBar.open("Login credentials are incorrect.  Do you need to signup first?", `Sorry Login Failed!`, {
+                        duration: 4000,
+                    });
+                    return;
+                }
+  
                 if(token) {
+                    this._snackBar.open("Yay you're back!", `Successful Login!`, {
+                        duration: 4000,
+                    });
                     this.user = response.user;
 
                     const expiresIn = response.expiresIn;
@@ -62,6 +76,9 @@ export class AuthService {
  
         const expiresIn = authInformation.expirationDate.getTime() - now.getTime();
         if(expiresIn > 0) {
+            this._snackBar.open("Welcome Back!", `Time to learn.`, {
+                duration: 4000,
+            });
             this.token = authInformation.token;
             this.user = {name: authInformation.name, email:authInformation.email} as LoggedInUser
             this.setAuthTimer(expiresIn / 1000);
@@ -72,6 +89,9 @@ export class AuthService {
     }
 
     logout() {
+        this._snackBar.open("Cya!", `Logged out`, {
+            duration: 4000,
+        });
         this.token = '';
         this.user = {name: '', email:''};
         this.authStatusListener.next(false);

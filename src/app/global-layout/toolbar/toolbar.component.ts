@@ -1,7 +1,7 @@
+import { Input } from '@angular/core';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { LoggedInUser } from 'src/app/core/models/loggedInUser.model';
-import { AuthService } from 'src/app/core/services/auth.service';
-import { SubSink } from 'subsink';
+
+
 
 
 @Component({
@@ -12,21 +12,13 @@ import { SubSink } from 'subsink';
 export class ToolbarComponent implements OnInit {
 
   @Output() clicked = new EventEmitter();
-  
-  private subs = new SubSink();
+  @Input() username:any;
 
-  userIsAuthenticated = false;
-  loggedInUser:LoggedInUser = {name:'', email:''};
 
-  constructor(private authService: AuthService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.subs.sink = this.authService
-      .getAuthStatus()
-      .subscribe(isAuthenticated => {
-        this.userIsAuthenticated = isAuthenticated;
-        this.loggedInUser = this.authService.getUser();
-      })
+ 
       
   }
 
@@ -34,6 +26,6 @@ export class ToolbarComponent implements OnInit {
     this.clicked.emit("sidenav toggled from toolbar");
   }
 
-  ngOnDestroy() { this.subs.unsubscribe();}
+  
 
 }
