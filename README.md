@@ -1,28 +1,119 @@
-# Kbase
+<!-- PROJECT LOGO -->
+<br />
+<p align="center">
+  <a href="">
+    <img src="readme-assets/logo.png" alt="Logo" width="200" height="200">
+  </a>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.0.
+  <h3 align="center">K-Base</h3>
 
-## Development server
+  <p align="center">
+   A Personal Knowledge Base System
+    <br />
+    <a href="https://github.com/kevinmilly/K-Base-frontend"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="readme-assets/kbase-demo.gif">View Demo</a>
+    
+    <a href="https://github.com/kevinmilly/K-Base-frontend/issues">Report Bug</a>
+    
+    <a href="https://github.com/kevinmilly/K-Base-frontend/issues">Request Feature</a>
+  </p>
+</p>
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+<!-- TABLE OF CONTENTS -->
+<details open="open">
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#generaluse">End User Setup</a></li>
+        <li><a href="#installation">Developer Setup</a></li>
+      </ul>
+    </li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
 
-## Build
+  </ol>
+</details>
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+<!-- ABOUT THE PROJECT -->
+## About The Project
 
-## Running end-to-end tests
+<img src="readme-assets/screenshot.gif" alt="screenshot">
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
-## Further help
+## Built With
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
-"# kbase-frontend" 
+* [MongoDB](https://www.mongodb.com/)
+* [Express](https://expressjs.com/)
+* [Angular](https://angular.io/)
+* [NodeJS](https://nodejs.org/en/)
+
+
+Depending how you want to get involved, below are some steps if you want to help with development or step
+up your task management game!
+
+
+### End User Setup
+
+COMING SOON - Working on deploying to different host environment
+
+### Developer Setup
+
+1. Clone the repo
+   ```sh
+   git clone https://github.com/kevinmilly/Queue-D.git
+   ```
+2. Install NPM packages
+   ```sh
+   npm install
+   ```
+## Roadmap
+
+*General UX is an ongoing project.
+
+
+See the [open issues](https://github.com/kevinmilly/QueueD/issues) for a list of proposed features (and known issues).
+
+<!-- CONTRIBUTING -->
+## Contributing
+
+Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+
+
+<!-- LICENSE -->
+## License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+
+
+<!-- CONTACT -->
+## Contact
+
+Kevin Smith - [Connect with me on LinkedIn](https://www.linkedin.com/in/ksmithtech/) - https://www.linkedin.com/in/ksmithtech/
+
+Email me at: kevinmilly@gmail.com

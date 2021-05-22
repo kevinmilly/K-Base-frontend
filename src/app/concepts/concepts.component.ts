@@ -154,7 +154,8 @@ columns:string[] =[
     this.spinner.show();
     this.backend.getConcepts();
     this.subs.sink = this.backend.concepts$
-      .subscribe(concepts => {;
+      .subscribe(concepts => {
+        console.dir(this.concepts);
         this.concepts = [...concepts];
         if(concepts.length > 0) {
           this.filterConceptsForKanban(this.selectedFilter);
