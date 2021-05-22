@@ -13,7 +13,7 @@
     <a href="https://github.com/kevinmilly/K-Base-frontend"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="readme-assets/kbase-demo.gif">View Demo</a>
+    <a href="#demo">View Demo</a>
     .
     <a href="https://github.com/kevinmilly/K-Base-frontend/issues">Report Bug</a>
     .
@@ -56,6 +56,9 @@
 
 <img src="readme-assets/screenshot.PNG" alt="screenshot" width="750" height="400">
 
+
+## Demo
+<img src="readme-assets/kbase-demo.gif">
 
 ## Built With
 
