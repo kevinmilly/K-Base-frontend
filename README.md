@@ -8,7 +8,7 @@
   <h3 align="center">K-Base</h3>
 
   <p align="center">
-   A Personal Knowledge Base System (This is the backend for this project)
+   A Personal Knowledge Base System (This is the frontend for this project)
     <br />
     <a href="https://github.com/kevinmilly/K-Base-frontend"><strong>Explore the docs »</strong></a>
     <br />
