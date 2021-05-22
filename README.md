@@ -54,7 +54,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-<img src="readme-assets/screenshot.gif" alt="screenshot">
+<img src="readme-assets/screenshot.png" alt="screenshot">
 
 
 ## Built With
