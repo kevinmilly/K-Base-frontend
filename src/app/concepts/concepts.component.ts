@@ -133,7 +133,7 @@ columns:string[] =[
   sizes:string[] = ['xs','sm','md','lg','xl','lt-sm',
   'lt-md','lt-lg','lt-xl','gt-xs','gt-sm','gt-md','gt-lg'];
 
-  
+   
   
  
   constructor(

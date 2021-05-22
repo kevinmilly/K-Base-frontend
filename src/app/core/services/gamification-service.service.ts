@@ -36,4 +36,6 @@ export class GamificationServiceService {
   getQuoteMessage(): string {
     return this.messages[Math.floor(Math.random() * this.messages.length)]
   }
+
+ 
 }

@@ -16,6 +16,9 @@
       <div class="toolbar__concept-input" fxHide.md fxShow>
         <kb-quick-add-concept></kb-quick-add-concept>
       </div> -->
+      <div *ngIf="username">
+        Hello {{username}}
+      </div>
     </mat-toolbar-row>
   
   </mat-toolbar>

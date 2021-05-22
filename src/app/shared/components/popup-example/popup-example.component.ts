@@ -22,7 +22,6 @@ export class PopupExampleComponent implements OnInit {
 
   ngOnInit(): void {
     this.gifImage = this.data;
-    console.log(this.gifImage);
   }
 
 }

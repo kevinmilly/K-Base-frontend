@@ -1,3 +1,5 @@
+$header-button-width: 2.5rem;
+
 @mixin mat-forms {
     ::ng-deep .mat-form-field {
       width: 100%;
@@ -64,7 +66,7 @@
   @mixin small-button {
     width: $header-button-width;
     margin: $header-button-margin;
-    background-color: antiquewhite;
+    background-color: blue;
     color: darkslategrey;
   }
   
@@ -73,7 +75,7 @@
     width: calc(#{$header-button-width} * 4);
     margin: $header-button-margin;
     color: darkslategrey;
-    background-color: antiquewhite;
+    background-color: blue;
   
   }
   
@@ -83,7 +85,7 @@
     letter-spacing: .3rem;
     margin: $header-button-margin;
     color: darkslategrey;
-    background-color: antiquewhite;
+    background-color: rgb(222, 222, 236);
   }
   
   
@@ -106,3 +108,8 @@
     color: darkslategrey;
   }
   
+
+  @mixin center-element {
+    margin: auto;
+    width: 10rem;
+  }

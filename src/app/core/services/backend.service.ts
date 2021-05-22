@@ -6,6 +6,7 @@ import { INote } from '../models/note.model';
 import { IResource } from '../models/resource.model';
 
 import { environment } from '../../../environments/environment';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +29,7 @@ export class BackendService {
   private notes:INote[] = [];
   private resources:IResource[] = [];
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient, private authService:AuthService) { }
 
 
 
@@ -78,7 +79,11 @@ export class BackendService {
   addConcepts(c:IConcept) {
     this.http.post<IConcept>(`${this.BASE_URL}/api/concepts`, c)
       .subscribe((response) => {
+<<<<<<< HEAD
         this.concepts.push(c);
+=======
+        this.concepts.push(response);
+>>>>>>> 5420b13caf7e420ee7f51e731ac1ca1e05e28e04
         this.conceptsUpdated.next([...this.concepts]);
       })
   }
@@ -129,7 +134,7 @@ export class BackendService {
 
    editResources(resource:IResource) {
       this.http.put<{resource:IResource}>(`${this.BASE_URL}/api/resources/${resource._id}`, resource)
-        .subscribe(r => console.log({r}));
+        .subscribe();
     }
 
     addResources(resourcesToAdd:IResource[]) {

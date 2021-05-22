@@ -9,6 +9,7 @@ import { catchError, map } from "rxjs/operators";
 import { ISearchResult } from '../models/search-result.model';
 import { IConcept } from '../models/concepts.model';
 import { INote } from '../models/note.model';
+import { AuthService } from './auth.service';
 
 
 const httpOptions = {
@@ -27,7 +28,7 @@ export class LearningService {
   private resultSubject:BehaviorSubject<ISearchResult[]> = new BehaviorSubject<ISearchResult[]>([]);
   resultObs:Observable<ISearchResult[]> = this.resultSubject.asObservable();
 
-  constructor(private http:HttpClient) {
+  constructor(private http:HttpClient, private authService:AuthService) {
 
    }
 

@@ -7,6 +7,10 @@
         text-transform: uppercase;
         margin-bottom: 3.5rem;
         font-family: 'Merriweather Sans', sans-serif;
+        color: rgb(74, 74, 163);
+        a {
+        font-size: .7rem;
+        }
     }
 
     &__horiz-content {
@@ -49,4 +53,9 @@
 
 input {
     width: 10rem;
+}
+
+.link-text {
+    font-size: .7rem;
+    color: rgb(74, 74, 163);;
 }

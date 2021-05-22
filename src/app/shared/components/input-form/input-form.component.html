@@ -4,6 +4,9 @@
       <ng-container *ngIf="orientation === 'horizontal'; else vertical">
           <div class="edit__container__header"  fxLayout="row" fxLayoutAlign="center" >
             <ng-content select="[horizontal]"></ng-content>
+            <div class="link-text">
+              <ng-content select="[horiz-link]"></ng-content>
+            </div>
           </div>
           <form [formGroup]="inputForm" fxLayout="row" fxLayoutAlign="center">
     
@@ -75,6 +78,44 @@
                         </mat-form-field>
     
                   </div>
+                  <div *ngSwitchCase="'email'">
+                    <mat-form-field class="medium">
+                      
+                          <input matInput type="email" [formControl]="indexedCreatedControls(i)" />
+                            <mat-error *ngIf="indexedCreatedControls(i).invalid">
+                              Please check {{controlsToCreate[i].name}}
+                            </mat-error>
+                            <mat-label>{{controlsToCreate[i].name}}</mat-label>
+                        </mat-form-field>
+                </div>
+                <div *ngSwitchCase="'password'">
+                  <mat-form-field class="medium">
+                    
+                        <input matInput type="password" [formControl]="indexedCreatedControls(i)" />
+                          <mat-error *ngIf="indexedCreatedControls(i).invalid">
+                            Please check {{controlsToCreate[i].name}}
+                          </mat-error>
+                          <mat-label>{{controlsToCreate[i].name}}</mat-label>
+                      </mat-form-field>
+              </div>
+              <div *ngSwitchCase="'autocomplete-select'">
+                <mat-form-field class="big">
+                  <mat-label>{{controlsToCreate[i].name}}</mat-label>
+                  <input type="text"
+                        aria-label="Resource"
+                        matInput
+                        [formControl]="indexedCreatedControls(i)"
+                        [matAutocomplete]="auto">
+                  <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let option of controlsToCreate[i].autoCompleteOptions | async" [value]="option">
+                      {{option}}
+                    </mat-option>
+                  </mat-autocomplete>
+                  <mat-error *ngIf="indexedCreatedControls(i).invalid">
+                    Please check {{controlsToCreate[i].name}}
+                  </mat-error>
+                </mat-form-field>
+          </div>
     
               </div>
             </div>
@@ -85,6 +126,9 @@
       <ng-template #vertical>
           <div class="edit__container__header"  fxLayout="row" fxLayoutAlign="center" >
             <ng-content select="[vertical]"></ng-content>
+          </div>
+          <div class="link-text">
+            <ng-content select="[vert-link]"></ng-content>
           </div>
           <form [formGroup]="inputForm" fxLayout="row" fxLayoutAlign="center">
     
@@ -155,6 +199,27 @@
                         </mat-form-field>
     
                   </div>
+                  <div *ngSwitchCase="'email'">
+                    <mat-form-field class="medium">
+                      
+                          <input matInput type="email" [formControl]="indexedCreatedControls(i)" />
+                            <mat-error *ngIf="indexedCreatedControls(i).invalid">
+                              Please check {{controlsToCreate[i].name}}
+                            </mat-error>
+                            <mat-label>{{controlsToCreate[i].name}}</mat-label>
+                        </mat-form-field>
+                </div>
+                <div *ngSwitchCase="'password'">
+                  <mat-form-field class="medium">
+                    
+                        <input matInput type="password" [formControl]="indexedCreatedControls(i)" />
+                          <mat-error *ngIf="indexedCreatedControls(i).invalid">
+                            Please check {{controlsToCreate[i].name}}
+                          </mat-error>
+                          <mat-label>{{controlsToCreate[i].name}}</mat-label>
+                      </mat-form-field>
+              </div>
+    
                   <div *ngSwitchCase="'autocomplete-select'">
                       <mat-form-field class="big">
                         <mat-label>{{controlsToCreate[i].name}}</mat-label>

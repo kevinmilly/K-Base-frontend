@@ -1,0 +1,58 @@
+<div class="login-page">
+    <div class="login-page__login-signup-container" >
+        
+        <ng-container *ngIf="signup; else login">
+            <mat-card  [class.mat-elevation-z8]="true">
+                <ng-container *ngIf="signup; else loginButton">
+                    <a  (click)="signup = !signup"> Already a User?  Login!</a>
+                </ng-container>
+                <ng-template #loginButton>
+                    <a (click)="signup = !signup"> Need an Account? Signup!</a>
+                </ng-template>
+            <kb-input-form 
+                [orientation]="'vertical'"
+                [controlsToCreate]="signUpControls"
+                (onSubmit)="onSignup($event)"
+                >
+                <div 
+                vertical
+                > 
+                Sign Up
+
+            </div>
+             </kb-input-form>
+            </mat-card>
+        </ng-container>
+        <ng-template #login>
+            
+            <mat-card  [class.mat-elevation-z8]="true">
+                <ng-container *ngIf="signup; else loginButton">
+                    <a  (click)="signup = !signup"> Already a User?  Login!</a>
+                </ng-container>
+                <ng-template #loginButton>
+                    <a (click)="signup = !signup"> Need an Account? Signup!</a>
+                </ng-template>
+                <kb-input-form 
+                    [orientation]="'vertical'"
+                    [controlsToCreate]="loginControls"
+                    (onSubmit)="onLogin($event)"
+                    >
+                    <div 
+                    vertical
+                    > 
+                    Login
+                </div>
+                </kb-input-form>
+
+              
+            </mat-card>
+    
+        </ng-template>
+        
+    </div>
+    <div class="login-page__picture">
+        <img src="../../../../assets/images/thinkinglogin.jpg" alt="thinking man">
+    </div>    
+</div>
+
+
