@@ -8,15 +8,15 @@
   <h3 align="center">K-Base</h3>
 
   <p align="center">
-   A Personal Knowledge Base System
+   A Personal Knowledge Base System (This is the backend for this project)
     <br />
     <a href="https://github.com/kevinmilly/K-Base-frontend"><strong>Explore the docs »</strong></a>
     <br />
     <br />
     <a href="readme-assets/kbase-demo.gif">View Demo</a>
-    
+    .
     <a href="https://github.com/kevinmilly/K-Base-frontend/issues">Report Bug</a>
-    
+    .
     <a href="https://github.com/kevinmilly/K-Base-frontend/issues">Request Feature</a>
   </p>
 </p>
@@ -54,7 +54,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-<img src="readme-assets/screenshot.png" alt="screenshot">
+<img src="readme-assets/screenshot.png" alt="screenshot" width="200" height="200">
 
 
 ## Built With
@@ -65,9 +65,9 @@
 * [NodeJS](https://nodejs.org/en/)
 
 
-Depending how you want to get involved, below are some steps if you want to help with development or step
-up your task management game!
+### Getting Started
 
+Depending how you want to get involved, below are some steps if you want to help with development or use learn more effectively.
 
 ### End User Setup
 
