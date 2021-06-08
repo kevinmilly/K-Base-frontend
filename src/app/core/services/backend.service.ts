@@ -13,7 +13,7 @@ import { AuthService } from './auth.service';
 })
 export class BackendService {
   
-  private  BASE_URL:string = environment.apiUrl;
+  private  BASE_URL:string = "http://localhost:3000";
 
   private conceptsUpdated:BehaviorSubject<IConcept[]> = new BehaviorSubject<any>([]);
   public readonly concepts$:Observable<IConcept[]> = this.conceptsUpdated.asObservable();
@@ -79,7 +79,11 @@ export class BackendService {
   addConcepts(c:IConcept) {
     this.http.post<IConcept>(`${this.BASE_URL}/api/concepts`, c)
       .subscribe((response) => {
+<<<<<<< HEAD
+        this.concepts.push(c);
+=======
         this.concepts.push(response);
+>>>>>>> 5420b13caf7e420ee7f51e731ac1ca1e05e28e04
         this.conceptsUpdated.next([...this.concepts]);
       })
   }
@@ -112,9 +116,8 @@ export class BackendService {
       .subscribe(r => {
         this.concepts = this.concepts.filter(c => c._id !== concept._id);
 
-        this.deleteNote(concept._id)
-
         this.conceptsUpdated.next([...this.concepts]);
+        this.deleteNote(concept._id);
       });
   }
 
