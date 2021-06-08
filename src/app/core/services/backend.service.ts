@@ -79,11 +79,8 @@ export class BackendService {
   addConcepts(c:IConcept) {
     this.http.post<IConcept>(`${this.BASE_URL}/api/concepts`, c)
       .subscribe((response) => {
-<<<<<<< HEAD
         this.concepts.push(c);
-=======
         this.concepts.push(response);
->>>>>>> 5420b13caf7e420ee7f51e731ac1ca1e05e28e04
         this.conceptsUpdated.next([...this.concepts]);
       })
   }
