@@ -1,11 +1,18 @@
 mat-sidenav-container {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  height: 90%;
-  overflow: hidden;
+  // margin-bottom: 1rem;
+  height: 100%;
+  overflow:hidden;
 
   mat-sidenav {
-    overflow: hidden;
+    
+    img {
+      background-position: center;
+      background-size: contain;
+    }
+    width: auto;
+    overflow-x: hidden;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
     background-color: #fdeaff;
 
   }
@@ -30,8 +37,7 @@ mat-sidenav-container {
   }
 
   .logout {
-      position: absolute;
-      top: 70%;
+      margin-top: 90%;
   }
 }
 

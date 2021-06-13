@@ -1,6 +1,8 @@
 
  <div class="main-container">
-  <kb-tab [labels]="['Add Concept','Concept Table','Concept Kanban']">
+
+  <kb-tab 
+    [labels]="['Add Concept','Concept Table','Concept Kanban']">
     <div id="first" class="main-container__tab-content">
       <mat-card  [class.mat-elevation-z8]="true">
                 <kb-shared-button
@@ -62,11 +64,10 @@
     </mat-card>
   <ngx-spinner></ngx-spinner>
   <ng-template #noData>
-    <mat-card  [class.mat-elevation-z8]="true">
         <div  fxLayout="row" fxLayoutAlign="center center" [style.margin-top.rem]="5" >
             No Concepts Available.  You need to start learning something!  Add a Concept!
         </div>
-    </mat-card>
+
 </ng-template>
     </div>
     <div id="third" class="main-container__tab-content">
@@ -90,6 +91,7 @@
       <ngx-spinner></ngx-spinner>
     </div>
   </kb-tab>
+ 
  </div>   
 
 

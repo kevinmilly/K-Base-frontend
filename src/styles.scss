@@ -151,7 +151,7 @@ $mat-dark-theme-background: (
 body {
   --primary-color: #e464d5;
   --primary-lighter-color: #ffeafd;
-  --primary-darker-color: #ffa3f3;
+  --primary-darker-color: #633e5e;
   --text-primary-color: #{$dark-primary-text};
   --text-primary-lighter-color: #{$dark-primary-text};
   --text-primary-darker-color: #{$dark-primary-text};
@@ -165,7 +165,7 @@ $mat-primary: (
   contrast : (
     main: $dark-primary-text,
     lighter: $dark-primary-text,
-    darker: $dark-primary-text,
+    darker: $dark-primary-text, 
   )
 );
 $theme-primary: mat-palette($mat-primary, main, lighter, darker);

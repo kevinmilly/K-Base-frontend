@@ -9,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class TabComponent implements OnInit {
 
   @Input() labels: string[] = [];
+  @Input() selectedIndex:number=0;;
 
   constructor() { }
 

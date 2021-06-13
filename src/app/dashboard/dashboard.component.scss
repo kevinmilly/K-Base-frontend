@@ -1,9 +1,15 @@
 
 .dashboard-container{
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
 
-    padding-right: 10rem;
+
 
     mat-grid-list {
+        width: 100vmax;
+        margin: auto;
             
         margin-bottom: 2rem;
 
@@ -12,6 +18,16 @@
             .card-container {
                 
                 padding: 1rem;
+                height: auto;
+
+                .no-data {
+                    height: 1vh;
+                    text-align: center;
+                    margin-top: 10vh;
+                    color: var(--primary-darker-color);
+                    font-weight: 500;
+                    text-transform: uppercase;
+                }
     
                 &__title {
                     display: flex;
@@ -22,8 +38,9 @@
                     margin-bottom: 2rem;
                 }
                 &__graph-container {
-            
-                    height: 20rem;
+                    
+                    height: auto;
+                    max-height: 20rem;
                     width:   26rem;
         
                 
@@ -32,12 +49,14 @@
                 &__bar-graph-container {
         
                     // width: 20rem;
-            
-                    height: 28rem;
+                    height: auto;
+                    max-height: 28rem;
                     // width:   45rem;
                     margin: 5rem auto;
                 
                 }
+
+        
             }
         }
     }

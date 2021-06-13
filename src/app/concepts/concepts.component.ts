@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable, Subscription } from 'rxjs';
 import { SubSink } from 'subsink';
@@ -28,7 +28,6 @@ export class ConceptsComponent implements OnInit {
 
   concepts:IConcept[] = [];
   filteredConcepts:any = [];
-
 
   //kanban tab
 
@@ -143,6 +142,7 @@ columns:string[] =[
     private gamifyService:GamificationServiceService,
     private _snackBar: MatSnackBar,
     private media:MediaObserver
+
     ) {
         this.media$ = media.asObservable();
      }
