@@ -4,7 +4,6 @@ import { Observable, Subscription } from 'rxjs';
 import { SubSink } from 'subsink';
 import { IConcept } from '../core/models/concepts.model';
 import { IControlModel } from '../core/models/control.model';
-import { INote } from '../core/models/note.model';
 import { BackendService } from '../core/services/backend.service';
 import { ConceptDetailComponent } from './concept-detail/concept-detail.component';
 
@@ -13,6 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { GamificationServiceService } from '../core/services/gamification-service.service';
 import { MediaObserver, MediaChange } from '@angular/flex-layout';
 import { PopupExampleComponent } from '../shared/components/popup-example/popup-example.component';
+import { Level, Necessity, Tag } from '../core/models/factors.enum';
 
 
 @Component({
@@ -45,17 +45,17 @@ export class ConceptsComponent implements OnInit {
 
   filterChoices:string[][] = [ 
     [
-      "Frivolous",
-      "Somewhat Useful",
-      "Very Useful",
-      "Need to Know"
+      Necessity[0],
+      Necessity[1],
+      Necessity[2],
+      Necessity[3]
     ],
     [
-      "Nincompoop",
-      "Beginner",
-      "Intermediate",
-      "Expert",
-      "1%"
+      Level[0],
+      Level[1],
+      Level[2],
+      Level[3],
+      Level[4]
     ]
   ]
 
@@ -68,12 +68,12 @@ columns:string[] =[
   "level",
   "tag"
 ]
-
+ 
   tagChoices = [
-    "Bible",
-    "Programming",
-    "Language Studies",
-    "Potpourri"
+    Tag[0],
+    Tag[1],
+    Tag[2],
+    Tag[3]
   ]
 
   filters:string[] = ["necessity", "level"];
@@ -84,18 +84,18 @@ columns:string[] =[
   //add Concept tab
 
   necessityChoices = [
-    {name: "Frivolous", value:0},
-    {name:"Somewhat Useful", value:1},
-    {name: "Very Useful", value:2},
-    {name:"Need to Know", value: 3}
+    {name: Necessity[0], value:0},
+    {name:Necessity[1], value:1},
+    {name: Necessity[2], value:2},
+    {name:Necessity[3], value: 3} 
   ] 
 
   levelChoices = [
-    {name: "Nincompoop", value:0},
-    {name:"Beginner", value:1},
-    {name: "Intermediate", value:2},
-    {name:"Expert", value: 3},
-    {name:"1%", value: 4}
+    {name: Level[0], value:0},
+    {name: Level[1], value:1},
+    {name: Level[2], value:2},
+    {name: Level[3], value: 3},
+    {name: Level[4], value: 4}
   ] 
   addConceptControls:IControlModel[] = [
     {

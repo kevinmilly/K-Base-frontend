@@ -2,15 +2,17 @@
     *ngIf="userIsAuthenticated; else loggedOut" 
     (onLoggedOut)="userIsAuthenticated = false"
     >
-    <kb-toolbar 
-        (clicked)="toggleSideNav()"
-        [username]="loggedInUser.name"
-    ></kb-toolbar>
+    <div class="main-container">
+        <kb-toolbar 
+            (clicked)="toggleSideNav()"
+            [username]="loggedInUser.name"
+      ></kb-toolbar>
     <kb-sidenav>
-        <div class="main-container">
+        <div class="nav-content">
             <router-outlet></router-outlet>
         </div>
     </kb-sidenav>
+    </div>
 </ng-container>
 <ng-template #loggedOut>
     <kb-login

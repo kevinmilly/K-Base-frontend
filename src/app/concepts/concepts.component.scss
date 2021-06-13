@@ -1,6 +1,9 @@
-.first {
+.main-container {
+    height: 100vh;
 
-    .info-button {
-        
+    &__tab-content {
+        mat-card{
+            background-color: #f5f5f5;
+        }
     }
 }

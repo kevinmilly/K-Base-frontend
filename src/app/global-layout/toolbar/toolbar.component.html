@@ -1,4 +1,4 @@
-<mat-toolbar color="primary" class="toolbar mat-elevation-z6">
+  <mat-toolbar class="toolbar mat-elevation-z6">
     <mat-toolbar-row>
        <div class="toolbar__title-elements" fxLayout="row" fxLayoutAlign="space-evenly center" >
           <button mat-icon-button>
@@ -22,6 +22,6 @@
     </mat-toolbar-row>
   
   </mat-toolbar>
-  <ng-content>
-
-  </ng-content>
+  <div class="toolbar__content">
+      <ng-content></ng-content>
+  </div>

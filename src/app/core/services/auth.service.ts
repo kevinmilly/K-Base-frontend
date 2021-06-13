@@ -38,6 +38,7 @@ export class AuthService {
     loginUser(email:string, password:string) {
         this.http.post<{token:string, user:LoggedInUser, expiresIn:number}>(`${this.apiUrl}/api/user/login`, {email:email, password:password})
             .subscribe(response => {
+                console.dir(response);
                 const token = response.token;
                 this.token = token;
                 if(!token) {

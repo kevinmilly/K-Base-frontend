@@ -32,12 +32,6 @@ export class LearningService {
 
    }
 
-
-
-
-
-
-
   errorHandler(errorResponse: HttpErrorResponse) {
     if(errorResponse.error instanceof ErrorEvent) {
       console.error('Client Side Error: ', errorResponse.error.message);

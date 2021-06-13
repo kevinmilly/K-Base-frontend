@@ -1,5 +1,8 @@
+
 .toolbar {
+  background-color: #fdeaff;
   &__title-elements {
+
   }
 
   &__menu-spacer {
@@ -29,4 +32,8 @@
     margin-top: 3rem;
     margin-left: 5rem;
   }
+  &__content {
+    background-color: #fffffa;
+  }
+
 }

@@ -15,6 +15,7 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AbstractExtendedWebDriver } from 'protractor/built/browser';
 import { combineLatest, throwError } from 'rxjs';
+import { Level, Necessity } from 'src/app/core/models/factors.enum';
 
 @Component({
   selector: 'kb-resource-curate-display',
@@ -37,18 +38,17 @@ export class ResourceCurateDisplayComponent implements OnInit {
   searchTerm:string = '';
 
   levels:string[] =    [
-    "Nincompoop",
-    "Beginner",
-    "Intermediate",
-    "Expert",
-    "1%"
+    Level[0],
+    Level[1],
+    Level[2],
+    Level[3]
   ]
 
   necessities:string[] =    [
-    "Frivolous",
-    "Somewhat Useful",
-    "Very Useful",
-    "Need to Know"
+    Necessity[0],
+    Necessity[1],
+    Necessity[2],
+    Necessity[3]
   ]
 
 

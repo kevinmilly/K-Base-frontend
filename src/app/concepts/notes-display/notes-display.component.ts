@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { IControlModel } from 'src/app/core/models/control.model';
+import { NoteChoice } from 'src/app/core/models/factors.enum';
 import { INote } from 'src/app/core/models/note.model';
 
 @Component({
@@ -15,7 +16,7 @@ export class NotesDisplayComponent implements OnInit {
   
   note!:INote;
 
-  noteChoices:string[] = ['Random', 'Fundamental', 'Question']
+  noteChoices:string[] = [NoteChoice[0], NoteChoice[1], NoteChoice[2]] 
 
   editNoteControls:IControlModel[] = [
     {

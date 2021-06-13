@@ -1,6 +1,7 @@
 
+ <div class="main-container">
   <kb-tab [labels]="['Add Concept','Concept Table','Concept Kanban']">
-    <div id="first" class="tab-content">
+    <div id="first" class="main-container__tab-content">
       <mat-card  [class.mat-elevation-z8]="true">
                 <kb-shared-button
                 fxLayoutAlign="end end"
@@ -11,7 +12,7 @@
               >
                 <mat-icon>info</mat-icon>
               </kb-shared-button>
-           <kb-input-form 
+          <kb-input-form 
                 [orientation]="'horizontal'"
                 [controlsToCreate]="addConceptControls"
                 (onSubmit)="submit($event)"
@@ -43,7 +44,7 @@
           </kb-input-form>
       </mat-card>
     </div>
-    <div id="second" class="tab-content">
+    <div id="second" class="main-container__tab-content">
       <mat-card  [class.mat-elevation-z8]="true"> 
         <kb-table
               *ngIf="concepts.length > 0; else noData"
@@ -58,7 +59,7 @@
               (onDelete)="deleteConcept($event)"
         >
         </kb-table>
-     </mat-card>
+    </mat-card>
   <ngx-spinner></ngx-spinner>
   <ng-template #noData>
     <mat-card  [class.mat-elevation-z8]="true">
@@ -68,7 +69,7 @@
     </mat-card>
 </ng-template>
     </div>
-    <div id="third" class="tab-content">
+    <div id="third" class="main-container__tab-content">
       <mat-card  [class.mat-elevation-z8]="true">
             <kb-kanban
             *ngIf="concepts.length > 0; else noDataKanBan"
@@ -89,4 +90,6 @@
       <ngx-spinner></ngx-spinner>
     </div>
   </kb-tab>
+ </div>   
+
 
