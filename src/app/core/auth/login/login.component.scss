@@ -27,7 +27,7 @@
         fill: #D295E7;
     }
 
-    &__login-signup-container {
+    &__signup-container {
         &__decision {
             @include center-element;
           }
@@ -37,10 +37,26 @@
               height: auto;
           }
           position: absolute;
-          top: 5%;
+          top: 7%;
           z-index: 1000;
 
     }  
+
+    &__login-container {
+        &__decision {
+            @include center-element;
+          }
+
+          mat-card {
+              background-color: rgb(253, 253, 253);
+              height: auto;
+          }
+          position: absolute;
+          top: 15%;
+          z-index: 1000;
+
+    }  
+
 
 
     .custom-shape-divider-bottom {

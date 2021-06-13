@@ -3,11 +3,11 @@
     margin-top: 3rem;
 
     &__header {
-        font-size: 1.5rem;
+        font-size: 1.5vmax;
         text-transform: uppercase;
         margin-bottom: 3.5rem;
         font-family: 'Merriweather Sans', sans-serif;
-        color: rgb(74, 74, 163);
+        color: var(--text-primary-color);
         a {
         font-size: .7rem;
         }

@@ -3,62 +3,55 @@
     height: 100%;
     overflow: hidden;
     display: flex;
-    justify-content: center;
 
-
-
-    mat-grid-list {
-        width: 100vmax;
-        margin: auto;
+    mat-card {
+        width: 35vmax;
+        height: 35vmax;
+        
+        .card-container {
             
-        margin-bottom: 2rem;
+            padding: 1rem;
+            height: auto;
 
-        mat-grid-tile {
-
-            .card-container {
-                
-                padding: 1rem;
-                height: auto;
-
-                .no-data {
-                    height: 1vh;
-                    text-align: center;
-                    margin-top: 10vh;
-                    color: var(--primary-darker-color);
-                    font-weight: 500;
-                    text-transform: uppercase;
-                }
-    
-                &__title {
-                    display: flex;
-                    justify-content: center;
-                    font-size: 1.5rem;
-                    text-transform: uppercase;
-                    margin-top: 2rem;
-                    margin-bottom: 2rem;
-                }
-                &__graph-container {
-                    
-                    height: auto;
-                    max-height: 20rem;
-                    width:   26rem;
-        
-                
-                }
-        
-                &__bar-graph-container {
-        
-                    // width: 20rem;
-                    height: auto;
-                    max-height: 28rem;
-                    // width:   45rem;
-                    margin: 5rem auto;
-                
-                }
-
-        
+            .no-data {
+                height: 1vh;
+                text-align: center;
+                margin-top: 10vh;
+                color: var(--primary-darker-color);
+                font-weight: 500;
+                text-transform: uppercase;
             }
-        }
+
+            &__title {
+                display: flex;
+                justify-content: center;
+                font-size: 1rem;
+                text-transform: uppercase;
+                margin-top: 2rem;
+                margin-bottom: 2rem;
+                color: var( --text-primary-color);
+            }
+            &__graph-container {
+                
+                height: auto;
+                max-height: 20rem;
+                width:   26rem;
+    
+            
+            }
+    
+            &__bar-graph-container {
+    
+                // width: 20rem;
+                height: auto;
+                max-height: 28rem;
+                // width:   45rem;
+                margin: 5rem auto;
+            
+            }
+
+    
+    }
     }
 
 }
