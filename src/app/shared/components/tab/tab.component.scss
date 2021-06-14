@@ -1,3 +1,9 @@
+::ng-deep .mat-tab-group {
+    background-color: white;
+    width: 75vmax;
+
+}
+
 ::ng-deep .mat-tab-group.mat-primary .mat-ink-bar{
     background-color: #c7a4ca !important;
     
@@ -5,8 +11,13 @@
 
 ::ng-deep .mat-tab-list .mat-tab-labels .mat-tab-label-active {
     color: #300435;
-    
     font-size: 1.2rem;
     font-weight: 500;
     text-transform: uppercase;
+  }
+
+  ::ng-deep .mat-tab-labels {
+    background-color: white;
+    
+   
   }

@@ -1,10 +1,12 @@
 .main-container {
-    height: 100vh;
-    
+    height: 100%;
+    padding-top: 2rem;
+  
 
     &__tab-content {
         mat-card{
             background-color: #ffffff;
+            width: 70vmax;
         }
     }
 }
