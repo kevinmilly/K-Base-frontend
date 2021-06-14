@@ -19,5 +19,8 @@
   ::ng-deep .mat-tab-labels {
     background-color: white;
     
-   
   }
+
+  ::ng-deep .mat-tab-header, .mat-tab-nav-bar {
+    border-bottom: 0;
+}

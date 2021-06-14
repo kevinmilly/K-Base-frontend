@@ -9,7 +9,7 @@
         
         <ng-container *ngIf="signup; else login">
             <div class="login-page__signup-container" >
-                <mat-card  [class.mat-elevation-z8]="true">
+                <mat-card  [class.mat-elevation-z8]="true"> 
                     <ng-container *ngIf="signup; else loginButton">
                         <a  (click)="signup = !signup"> Already a User?  Login!</a>
                     </ng-container>
