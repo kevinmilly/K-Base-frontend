@@ -54,7 +54,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-<img src="readme-assets/screenshot.png" alt="screenshot" width="750" height="400">
+<img src="readme-assets/screenshot.PNG" alt="screenshot" width="750" height="400">
 
 Hello Friends and future prospective contributors!  I'm passionate about learning new things and remembering them.  Thus I wanted to make a tool that would help a user
 step through the process of learning concepts.  When you think about it usually those steps go like this:
