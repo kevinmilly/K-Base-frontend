@@ -8,10 +8,11 @@
     justify-content: space-between;
     width: 100%;
     &__title-elements {
+ 
       h1.title {
         font-size: 3rem;
         text-transform: uppercase;
-        font-family: "Abril Fatface", cursive;
+        font-family: 'Righteous', cursive;
         display: flex;
         justify-content: center;
         
@@ -40,8 +41,13 @@
     margin-left: 5rem;
   }
   &__content {
-    overflow-x: hidden;
+    overflow: hidden;
     background-color: var(--accent-lighter-color);
   }
 
+}
+
+mat-icon {
+  font-size: 3rem;
+  margin-left: 2vmax;
 }

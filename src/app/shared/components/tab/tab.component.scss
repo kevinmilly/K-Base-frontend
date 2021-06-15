@@ -1,25 +1,35 @@
-::ng-deep .mat-tab-group {
-    background-color: white;
-    width: 75vmax;
+@import "../../../../styles/mixins";
 
+mat-card {
+  background-color: white;
+    width: 75vmax;
+    border-radius: .7vmax;
+    height: auto;
+
+    @include card-shadow;
 }
+
 
 ::ng-deep .mat-tab-group.mat-primary .mat-ink-bar{
     background-color: #c7a4ca !important;
     
 }
 
-::ng-deep .mat-tab-list .mat-tab-labels .mat-tab-label-active {
+::ng-deep .mat-tab-label {
+  color: #300435;
+  font-size: .9vmax;
+}
+
+::ng-deep .mat-tab-list .mat-tab-label-active {
     color: #300435;
-    font-size: 1.2rem;
+    font-size: 1.4vmax;
     font-weight: 500;
     text-transform: uppercase;
+
   }
 
-  ::ng-deep .mat-tab-labels {
-    background-color: white;
-    
-  }
+
+
 
   ::ng-deep .mat-tab-header, .mat-tab-nav-bar {
     border-bottom: 0;

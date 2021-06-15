@@ -5,7 +5,7 @@ export enum Necessity {
     Critical
 }
 
-export enum Level {
+export enum Level { 
     Novice,
     Intermediate,
     Advanced,

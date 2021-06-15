@@ -2,10 +2,10 @@
     <mat-toolbar-row>
       <div class="row-container">
         <div class="row-container__title-elements" fxLayout="row" fxLayoutAlign="space-evenly center" >
-          <button mat-icon-button>
-            <mat-icon (click)="onToggle()">menu</mat-icon>
-          </button>
           <h1 class="title">K-Base</h1>
+          <button mat-icon-button (click)="onToggle()">
+            <mat-icon>menu</mat-icon>
+          </button>
          </div>
         <div *ngIf="username" class="username">
           What have you learned today {{username}}?

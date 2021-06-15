@@ -4,7 +4,7 @@
   <kb-tab 
     [labels]="['Add Concept','Concept Table','Concept Kanban']">
     <div id="first" class="main-container__tab-content">
-      <mat-card  [class.mat-elevation-z8]="true">
+      <!-- <mat-card  [class.mat-elevation-z8]="true"> -->
                 <kb-shared-button
                 fxLayoutAlign="end end"
                 [type]="'icon'" 
@@ -44,10 +44,10 @@
             What would you like to learn more about?
           </div>
           </kb-input-form>
-      </mat-card>
+      <!-- </mat-card> -->
     </div>
     <div id="second" class="main-container__tab-content">
-      <mat-card  [class.mat-elevation-z8]="true"> 
+      <!-- <mat-card  [class.mat-elevation-z8]="true">  -->
         <kb-table
               *ngIf="concepts.length > 0; else noData"
               [data]="concepts"
@@ -61,7 +61,7 @@
               (onDelete)="deleteConcept($event)"
         >
         </kb-table>
-    </mat-card>
+    <!-- </mat-card> -->
   <ngx-spinner></ngx-spinner>
   <ng-template #noData>
         <div  fxLayout="row" fxLayoutAlign="center center" [style.margin-top.rem]="5" >
@@ -71,7 +71,7 @@
 </ng-template>
     </div>
     <div id="third" class="main-container__tab-content">
-      <mat-card  [class.mat-elevation-z8]="true">
+      <!-- <mat-card  [class.mat-elevation-z8]="true"> -->
             <kb-kanban
             *ngIf="concepts.length > 0; else noDataKanBan"
             [kanbanFilteredDatasets]="filteredConcepts"
@@ -87,7 +87,7 @@
                 No Concepts Available.  You need to start learning something!  Add a Concept!
             </div>
         </ng-template>
-      </mat-card>
+      <!-- </mat-card> -->
       <ngx-spinner></ngx-spinner>
     </div>
   </kb-tab>

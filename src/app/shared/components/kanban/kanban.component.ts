@@ -139,6 +139,7 @@ export class KanbanComponent {
 
   openResources(concept:IConcept) {
     const dialogResourceRef = this.dialog.open(ResourceCurateDisplayComponent, {
+      panelClass:'panel-container',
       width: '90%',
       height: '45rem',
       data: {

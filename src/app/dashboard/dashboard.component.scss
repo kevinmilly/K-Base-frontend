@@ -1,3 +1,4 @@
+@import "../../styles/mixins";
 
 .dashboard-container{
     height: 100%;
@@ -7,6 +8,9 @@
     mat-card {
         width: 35vmax;
         height: 35vmax;
+        border-radius: .7vmax;
+        
+        @include card-shadow;
         
         .card-container {
             

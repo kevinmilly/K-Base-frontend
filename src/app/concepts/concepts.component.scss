@@ -1,11 +1,15 @@
 .main-container {
     height: 100%;
-    padding-top: 2rem;
+    // padding-top: 2rem;
+
+        border-radius: .7vmax;
+    
   
 
     &__tab-content {
         mat-card{
             background-color: #ffffff;
+            border-radius: .7vmax;
             width: 70vmax;
         }
     }
