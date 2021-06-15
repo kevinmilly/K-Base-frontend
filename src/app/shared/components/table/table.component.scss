@@ -1,6 +1,4 @@
-// .horiz-scroll {
-//   width: var(--semi-full-width);
-//   overflow: auto;
+ 
 
   .mat-form-field {
     font-size: 1rem;
@@ -17,6 +15,7 @@
      table {
       width: 100%;
       border-radius: 5%;
+      
   
       td,
       th {
@@ -28,11 +27,13 @@
         white-space: nowrap;
         overflow: hidden;
         vertical-align: middle;
-        font-size: .9rem;
+        font-size: 1.2rem;
+        color: black;
         
      
       }
-    
+
+
       tr:nth-child(even) {
         background-color: var(--off-white);
       }
@@ -45,7 +46,8 @@
   
       th {
         text-transform: uppercase;
-         background-color: rgb(237, 222, 253);
+         background-color: var(--primary-darker-color);
+         color: white;
       }
     }
   
@@ -71,16 +73,20 @@
 
   @keyframes myfirst {
     0% {
-      background: #f7bee1;
+      background: #d8fad5;
+      
     }
     25% {
-      background: #e267b3;
+      background: #bef5b9;
+      
     }
     75% {
-      background: #e67abc;
+      background: #86c080;
+   
     }
     100% {
-      background: #f7bee1;
+      background: #d8fad5;
+     
     }
   }
   

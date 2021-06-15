@@ -10,10 +10,11 @@ import { ConceptDetailComponent } from 'src/app/concepts/concept-detail/concept-
 import { BackendService } from 'src/app/core/services/backend.service';
 import { IConcept } from 'src/app/core/models/concepts.model';
 import { INote } from 'src/app/core/models/note.model';
+import { Tag } from 'src/app/core/models/factors.enum';
 
 @Component({
   selector: 'kb-table', 
-  templateUrl: './table.component.html',
+  templateUrl: './table.component.html', 
   styleUrls: ['./table.component.scss'] 
 })
 export class TableComponent implements OnInit {
@@ -45,23 +46,23 @@ export class TableComponent implements OnInit {
   categories:any[] = [
     {
       icon:'book',
-      cat:'Bible'
+      cat:Tag[0]
     },
     {
       icon:'keyboard',
-      cat: 'Programming'
+      cat: Tag[1]
     },
     {
       icon:'translate',
-      cat: 'Language Studies'
+      cat: Tag[2]
     },
     {
       icon:'psychology',
-      cat:'Potpourri'
+      cat:Tag[3]
     },
     {
       icon:'restart_alt',
-      cat:'Reset'
+      cat:'Reset Filter'
     }
   ]
 

@@ -1,10 +1,11 @@
 @import "../../../../styles/mixins";
 .login-page{
-    display: flex;
-    justify-content: space-evenly;
+    // display: flex;
+    // justify-content: space-evenly;
     position: relative;
-    height: 100vh;
+    height: 100%;
     overflow: hidden;
+    background-color: lavender;
 
     .custom-shape-divider-top {
         position: absolute;
@@ -15,44 +16,34 @@
         line-height: 0;
     }
     
-    .custom-shape-divider-top svg {
-        position: relative;
-        display: block;
-        width: calc(100% + 1.3px);
-        height: 191px;
-        transform: rotateY(180deg);
-    }
-    
     .custom-shape-divider-top .shape-fill {
         fill: #D295E7;
     }
 
     &__signup-container {
-        &__decision {
-            @include center-element;
-          }
-
+      
           mat-card {
               background-color: rgb(253, 253, 253);
-              height: auto;
+              height: 60vh;
+              width: 90%;
           }
           position: absolute;
-          top: 7%;
+          top: 15%;
+          left: 40%;
           z-index: 1000;
 
     }  
 
     &__login-container {
-        &__decision {
-            @include center-element;
-          }
-
+      
           mat-card {
               background-color: rgb(253, 253, 253);
-              height: auto;
+              height: 60vh;
+              width: 90%;
           }
           position: absolute;
           top: 15%;
+          left: 40%;
           z-index: 1000;
 
     }  
@@ -61,7 +52,7 @@
 
     .custom-shape-divider-bottom {
         position: absolute;
-        bottom: 5%;
+        bottom: 0;
         left: 0;
         width: 100%;
         overflow: hidden;

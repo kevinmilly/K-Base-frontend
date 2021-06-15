@@ -155,6 +155,8 @@ body {
   --text-primary-color: #{$dark-primary-text};
   --text-primary-lighter-color: #{$dark-primary-text};
   --text-primary-darker-color: #{$dark-primary-text};
+
+
 }
 
 $mat-primary: (
@@ -170,10 +172,10 @@ $mat-primary: (
 );
 $theme-primary: mat-palette($mat-primary, main, lighter, darker);
 
-body {
-  --accent-color: #797979;
-  --accent-lighter-color: #d7d7d7;
-  --accent-darker-color: #5c5c5c;
+body { 
+  --accent-color: #d9c3db;
+  --accent-lighter-color:#f2e7f3;
+  --accent-darker-color: #cf96d4;
   --text-accent-color: #{$light-primary-text};
   --text-accent-lighter-color: #{$dark-primary-text};
   --text-accent-darker-color: #{$light-primary-text};
@@ -182,7 +184,7 @@ body {
 $mat-accent: (
   main: #797979,
   lighter: #d7d7d7,
-  darker: #5c5c5c,
+  darker: #f2e7f3,
   200: #797979, // For slide toggle,
   contrast : (
     main: $light-primary-text,
@@ -249,9 +251,11 @@ $altTheme: mat-dark-theme($theme-primary, $theme-accent, $theme-warn);
 
 
 mat-card {
-  border-radius: 3%;
+  border-radius: .8vmax;
   border-width: 1rem;
-  width: 75%;
-  height: 95%;
+  // width: 75%;
+  // height: 95%;
   margin: 2rem 1rem;
+
+
 }

@@ -4,6 +4,7 @@ import { SingleDataSet, Label, monkeyPatchChartJsLegend, monkeyPatchChartJsToolt
 import { IConcept } from '../core/models/concepts.model';
 import { SubSink } from 'subsink';
 import { BackendService } from '../core/services/backend.service';
+import { Level, Necessity } from '../core/models/factors.enum';
 
 @Component({
   selector: 'kb-dashboard',
@@ -20,17 +21,17 @@ export class DashboardComponent implements OnInit {
 
     filterChoices:string[][] = [ 
       [
-        "Frivolous",
-        "Somewhat Useful",
-        "Very Useful",
-        "Need to Know"
-      ],
+        Necessity[0],
+        Necessity[1],
+        Necessity[2],
+        Necessity[3]
+      ], 
       [
-        "Nincompoop",
-        "Beginner",
-        "Intermediate",
-        "Expert",
-        "1%"
+        Level[0],
+        Level[1],
+        Level[2],
+        Level[3],
+        Level[4]
       ]
     ]
 
