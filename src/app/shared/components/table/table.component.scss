@@ -1,4 +1,8 @@
- 
+ .main-container {
+  height: 75vh;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
 
   .mat-form-field {
     font-size: 1rem;
@@ -8,7 +12,7 @@
   .filter-buttons {
     display: flex;
     justify-content: center;
-    margin-bottom: 2rem;
+    margin: 2rem 0;
   }
   
 
@@ -108,3 +112,10 @@
     border: black;
   }
   
+  .noDataFilter {
+    text-align: center;
+    margin-top: 10%;
+  }
+ }
+
+ 

@@ -56,13 +56,13 @@ export class TableComponent implements OnInit {
       icon:'translate',
       cat: Tag[2]
     },
-    {
+    { 
       icon:'psychology',
       cat:Tag[3]
     },
     {
       icon:'restart_alt',
-      cat:'Reset Filter'
+      cat:'Reset'
     }
   ]
 
@@ -131,7 +131,7 @@ export class TableComponent implements OnInit {
 
   rowClick(event:IConcept) {
     const dialogRef = this.dialog.open(ConceptDetailComponent, {
-      width: '40rem',
+      width: '90%',
       height: '45rem',
       data: {
         concept:event,
@@ -161,21 +161,26 @@ export class TableComponent implements OnInit {
   categoryFilter(category:any) {
 
     switch (category.cat) {
-      case "Bible":
-        this.data = this.dataSaved.filter(d => d.tag === "Bible");
+      case Tag[0]:
+        this.data = this.dataSaved.filter(d => d.tag === Tag[0]);
+        console.log(Tag[0]);
         break;
     
-       case "Programming":
-        this.data = this.dataSaved.filter(d => d.tag === "Programming");
+       case Tag[1]:
+        this.data = this.dataSaved.filter(d => d.tag === Tag[1]);
+        console.log(Tag[1]);
         break;
-        case "Language Studies":
-          this.data = this.dataSaved.filter(d => d.tag === "Language Studies");
+        case Tag[2]:
+          this.data = this.dataSaved.filter(d => d.tag === Tag[2]);
+          console.log(Tag[2]);
         break;
-        case "Potpourri":
-          this.data = this.dataSaved.filter(d => "Potpourri");
+        case Tag[3]:
+          this.data = this.dataSaved.filter(d => d.tag === Tag[3]);
+          console.log(Tag[3]);
         break;
         case "Reset":
           this.data = [...this.dataSaved];
+          console.log("Reset");
     }
     this.resetTableAndFilter(this.data);
 

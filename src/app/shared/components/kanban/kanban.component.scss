@@ -1,21 +1,34 @@
 .main-container {
+  height: 75vh;
   width: 100%;
   overflow-x: hidden;
+  overflow-y: auto;
 
   .mat-chip-container {
     margin: 3rem 5rem 3rem 65%;
     width: 100%;
     .mat-chip {
-      background-color: rgb(247, 192, 205);
       font-size: 1.3rem;
       font-weight: 500;
       font-family: "Merriweather Sans", sans-serif, "Helvetica Neue", sans-serif;
-      box-shadow: 10px 5px 5px rgb(168, 44, 141);
       width: auto;
   
       &:active {
         text-decoration: underline;
         
+      }
+
+      &-necessity {
+        background-color: rgb(247, 192, 205);
+        box-shadow: 10px 5px 5px rgb(168, 44, 141);
+      }
+      &-level {
+        background-color: rgb(192, 247, 217);
+        box-shadow: 10px 5px 5px rgb(70, 107, 55);
+      }
+      &-tag {
+        background-color: rgb(240, 209, 170);
+        box-shadow: 10px 5px 5px rgb(168, 114, 44);
       }
     }
   }
@@ -34,7 +47,7 @@
       }
   
       &-list {
-        width: 10rem;
+        width: 100%;
         margin: .5rem;
         max-width: 100%;
         max-height: 100%;
@@ -52,7 +65,7 @@
         &__box {
           display: block;
           padding: 2rem 1rem;
-          margin: .5rem;
+          margin: .7rem;
           border-bottom: solid 1px #ccc;
           color: rgba(30, 9, 45, 0.87);
           align-items: center;
@@ -64,16 +77,30 @@
           
           &-header {
             font-size: 1.3vmax;
-            margin: 1vmax;
+            margin-bottom: 1vmax;
           }
   
           &-content {
             
             &__details {
               font-size: 1vmax;
-              margin: .5vmax;
+              width: 100%;
+              margin: .5vmax auto;
               color: purple;
-              margin-left: .5vmax;
+
+              &-necessity {
+                color: rgb(243, 157, 178);
+                font-weight: 600;
+              }
+              &-level {
+                color: rgb(104, 241, 166);
+                font-weight: 600;
+              }
+              &-tag {
+                color: rgb(238, 177, 102);
+                font-weight: 600;
+              }
+            
             }
           }  
       
@@ -105,7 +132,7 @@
   }
   
   .link-text {
-    margin-top: 4rem;
+    margin-top: 2vmax;
     font-style: italic;
     text-decoration: underline;
     text-transform: uppercase;
@@ -116,4 +143,5 @@
 .panel-container{
   border-radius: 3vmax;
   padding: auto;
+  height: 100%;
 }

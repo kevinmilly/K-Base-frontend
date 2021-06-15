@@ -10,7 +10,7 @@ mat-sidenav-container {
     padding: 0;
     display: flex;
     justify-content: center;
-    width: 15vmax;
+    width: 14vmax;
     height: 100%;
     overflow: hidden;
     -ms-overflow-style: none;  /* IE and Edge */
@@ -42,7 +42,7 @@ mat-sidenav-container {
     .background {
       background-color: rgb(43, 16, 43);
       background-repeat: no-repeat;
-      opacity: .8;
+      opacity: .85;
       padding: 70%;
       position: absolute;
       top: 0;
@@ -55,7 +55,7 @@ mat-sidenav-container {
   }
 
   mat-nav-list {
-    margin-top: 80%;
+    margin-top: 85%;
     mat-icon {
         margin-top: .4rem;
         color: #ffffff;
@@ -67,7 +67,7 @@ mat-sidenav-container {
       font-size: 1.5vmax;
       color: #ffffff;
       font-weight: 500;
-      margin: 3vmax 2vmax;
+      margin: 1vmax auto;
 
       &:active, a:focus, a:target {
         text-indent: 1vmax;
@@ -93,7 +93,7 @@ mat-sidenav-container {
     height: 100%;
     position: absolute;
     top:2vmax;
-    left: 13vmax;
+    left: 10vmax;
   }
 
 }

@@ -61,7 +61,70 @@ $header-button-width: 2.5rem;
         background-color: #ff33cc;
       }
     }
+}
+
+@mixin big-mat-forms {
+  ::ng-deep .mat-form-field {
+    width: 10vmax;
+    height: auto;
+  
+    .mat-input-element {
+      color: rgb(80, 71, 77);
+     
+      line-height: normal !important;
+ 
+    }
+    .mat-form-field-label {
+      color: rgb(80, 71, 77);
+      margin-bottom: 1.5rem;
+
+    }
+    .mat-form-field-underline {
+      background-color: rgb(80, 71, 77);
+    }
+    .mat-form-field-ripple {
+      background-color: rgb(80, 71, 77);
+    }
+    .mat-form-field-required-marker {
+      color: rgb(80, 71, 77);
+    }
   }
+
+  ::ng-deep mat-form-field.mat-form-field-appearance-outline .mat-form-field-wrapper {
+    margin: 0;
+  }
+
+  ::ng-deep .mat-form-field.mat-focused {
+    .mat-form-field-label {
+      color: #5a0956;
+    }
+    .mat-form-field-ripple {
+      background-color: #5a0956;
+    }
+    .mat-form-field-required-marker {
+      color: #5a0956;
+    }
+    .mat-input-element {
+      color: #5a0956;
+      margin-bottom: 1rem;
+    }
+  }
+
+  ::ng-deep .mat-form-field.mat-form-field-invalid {
+    .mat-input-element {
+      color: #ff33cc;
+    }
+    .mat-form-field-label {
+      color: #ff33cc;
+      .mat-form-field-required-marker {
+        color: #ff33cc;
+      }
+    }
+    .mat-form-field-ripple {
+      background-color: #ff33cc;
+    }
+  }
+}
 
   @mixin small-button {
     width: $header-button-width;

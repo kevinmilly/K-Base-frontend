@@ -1,9 +1,9 @@
 <div class="main-container">
     <div class="mat-chip-container mat-chip-list">
         <mat-chip-list aria-label="Filter Selection">
-            <mat-chip (click)="updateFilter('level')">Level</mat-chip>
-            <mat-chip (click)="updateFilter('necessity')">Necessity</mat-chip>
-            <mat-chip (click)="updateFilter('tag')">Tag</mat-chip>
+            <mat-chip class="mat-chip-level" (click)="updateFilter('level')">Level</mat-chip>
+            <mat-chip class="mat-chip-necessity" (click)="updateFilter('necessity')">Necessity</mat-chip>
+            <mat-chip class="mat-chip-tag" (click)="updateFilter('tag')">Tag</mat-chip>
         </mat-chip-list>
     </div>
     
@@ -29,14 +29,14 @@
                                 <li *ngFor="let boxContent of labels">
                                     <div class="kanban-container__kanban-list__box-content__details">
                                         <ng-container *ngIf="boxContent === 'necessity'">
-                                            <span [style.text-transform]="'capitalize'"> </span>
+                                           <span class="kanban-container__kanban-list__box-content__details-necessity">Necessity: </span> 
                                             {{
                                                 translators[0][content[boxContent]]
                                             }}
                                            
                                         </ng-container>
                                         <ng-container *ngIf="boxContent === 'level'">
-                                            <span [style.text-transform]="'capitalize'"> </span>
+                                            <span class="kanban-container__kanban-list__box-content__details-level">Level: </span> 
                                             {{
                                                 translators[1][content[boxContent]]
                                             }}
@@ -44,7 +44,7 @@
                                         </ng-container>
                                         
                                         <ng-container *ngIf="boxContent === 'tag'">
-                                            <span [style.text-transform]="'capitalize'"> </span>
+                                            <span class="kanban-container__kanban-list__box-content__details-tag">Tag: </span> 
                                             {{
                                                 content[boxContent] !== ' ' && content[boxContent]
                                             }}
@@ -52,7 +52,7 @@
                                     </div>
                                 </li>
                             </ul>
-                            <span class="link-text"> <a (click)="openResources(content)">Resources</a></span>
+                            <div class="link-text"> <a (click)="openResources(content)">Resources</a></div>
                         </div>
                     </div>
                 </div>

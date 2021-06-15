@@ -209,19 +209,14 @@ columns:string[] =[
 
 
   detail(row:IConcept) {
-    this.backend.getNotesByConcept(row._id || "");
-    this.subs.sink = this.backend.notes$
-                      .subscribe(n => {
         const dialogRef = this.dialog.open(ConceptDetailComponent, {
           width: '250px',
-          data: { concept: row, notes:n} 
+          data: { concept: row} 
         });
     
         this.subs.sink = dialogRef.afterClosed().subscribe(result => {
 
         });
-        
-      })
    
   }
 

@@ -30,25 +30,6 @@ export class KanbanComponent {
 
   private subs = new SubSink();
 
-  categories:any[] = [
-    {
-      icon:'local_library',
-      cat:'Level'
-    },
-    {
-      icon:'keyboard',
-      cat: 'Programming'
-    },
-    {
-      icon:'translate',
-      cat: 'Language Studies'
-    },
-    {
-      icon:'psychology',
-      cat:'Potpourri'
-    }
-  ]
-
   currentFilterType:string = 'level';
 
   constructor(

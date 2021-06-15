@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from "@angular/core";
+import { Level, Necessity } from "src/app/core/models/factors.enum";
 
 @Pipe({
     name: 'levelStatus'
@@ -10,17 +11,17 @@ import { Pipe, PipeTransform } from "@angular/core";
   }
 
   const level:string[] = [
-    "Nincompoop",
-    "Beginner",
-    "Intermediate",
-    "Expert",
-    "1%"
+    Level[0],
+    Level[1],
+    Level[2], 
+    Level[3],
+    Level[4]
   ]
 
   const necessity:string[] = [
-    "Frivolous",
-    "Somewhat Useful",
-    "Very Useful",
-    "Need to Know"
+    Necessity[0],
+    Necessity[1],
+    Necessity[2],
+    Necessity[3]
   ]
 

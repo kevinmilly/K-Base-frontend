@@ -1,3 +1,5 @@
+@import "../../../../styles/mixins";
+
 .edit__container {
 
     margin-top: 3rem;
@@ -55,7 +57,14 @@ input {
     width: 10rem;
 }
 
+.mat-form-field textarea {
+    height: 100%;
+    width: 100%;
+  }
+
+
 .link-text {
     font-size: .7rem;
     color: rgb(74, 74, 163);;
 }
+
