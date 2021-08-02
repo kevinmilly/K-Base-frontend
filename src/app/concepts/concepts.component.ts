@@ -208,7 +208,7 @@ columns:string[] =[
 
 
 
-  detail(row:IConcept) {
+  detailModalPopup(row:IConcept) {
         const dialogRef = this.dialog.open(ConceptDetailComponent, {
           width: '250px',
           data: { concept: row} 

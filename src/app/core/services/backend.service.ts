@@ -5,7 +5,6 @@ import { IConcept } from '../models/concepts.model';
 import { INote } from '../models/note.model';
 import { IResource } from '../models/resource.model';
 
-import { environment } from '../../../environments/environment';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -13,7 +12,8 @@ import { AuthService } from './auth.service';
 })
 export class BackendService {
   
-  private  BASE_URL:string = "http://localhost:3000";
+  // private  BASE_URL:string = "http://localhost:3000";
+  private  BASE_URL:string = "https://afternoon-shore-01719.herokuapp.com";
 
   private conceptsUpdated:BehaviorSubject<IConcept[]> = new BehaviorSubject<any>([]);
   public readonly concepts$:Observable<IConcept[]> = this.conceptsUpdated.asObservable();
