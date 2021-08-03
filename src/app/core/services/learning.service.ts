@@ -7,7 +7,7 @@ import {
 import { Observable, throwError, Subscription, BehaviorSubject } from "rxjs";
 import { catchError, map } from "rxjs/operators";
 import { ISearchResult } from '../models/search-result.model';
-import { IConcept } from '../models/concepts.model';
+import { Concept } from '../models/concepts.model';
 import { INote } from '../models/note.model';
 import { AuthService } from './auth.service';
 
@@ -24,16 +24,16 @@ const httpOptions = {
 })
 export class LearningService {
 
-  results:ISearchResult[] = [];
-  private resultSubject:BehaviorSubject<ISearchResult[]> = new BehaviorSubject<ISearchResult[]>([]);
-  resultObs:Observable<ISearchResult[]> = this.resultSubject.asObservable();
+  results: ISearchResult[] = [];
+  private resultSubject: BehaviorSubject<ISearchResult[]> = new BehaviorSubject<ISearchResult[]>([]);
+  resultObs: Observable<ISearchResult[]> = this.resultSubject.asObservable();
 
-  constructor(private http:HttpClient, private authService:AuthService) {
+  constructor(private http: HttpClient, private authService: AuthService) {
 
-   }
+  }
 
   errorHandler(errorResponse: HttpErrorResponse) {
-    if(errorResponse.error instanceof ErrorEvent) {
+    if (errorResponse.error instanceof ErrorEvent) {
       console.error('Client Side Error: ', errorResponse.error.message);
     } else {
       console.error('Server Side Error: ', errorResponse);
@@ -43,12 +43,12 @@ export class LearningService {
   }
 
 
-  getSearchResources(term:string) {
-        this.http.get<ISearchResult[]>(`http://localhost:3000/api/g-search/${term}`)
-          .subscribe(results => this.resultSubject.next(results));
+  getSearchResources(term: string) {
+    this.http.get<ISearchResult[]>(`http://localhost:3000/api/g-search/${term}`)
+      .subscribe(results => this.resultSubject.next(results));
   }
 
- 
+
 
 
 

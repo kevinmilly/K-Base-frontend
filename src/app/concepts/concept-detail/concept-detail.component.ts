@@ -3,8 +3,8 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { IConcept } from 'src/app/core/models/concepts.model';
-import { IControlModel } from 'src/app/core/models/control.model';
+import { Concept } from 'src/app/core/models/concepts.model';
+import { CustomControl } from 'src/app/core/models/control.model';
 import { Necessity, Level, Tag, NoteChoice } from 'src/app/core/models/enums/factors.enum';
 import { INote } from 'src/app/core/models/note.model';
 import { BackendService } from 'src/app/core/services/backend.service';
@@ -41,19 +41,19 @@ export class ConceptDetailComponent implements OnInit {
   ]
 
   necessityChoices = [
-    {name: Necessity[0], value:0},
-    {name:Necessity[1], value:1},
-    {name: Necessity[2], value:2},
-    {name:Necessity[3], value: 3} 
-  ] 
+    { name: Necessity[0], value: 0 },
+    { name: Necessity[1], value: 1 },
+    { name: Necessity[2], value: 2 },
+    { name: Necessity[3], value: 3 }
+  ]
 
   levelChoices = [
-    {name: Level[0], value:0},
-    {name: Level[1], value:1},
-    {name: Level[2], value:2},
-    {name: Level[3], value: 3},
-    {name: Level[4], value: 4}
-  ] 
+    { name: Level[0], value: 0 },
+    { name: Level[1], value: 1 },
+    { name: Level[2], value: 2 },
+    { name: Level[3], value: 3 },
+    { name: Level[4], value: 4 }
+  ]
 
   tagChoices = [
     Tag[0],
@@ -68,14 +68,14 @@ export class ConceptDetailComponent implements OnInit {
 
   filters: string[] = ["difficulty", "status"];
 
-  editControls: IControlModel[] = [];
-  addNoteControls: IControlModel[] = [];
+  editControls: CustomControl[] = [];
+  addNoteControls: CustomControl[] = [];
 
 
 
 
 
-  concept: IConcept = {} as IConcept;
+  concept: Concept = {} as Concept;
   notes: INote[] = [];
 
   private subs = new SubSink();
@@ -83,7 +83,7 @@ export class ConceptDetailComponent implements OnInit {
   constructor(
     private _snackBar: MatSnackBar,
     public dialog: MatDialog,
-    @Inject(MAT_DIALOG_DATA) public data: { concept: IConcept, notes$: Observable<INote[]> },
+    @Inject(MAT_DIALOG_DATA) public data: { concept: Concept, notes$: Observable<INote[]> },
     private dialogRef: MatDialogRef<ConceptDetailComponent>,
     private backend: BackendService,
     private gamifyService: GamificationServiceService
