@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { IControlModel } from 'src/app/core/models/control.model';
+import { CustomControl } from 'src/app/core/models/control.model';
 import { NoteChoice } from 'src/app/core/models/enums/factors.enum';
 import { INote } from 'src/app/core/models/note.model';
 
@@ -12,47 +12,47 @@ import { INote } from 'src/app/core/models/note.model';
 })
 export class NotesDisplayComponent implements OnInit {
 
-  displayMode:FormControl = new FormControl(false, []);
-  
-  note!:INote;
+  displayMode: FormControl = new FormControl(false, []);
 
-  noteChoices:string[] = [NoteChoice[0], NoteChoice[1], NoteChoice[2]] 
+  note!: INote;
 
-  editNoteControls:IControlModel[] = [
+  noteChoices: string[] = [NoteChoice[0], NoteChoice[1], NoteChoice[2]]
+
+  editNoteControls: CustomControl[] = [
     {
-      name:"Title", 
-      type:"string", 
-      required:true, 
+      name: "Title",
+      type: "string",
+      required: true,
       default: '',
 
     },
     {
-      name:"Content", 
-      type:"longString", 
-      required:true, 
+      name: "Content",
+      type: "longString",
+      required: true,
       default: '',
 
     },
     {
-      name:"Source", 
-      type:"string", 
-      required:false, 
+      name: "Source",
+      type: "string",
+      required: false,
       default: '',
 
     },
     {
-      name:"Type", 
-      type:"stringChoice", 
-      required:true, 
-      default:0,
-      stringChoices:this.noteChoices
+      name: "Type",
+      type: "stringChoice",
+      required: true,
+      default: 0,
+      stringChoices: this.noteChoices
     }
   ];
 
 
   constructor(
     public dialog: MatDialog,
-    @Inject(MAT_DIALOG_DATA) public data: {note:INote},
+    @Inject(MAT_DIALOG_DATA) public data: { note: INote },
     private dialogRef: MatDialogRef<NotesDisplayComponent>
   ) { }
 
@@ -63,7 +63,7 @@ export class NotesDisplayComponent implements OnInit {
 
   submit(eventObj: any) {
 
-    this.dialogRef.close({event:eventObj, type:'update'});
+    this.dialogRef.close({ event: eventObj, type: 'update' });
   }
 
 }

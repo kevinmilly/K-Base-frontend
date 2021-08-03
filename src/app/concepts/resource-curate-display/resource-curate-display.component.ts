@@ -1,17 +1,17 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { BackendService } from 'src/app/core/services/backend.service';
 
-import {IResource} from '../../core/models/resource.model';
-import {ISearchResult} from '../../core/models/search-result.model';
+import { IResource } from '../../core/models/resource.model';
+import { ISearchResult } from '../../core/models/search-result.model';
 
 import { SubSink } from 'subsink';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { IConcept } from 'src/app/core/models/concepts.model';
+import { Concept } from 'src/app/core/models/concepts.model';
 import { LearningService } from 'src/app/core/services/learning.service';
 import { FormControl, Validators } from '@angular/forms';
 import { debounce, debounceTime, distinctUntilChanged, map, tap } from 'rxjs/operators';
 
-import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AbstractExtendedWebDriver } from 'protractor/built/browser';
 import { combineLatest, throwError } from 'rxjs';
@@ -26,25 +26,25 @@ export class ResourceCurateDisplayComponent implements OnInit {
 
   private subs = new SubSink();
 
-  concept:IConcept = {} as IConcept;
+  concept: Concept = {} as Concept;
 
-  prospectResources:ISearchResult[] = [];
-  currentResources:IResource[] = [];
-  originalResources:IResource[] = [];
-  resourcesToAdd:IResource[] = [];
-  resourcesToDelete:IResource[] = [];
+  prospectResources: ISearchResult[] = [];
+  currentResources: IResource[] = [];
+  originalResources: IResource[] = [];
+  resourcesToAdd: IResource[] = [];
+  resourcesToDelete: IResource[] = [];
 
-  searchControl:FormControl = new FormControl('',[Validators.required]);
-  searchTerm:string = '';
+  searchControl: FormControl = new FormControl('', [Validators.required]);
+  searchTerm: string = '';
 
-  levels:string[] =    [
+  levels: string[] = [
     Level[0],
     Level[1],
     Level[2],
     Level[3]
   ]
 
-  necessities:string[] =    [
+  necessities: string[] = [
     Necessity[0],
     Necessity[1],
     Necessity[2],
@@ -55,14 +55,14 @@ export class ResourceCurateDisplayComponent implements OnInit {
   constructor(
     private backendService: BackendService,
     private learningService: LearningService,
-    @Inject(MAT_DIALOG_DATA) public data:any,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<ResourceCurateDisplayComponent>,
     private spinner: NgxSpinnerService
-    
+
   ) {
 
     this.concept = this.data.concept;
-   }
+  }
 
   ngOnInit(): void {
     switch (this.concept.level) {
@@ -70,7 +70,7 @@ export class ResourceCurateDisplayComponent implements OnInit {
         this.searchTerm = `Beginning ${this.concept.title}`;
         break;
       case 2 || 3:
-      this.searchTerm = `Intermediate ${this.concept.title}`;
+        this.searchTerm = `Intermediate ${this.concept.title}`;
         break;
       case 4 || 5:
         this.searchTerm = `Advanced ${this.concept.title}`;
@@ -88,10 +88,10 @@ export class ResourceCurateDisplayComponent implements OnInit {
         debounceTime(1000),
         distinctUntilChanged(),
       )
-     .subscribe(value => {
-       this.searchTerm = value
-       this.learningService.getSearchResources(this.searchTerm);
-    });
+      .subscribe(value => {
+        this.searchTerm = value
+        this.learningService.getSearchResources(this.searchTerm);
+      });
 
     this.learningService.getSearchResources(this.searchTerm);
     this.backendService.getResources(this.concept);
@@ -100,51 +100,51 @@ export class ResourceCurateDisplayComponent implements OnInit {
       this.backendService.resources$,
       this.learningService.resultObs
     ])
-    .pipe(
-      tap(([original,prospect]) => {
+      .pipe(
+        tap(([original, prospect]) => {
           return (
-            original.forEach( o => {
+            original.forEach(o => {
               const idx = prospect.findIndex(p => p.link === o.link)
-              if(idx !== -1) prospect.splice(idx,1);
+              if (idx !== -1) prospect.splice(idx, 1);
             })
           )
-         }),
+        }),
       )
       .subscribe(([curr, changedProspective]) => {
         this.currentResources = curr;
         this.prospectResources = changedProspective;
 
-          setTimeout(() => {
-            /** spinner ends after 5 seconds */
-            this.spinner.hide();
-          }, 1000);
-    })
+        setTimeout(() => {
+          /** spinner ends after 5 seconds */
+          this.spinner.hide();
+        }, 1000);
+      })
   }
 
-  drop(event: CdkDragDrop<any>, stack:string) {
+  drop(event: CdkDragDrop<any>, stack: string) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
-        transferArrayItem(event.previousContainer.data,
-          event.container.data,
-          event.previousIndex,
-          event.currentIndex); 
+      transferArrayItem(event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex);
 
-          this.searchOriginal(event.container,event.currentIndex,stack);
-    
-    } 
+      this.searchOriginal(event.container, event.currentIndex, stack);
+
+    }
 
   }
 
 
-  searchOriginal(currentStack:any, index:number, droppedStackName:string) {
-    if(droppedStackName === 'save') { //if we moved it in the current stack
+  searchOriginal(currentStack: any, index: number, droppedStackName: string) {
+    if (droppedStackName === 'save') { //if we moved it in the current stack
       /*if it's in the delete stack that means it was moved from the original
       just checking if it's in there allows us to see that it doesn't need to be added to the
       resourcesToAdd array and we don't have to track the original state of the currentResources
       */
       const resourceMarkedForDeletionIdx = this.resourcesToDelete.findIndex(r => r._id === currentStack.data._id);
-      if(resourceMarkedForDeletionIdx === -1) { //wasn't part of the original
+      if (resourceMarkedForDeletionIdx === -1) { //wasn't part of the original
         const latestResourceAdded = currentStack.data[currentStack.data.length - 1];
         this.resourcesToAdd.push({
           title: latestResourceAdded.title,
@@ -152,31 +152,31 @@ export class ResourceCurateDisplayComponent implements OnInit {
           level: this.concept.level,
           concept: this.concept._id,
         } as IResource)
-     
+
       } else {
-          this.resourcesToDelete.splice(resourceMarkedForDeletionIdx,1);
+        this.resourcesToDelete.splice(resourceMarkedForDeletionIdx, 1);
       }
-   
+
     } else {
-        const resourceMarkedForAddIdx = this.resourcesToAdd.findIndex(r => r._id === currentStack.data[index]._id);
-        if(resourceMarkedForAddIdx === -1) { //was part of the original
-          this.resourcesToDelete.push({
-            _id: currentStack.data[index]._id,
-            title: currentStack.data[index].title,
-            link: currentStack.data[index].link,
-            level: this.concept.level,
-            concept: this.concept._id,
-          } as IResource)
-        } else {
-            this.resourcesToAdd.splice(resourceMarkedForAddIdx,1);
-         }
+      const resourceMarkedForAddIdx = this.resourcesToAdd.findIndex(r => r._id === currentStack.data[index]._id);
+      if (resourceMarkedForAddIdx === -1) { //was part of the original
+        this.resourcesToDelete.push({
+          _id: currentStack.data[index]._id,
+          title: currentStack.data[index].title,
+          link: currentStack.data[index].link,
+          level: this.concept.level,
+          concept: this.concept._id,
+        } as IResource)
+      } else {
+        this.resourcesToAdd.splice(resourceMarkedForAddIdx, 1);
+      }
     }
   }
 
   save() {
     this.dialogRef.close({
       delete: this.resourcesToDelete.map(resource => resource._id),
-      add:this.resourcesToAdd
+      add: this.resourcesToAdd
     })
   }
 

@@ -1,7 +1,7 @@
 import { Output, EventEmitter } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { Auth } from '../../models/interfaces/auth.model';
-import { IControlModel } from '../../models/control.model';
+import { CustomControl } from '../../models/control.model';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   signup: boolean = true;
   @Output() loggedIn = new EventEmitter();
 
-  loginControls: IControlModel[] = [
+  loginControls: CustomControl[] = [
     {
       name: "Email",
       type: "email",
@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
     }
   ];
 
-  signUpControls: IControlModel[] = [
+  signUpControls: CustomControl[] = [
     {
       name: "Name",
       type: "string",
@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
     }
   ];
 
-  constructor(public authService:AuthService) { }
+  constructor(public authService: AuthService) { }
 
   ngOnInit(): void {
   }
@@ -65,8 +65,8 @@ export class LoginComponent implements OnInit {
     this.authService.createUser(event.name, event.email, event.password)
   }
 
-  onLogin(event: {email:string, password:string}) {
-    this.authService.loginUser(event.email,event.password);
+  onLogin(event: { email: string, password: string }) {
+    this.authService.loginUser(event.email, event.password);
   }
 
 }
