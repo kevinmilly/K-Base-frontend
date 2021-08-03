@@ -2,8 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable, Subscription } from 'rxjs';
 import { SubSink } from 'subsink';
-import { IConcept } from '../core/models/concepts.model';
-import { IControlModel } from '../core/models/control.model';
+import { IConcept } from '../core/models/interfaces/concepts.model';
+import { IControlModel } from '../core/models/interfaces//control.model';
 import { BackendService } from '../core/services/backend.service';
 import { ConceptDetailComponent } from './concept-detail/concept-detail.component';
 
@@ -12,7 +12,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { GamificationServiceService } from '../core/services/gamification-service.service';
 import { MediaObserver, MediaChange } from '@angular/flex-layout';
 import { PopupExampleComponent } from '../shared/components/popup-example/popup-example.component';
-import { Level, Necessity, Tag } from '../core/models/factors.enum';
+import { Level, Necessity, Tag } from '../core/models/enums/factors.enum';
+import { FilterChoices } from '../core/models/interfaces/filterChoices.model';
 
 
 @Component({
@@ -31,32 +32,15 @@ export class ConceptsComponent implements OnInit {
 
   //kanban tab
 
-  selectedFilter: string = 'level';
+  selectedFilter: string;
 
-  boxDetails:string[] = [
-    "necessity",
-    "level" ,
-    "tag"
-  ];
+  boxDetails:string[];
 
   kanbanLabels:string[] = [];
   kanbanHeaders:string[] = [];
 
-  filterChoices:string[][] = [ 
-    [
-      Necessity[0],
-      Necessity[1],
-      Necessity[2],
-      Necessity[3]
-    ],
-    [
-      Level[0],
-      Level[1],
-      Level[2],
-      Level[3],
-      Level[4]
-    ]
-  ]
+  filterChoices:FilterChoices;
+
 
 //table tab
 
@@ -145,6 +129,35 @@ columns:string[] =[
 
     ) {
         this.media$ = media.asObservable();
+
+        this.selectedFilter = 'level';
+        this.boxDetails = [
+          "necessity",
+          "level" ,
+          "tag"
+        ];
+
+        this.filterChoices = {
+          necessities: [
+            Necessity[0],
+            Necessity[1],
+            Necessity[2],
+            Necessity[3]
+          ],
+          levels: [
+            Level[0],
+            Level[1],
+            Level[2],
+            Level[3],
+            Level[4]
+          ]
+        }
+
+
+
+      
+      
+        
      }
 
   ngOnInit(): void { //put the method in the constructor
@@ -176,19 +189,19 @@ columns:string[] =[
     this.filteredConcepts = [];
     switch (selectedFilter) {
       case 'level':
-        this.filterChoices[1].forEach((choice, i) => {
+        this.filterChoices.levels.forEach((choice, i) => {
           this.filteredConcepts.push(this.concepts.filter(concept => concept.level === i));
         })
         this.kanbanLabels = this.boxDetails.filter(detail => detail !== 'level');
-        this.kanbanHeaders = this.filterChoices[1];
+        this.kanbanHeaders = this.filterChoices.levels;
         break;
 
       case 'necessity':
-        this.filterChoices[0].forEach((choice, i) => {
+        this.filterChoices.necessities.forEach((choice, i) => {
           this.filteredConcepts.push(this.concepts.filter(concept => concept.necessity === i));
         })
         this.kanbanLabels = this.boxDetails.filter(detail => detail !== 'necessity');
-        this.kanbanHeaders = this.filterChoices[0];
+        this.kanbanHeaders = this.filterChoices.necessities;
         break;
 
       case 'tag':

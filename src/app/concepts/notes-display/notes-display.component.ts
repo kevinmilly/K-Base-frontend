@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { IControlModel } from 'src/app/core/models/control.model';
-import { NoteChoice } from 'src/app/core/models/factors.enum';
+import { NoteChoice } from 'src/app/core/models/enums/factors.enum';
 import { INote } from 'src/app/core/models/note.model';
 
 @Component({

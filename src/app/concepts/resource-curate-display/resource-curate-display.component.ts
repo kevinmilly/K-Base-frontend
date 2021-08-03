@@ -15,7 +15,7 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AbstractExtendedWebDriver } from 'protractor/built/browser';
 import { combineLatest, throwError } from 'rxjs';
-import { Level, Necessity } from 'src/app/core/models/factors.enum';
+import { Level, Necessity } from 'src/app/core/models/enums/factors.enum';
 
 @Component({
   selector: 'kb-resource-curate-display',
