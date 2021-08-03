@@ -10,7 +10,7 @@ import { ConceptDetailComponent } from 'src/app/concepts/concept-detail/concept-
 import { BackendService } from 'src/app/core/services/backend.service';
 import { IConcept } from 'src/app/core/models/concepts.model';
 import { INote } from 'src/app/core/models/note.model';
-import { Tag } from 'src/app/core/models/factors.enum';
+import { Tag } from 'src/app/core/models/enums/factors.enum';
 
 @Component({
   selector: 'kb-table', 

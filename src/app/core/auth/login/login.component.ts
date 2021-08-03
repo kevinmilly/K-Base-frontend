@@ -1,6 +1,6 @@
 import { Output, EventEmitter } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
-import { Auth } from '../../models/auth.model';
+import { Auth } from '../../models/interfaces/auth.model';
 import { IControlModel } from '../../models/control.model';
 import { AuthService } from '../../services/auth.service';
 

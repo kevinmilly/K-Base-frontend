@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from "@angular/core";
-import { Level, Necessity } from "src/app/core/models/factors.enum";
+import { Level, Necessity } from "src/app/core/models/enums/factors.enum";
 
 @Pipe({
     name: 'levelStatus'

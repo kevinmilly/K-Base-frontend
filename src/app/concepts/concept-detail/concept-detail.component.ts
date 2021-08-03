@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { IConcept } from 'src/app/core/models/concepts.model';
 import { IControlModel } from 'src/app/core/models/control.model';
-import { Necessity, Level, Tag, NoteChoice } from 'src/app/core/models/factors.enum';
+import { Necessity, Level, Tag, NoteChoice } from 'src/app/core/models/enums/factors.enum';
 import { INote } from 'src/app/core/models/note.model';
 import { BackendService } from 'src/app/core/services/backend.service';
 import { GamificationServiceService } from 'src/app/core/services/gamification-service.service';
