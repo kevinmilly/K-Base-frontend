@@ -4,7 +4,7 @@ import { SingleDataSet, Label, monkeyPatchChartJsLegend, monkeyPatchChartJsToolt
 import { IConcept } from '../core/models/concepts.model';
 import { SubSink } from 'subsink';
 import { BackendService } from '../core/services/backend.service';
-import { Level, Necessity } from '../core/models/factors.enum';
+import { Level, Necessity } from '../core/models/enums/factors.enum';
 
 @Component({
   selector: 'kb-dashboard',

@@ -5,7 +5,7 @@ import { Router } from "@angular/router";
 import { BehaviorSubject } from "rxjs";
 
 import { environment } from "../../../environments/environment";
-import { Auth } from "../models/auth.model";
+import { Auth } from "../models/interfaces/auth.model";
 import { LoggedInUser } from "../models/loggedInUser.model";
 
 @Injectable({
