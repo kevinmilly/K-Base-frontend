@@ -18,11 +18,15 @@ import { Observable } from 'rxjs';
 })
 export class DropdownComponent {
 
-  @Input() list:string[] = [];
-  @Output() onChoiceEmitter:EventEmitter<string> = new EventEmitter<string>();
-  selected = new FormControl();
+  @Input() list:string[];
+  @Output() onChoiceEmitter:EventEmitter<string>;
+  selected:FormControl;
 
-  constructor() { }
+  constructor() { 
+    this.list  = [];
+    this.onChoiceEmitter = new EventEmitter<string>();
+    this.selected= new FormControl();
+  }
 
   ngOnInit(): void {
   

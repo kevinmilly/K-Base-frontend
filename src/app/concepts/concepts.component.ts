@@ -16,7 +16,7 @@ import { GamificationServiceService } from '../core/services/gamification-servic
 import { MediaObserver, MediaChange } from '@angular/flex-layout';
 import { PopupExampleComponent } from '../shared/components/popup-example/popup-example.component';
 import { Level, Necessity, Tag } from '../core/models/enums/factors.enum';
-import { FilterChoices } from '../core/models/interfaces/filterChoices.model';
+import { GeneralFilterChoices } from '../core/models/interfaces/generalFilterChoices.model';
 
 
 @Component({
@@ -38,7 +38,7 @@ export class ConceptsComponent implements OnInit {
   boxDetails: string[];
   kanbanLabels: string[] = [];
   kanbanHeaders: string[] = [];
-  filterChoices: FilterChoices;
+  filterChoices: GeneralFilterChoices;
 
   //table tab
   columns: string[];
@@ -47,8 +47,8 @@ export class ConceptsComponent implements OnInit {
   displayNames: string[];
 
   //add Concept tab
-  necessityChoices:ChoiceValue[];
-  levelChoices:ChoiceValue[];
+  necessityChoices: ChoiceValue[];
+  levelChoices: ChoiceValue[];
   addConceptControls: CustomControl[];
 
   mediaSize: string = '';
@@ -98,15 +98,15 @@ export class ConceptsComponent implements OnInit {
     ]
 
     this.addConceptControls = [
-      { name: "Title", type: "string", required: true, default: '',},
-      {name: "Necessity",type: "stringChoice",required: true,default: 1,stringChoices: this.necessityChoices},
-      {name: "Level",type: "stringChoice",required: true,default: 1,stringChoices: this.levelChoices},
-      {name: "Tag",type: "stringChoiceSet",required: true,default: "Programming",stringChoices: this.tagChoices}
+      { name: "Title", type: "string", required: true, default: '', },
+      { name: "Necessity", type: "stringChoice", required: true, default: 1, stringChoices: this.necessityChoices },
+      { name: "Level", type: "stringChoice", required: true, default: 1, stringChoices: this.levelChoices },
+      { name: "Tag", type: "stringChoiceSet", required: true, default: "Programming", stringChoices: this.tagChoices }
     ];
-      
+
   }
 
-  ngOnInit(): void { //put the method in the constructor
+  ngOnInit(): void {
 
     this.subs.sink = this.media$.subscribe(m => this.mediaSize = m[0].mqAlias);
 
@@ -114,21 +114,13 @@ export class ConceptsComponent implements OnInit {
     this.backend.getConcepts();
     this.subs.sink = this.backend.concepts$
       .subscribe(concepts => {
-        console.dir(this.concepts);
         this.concepts = [...concepts];
-        if (concepts.length > 0) {
-          this.filterConceptsForKanban(this.selectedFilter);
-        }
-
+        if (concepts.length > 0) this.filterConceptsForKanban(this.selectedFilter);
         setTimeout(() => {
-          /** spinner ends after 5 seconds */
           this.spinner.hide();
         }, 2000);
 
       })
-
-
-
   }
 
   filterConceptsForKanban(selectedFilter: string) {
@@ -141,7 +133,6 @@ export class ConceptsComponent implements OnInit {
         this.kanbanLabels = this.boxDetails.filter(detail => detail !== 'level');
         this.kanbanHeaders = this.filterChoices.levels;
         break;
-
       case 'necessity':
         this.filterChoices.necessities.forEach((choice, i) => {
           this.filteredConcepts.push(this.concepts.filter(concept => concept.necessity === i));
@@ -149,7 +140,6 @@ export class ConceptsComponent implements OnInit {
         this.kanbanLabels = this.boxDetails.filter(detail => detail !== 'necessity');
         this.kanbanHeaders = this.filterChoices.necessities;
         break;
-
       case 'tag':
         this.tagChoices.forEach((choice, i) => {
           this.filteredConcepts.push(this.concepts.filter(concept => concept.tag === this.tagChoices[i]));
@@ -158,6 +148,11 @@ export class ConceptsComponent implements OnInit {
         this.kanbanHeaders = this.tagChoices;
         break;
       case 'all':
+        this.filteredConcepts = [...this.concepts];
+        this.kanbanLabels = this.boxDetails.filter(detail => detail !== 'tag');
+        this.kanbanHeaders = this.tagChoices;
+        break;
+      default:
         this.filteredConcepts = [...this.concepts];
         this.kanbanLabels = this.boxDetails.filter(detail => detail !== 'tag');
         this.kanbanHeaders = this.tagChoices;
@@ -174,7 +169,7 @@ export class ConceptsComponent implements OnInit {
     });
 
     this.subs.sink = dialogRef.afterClosed().subscribe(result => {
-
+        //TODO: Need to add concept edit backend
     });
 
   }

@@ -2,7 +2,8 @@ import { ViewChild, Output } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { SidenavComponent } from 'src/app/global-layout/sidenav/sidenav.component';
 import { SubSink } from 'subsink';
-import { LoggedInUser } from './core/models/loggedInUser.model';
+import { LoggedInUser } from './core/models/interfaces/loggedInUser.model';
+
 import { AuthService } from './core/services/auth.service';
 
 @Component({
@@ -21,10 +22,10 @@ export class AppComponent implements OnInit {
   private subs = new SubSink();
 
   userIsAuthenticated = false;
-  loggedInUser:LoggedInUser = {name:'', email:''};
+  loggedInUser:LoggedInUser;
 
   constructor(private authService:AuthService) {
- 
+    this.loggedInUser = {name:'', email:''};
   }
 
   ngOnInit() {

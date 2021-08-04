@@ -1,4 +1,4 @@
-export interface ISearchResult {
+export interface SearchResult {
     title: string,
     link: string,
     content:string,

@@ -1,9 +1,11 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { CustomControl } from 'src/app/core/models/control.model';
+
 import { NoteChoice } from 'src/app/core/models/enums/factors.enum';
-import { INote } from 'src/app/core/models/note.model';
+import { CustomControl } from 'src/app/core/models/interfaces/control.model';
+import { Note } from 'src/app/core/models/interfaces/note.model';
+
 
 @Component({
   selector: 'kb-notes-display',
@@ -12,49 +14,34 @@ import { INote } from 'src/app/core/models/note.model';
 })
 export class NotesDisplayComponent implements OnInit {
 
-  displayMode: FormControl = new FormControl(false, []);
+  displayMode: FormControl;
 
-  note!: INote;
+  note!: Note;
 
-  noteChoices: string[] = [NoteChoice[0], NoteChoice[1], NoteChoice[2]]
+  noteChoices: string[];
 
-  editNoteControls: CustomControl[] = [
-    {
-      name: "Title",
-      type: "string",
-      required: true,
-      default: '',
+  editNoteControls: CustomControl[];
 
-    },
-    {
-      name: "Content",
-      type: "longString",
-      required: true,
-      default: '',
-
-    },
-    {
-      name: "Source",
-      type: "string",
-      required: false,
-      default: '',
-
-    },
-    {
-      name: "Type",
-      type: "stringChoice",
-      required: true,
-      default: 0,
-      stringChoices: this.noteChoices
-    }
-  ];
+  
 
 
   constructor(
     public dialog: MatDialog,
-    @Inject(MAT_DIALOG_DATA) public data: { note: INote },
+    @Inject(MAT_DIALOG_DATA) public data: { note: Note },
     private dialogRef: MatDialogRef<NotesDisplayComponent>
-  ) { }
+  ) {
+    
+    this.displayMode = new FormControl(false, []);
+
+    this.noteChoices  = [NoteChoice[0], NoteChoice[1], NoteChoice[2]];
+      this.editNoteControls = [
+        {name: "Title",type: "string",required: true,default: this.note.title,},
+        {name: "Content",type: "longString",required: true,default: this.note.content},
+        {name: "Source", type: "string", required:false, default: this.note.source},
+        { name: "Type",type: "stringChoice",required: true,default: this.note.type, stringChoices: this.noteChoices },
+      ]
+
+   }
 
   ngOnInit(): void {
     this.note = this.data.note;
