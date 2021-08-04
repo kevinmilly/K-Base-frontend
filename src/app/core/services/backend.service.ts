@@ -1,9 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Concept } from '../models/concepts.model';
-import { INote } from '../models/note.model';
-import { IResource } from '../models/resource.model';
+import { Concept } from '../models/interfaces/concepts.model';
+import { Note } from '../models/interfaces/note.model';
+import { Resource } from '../models/interfaces/resource.model';
+
+
 
 import { AuthService } from './auth.service';
 
@@ -19,15 +21,15 @@ export class BackendService {
   public readonly concepts$: Observable<Concept[]> = this.conceptsUpdated.asObservable();
 
 
-  private notesUpdated: BehaviorSubject<INote[]> = new BehaviorSubject<INote[]>([]);
-  public readonly notes$: Observable<INote[]> = this.notesUpdated.asObservable();
+  private notesUpdated: BehaviorSubject<Note[]> = new BehaviorSubject<Note[]>([]);
+  public readonly notes$: Observable<Note[]> = this.notesUpdated.asObservable();
 
-  private resourcesUpdated: BehaviorSubject<IResource[]> = new BehaviorSubject<IResource[]>([]);
-  public readonly resources$: Observable<IResource[]> = this.resourcesUpdated.asObservable();
+  private resourcesUpdated: BehaviorSubject<Resource[]> = new BehaviorSubject<Resource[]>([]);
+  public readonly resources$: Observable<Resource[]> = this.resourcesUpdated.asObservable();
 
   private concepts: Concept[] = [];
-  private notes: INote[] = [];
-  private resources: IResource[] = [];
+  private notes: Note[] = [];
+  private resources: Resource[] = [];
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
@@ -35,24 +37,23 @@ export class BackendService {
 
   /*NoteS*/
 
-  addNote(t: INote) {
-    this.http.post<{ m: string }>(`${this.BASE_URL}/api/notes`, t)
+  addNote(noteToAdd: Note) {
+    this.http.post<{ m: string }>(`${this.BASE_URL}/api/notes`, noteToAdd)
       .subscribe((response) => {
-        this.notes.push(t);
+        this.notes.push(noteToAdd);
         this.notesUpdated.next([...this.notes]);
       })
   }
 
   getNotesByConcept(relatedConcept?: string) {
-    this.http.get<{ message: string, notes: INote[] }>(`${this.BASE_URL}/api/notes/${relatedConcept}`)
+    this.http.get<{ message: string, notes: Note[] }>(`${this.BASE_URL}/api/notes/${relatedConcept}`)
       .subscribe(c => {
         this.notes = c.notes;
         this.notesUpdated.next(this.notes);
       })
   }
-
-  editNotes(note: INote) {
-    this.http.put<{ note: INote }>(`${this.BASE_URL}/api/notes/${note._id}`, note)
+  editNotes(note: Note) {
+    this.http.put<{ note: Note }>(`${this.BASE_URL}/api/notes/${note._id}`, note)
       .subscribe(r => {
         this.notesUpdated.next(
           this.notes.splice(
@@ -65,7 +66,7 @@ export class BackendService {
 
   deleteNote(relatedConcept?: string) {
 
-    this.http.delete<{ note: INote }>(`${this.BASE_URL}/api/notes/${relatedConcept}`)
+    this.http.delete<{ note: Note }>(`${this.BASE_URL}/api/notes/${relatedConcept}`)
       .subscribe(r => {
         this.notes = this.notes.filter(n => n.relatedConcept !== relatedConcept);
         this.notesUpdated.next([...this.notes]);
@@ -76,8 +77,8 @@ export class BackendService {
 
   /*CONCEPTS*/
 
-  addConcepts(c: Concept) {
-    this.http.post<Concept>(`${this.BASE_URL}/api/concepts`, c)
+  addConcepts(conceptToAdd: Concept) {
+    this.http.post<Concept>(`${this.BASE_URL}/api/concepts`, conceptToAdd)
       .subscribe((response) => {
         this.concepts.push(response);
         this.conceptsUpdated.next([...this.concepts]);
@@ -120,7 +121,7 @@ export class BackendService {
   /*RESOURCES*/
 
   getResources(concept: Concept) {
-    this.http.get<{ message: string, resources: IResource[] }>(`${this.BASE_URL}/api/resources/${concept._id}`)
+    this.http.get<{ message: string, resources: Resource[] }>(`${this.BASE_URL}/api/resources/${concept._id}`)
       .subscribe(c => {
         this.resources = c.resources;
 
@@ -128,12 +129,12 @@ export class BackendService {
       })
   }
 
-  editResources(resource: IResource) {
-    this.http.put<{ resource: IResource }>(`${this.BASE_URL}/api/resources/${resource._id}`, resource)
+  editResources(resource: Resource) {
+    this.http.put<{ resource: Resource }>(`${this.BASE_URL}/api/resources/${resource._id}`, resource)
       .subscribe();
   }
 
-  addResources(resourcesToAdd: IResource[]) {
+  addResources(resourcesToAdd: Resource[]) {
     this.http.post<{ m: string }>(`${this.BASE_URL}/api/resources`, resourcesToAdd)
       .subscribe((response) => {
         this.resources = [...this.resources, ...resourcesToAdd];

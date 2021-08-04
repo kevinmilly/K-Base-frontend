@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { Concept } from 'src/app/core/models/concepts.model';
+
 import { Tag } from 'src/app/core/models/enums/factors.enum';
+import { Concept } from 'src/app/core/models/interfaces/concepts.model';
 import { BackendService } from 'src/app/core/services/backend.service';
 
 @Component({

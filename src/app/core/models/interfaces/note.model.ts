@@ -1,4 +1,4 @@
-export interface INote {
+export interface Note {
     _id?:string;
     title:string;
     content:string;

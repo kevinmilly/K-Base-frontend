@@ -1,21 +1,22 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { BackendService } from 'src/app/core/services/backend.service';
 
-import { IResource } from '../../core/models/resource.model';
-import { ISearchResult } from '../../core/models/search-result.model';
-
 import { SubSink } from 'subsink';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Concept } from 'src/app/core/models/concepts.model';
+
 import { LearningService } from 'src/app/core/services/learning.service';
 import { FormControl, Validators } from '@angular/forms';
-import { debounce, debounceTime, distinctUntilChanged, map, tap } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, map, tap } from 'rxjs/operators';
 
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { AbstractExtendedWebDriver } from 'protractor/built/browser';
-import { combineLatest, throwError } from 'rxjs';
+
+import { combineLatest } from 'rxjs';
 import { Level, Necessity } from 'src/app/core/models/enums/factors.enum';
+import { Concept } from 'src/app/core/models/interfaces/concepts.model';
+import { Resource } from 'src/app/core/models/interfaces/resource.model';
+import { SearchResult } from 'src/app/core/models/interfaces/search-result.model';
+import { ChoiceValue } from 'src/app/core/models/interfaces/choiceValue.model';
 
 @Component({
   selector: 'kb-resource-curate-display',
@@ -28,28 +29,17 @@ export class ResourceCurateDisplayComponent implements OnInit {
 
   concept: Concept = {} as Concept;
 
-  prospectResources: ISearchResult[] = [];
-  currentResources: IResource[] = [];
-  originalResources: IResource[] = [];
-  resourcesToAdd: IResource[] = [];
-  resourcesToDelete: IResource[] = [];
+  prospectResources: SearchResult[];
+  currentResources: Resource[];
+  originalResources: Resource[];
+  resourcesToAdd: Resource[];
+  resourcesToDelete: Resource[];
 
-  searchControl: FormControl = new FormControl('', [Validators.required]);
-  searchTerm: string = '';
+  searchControl: FormControl;
+  searchTerm: string;
 
-  levels: string[] = [
-    Level[0],
-    Level[1],
-    Level[2],
-    Level[3]
-  ]
-
-  necessities: string[] = [
-    Necessity[0],
-    Necessity[1],
-    Necessity[2],
-    Necessity[3]
-  ]
+  necessityChoices:ChoiceValue[];
+  levelChoices:ChoiceValue[];
 
 
   constructor(
@@ -61,7 +51,30 @@ export class ResourceCurateDisplayComponent implements OnInit {
 
   ) {
 
-    this.concept = this.data.concept;
+      this.prospectResources = [];
+      this.currentResources = [];
+      this.originalResources = [];
+      this.resourcesToAdd = [];
+      this.resourcesToDelete = [];
+
+      this.searchControl =  new FormControl('', [Validators.required]);
+      this.searchTerm  = '';
+
+      this.concept = this.data.concept;
+
+      this.necessityChoices = [
+        { name: Necessity[0], value: 0 },
+        { name: Necessity[1], value: 1 }, 
+        { name: Necessity[2], value: 2 },
+        { name: Necessity[3], value: 3 }
+      ]
+      this.levelChoices = [
+        { name: Level[0], value: 0 },
+        { name: Level[1], value: 1 },
+        { name: Level[2], value: 2 },
+        { name: Level[3], value: 3 },
+        { name: Level[4], value: 4 }
+      ]
   }
 
   ngOnInit(): void {
@@ -151,7 +164,7 @@ export class ResourceCurateDisplayComponent implements OnInit {
           link: latestResourceAdded.link,
           level: this.concept.level,
           concept: this.concept._id,
-        } as IResource)
+        } as Resource)
 
       } else {
         this.resourcesToDelete.splice(resourceMarkedForDeletionIdx, 1);
@@ -166,7 +179,7 @@ export class ResourceCurateDisplayComponent implements OnInit {
           link: currentStack.data[index].link,
           level: this.concept.level,
           concept: this.concept._id,
-        } as IResource)
+        } as Resource)
       } else {
         this.resourcesToAdd.splice(resourceMarkedForAddIdx, 1);
       }

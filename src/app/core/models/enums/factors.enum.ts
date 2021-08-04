@@ -13,6 +13,12 @@ export enum Level {
     Master
 }
 
+export enum Status { 
+    Not_Started,
+    In_Progress,
+    Done
+}
+
 export enum Tag {
     Spiritual,
     Profession,

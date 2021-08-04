@@ -10,13 +10,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SharedButtonComponent implements OnInit {
 
-  @Input() type: string = 'regular';
-  @Input() content: string = '';
-  @Input() disabled: boolean = false;
-  @Output() clicked = new EventEmitter();
-  @Input() size: string = 'reg';
+  @Input() type: string;
+  @Input() content: string;
+  @Input() disabled: boolean;
+  @Output() clicked;
+  @Input() size: string;
 
-  constructor() { }
+  constructor() {
+    this.type = 'regular';
+    this.content = '';
+    this.disabled  = false;
+    this.clicked = new EventEmitter();
+    this.size  = 'reg';
+   }
 
   ngOnInit(): void {
    

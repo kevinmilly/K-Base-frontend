@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { SingleDataSet, Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, Color } from 'ng2-charts';
-import { Concept } from '../core/models/concepts.model';
 import { SubSink } from 'subsink';
 import { BackendService } from '../core/services/backend.service';
 import { Level, Necessity } from '../core/models/enums/factors.enum';
+import { Concept } from '../core/models/interfaces/concepts.model';
+import { GeneralFilterChoices } from '../core/models/interfaces/generalFilterChoices.model';
 
 @Component({
   selector: 'kb-dashboard',
@@ -15,25 +16,11 @@ export class DashboardComponent implements OnInit {
 
   private subs = new SubSink();
 
-  concept: Concept[] = [];
+  concept: Concept[];
 
-  filterChosen: string = "level";
+  filterChosen: string;
 
-  filterChoices: string[][] = [
-    [
-      Necessity[0],
-      Necessity[1],
-      Necessity[2],
-      Necessity[3]
-    ],
-    [
-      Level[0],
-      Level[1],
-      Level[2],
-      Level[3],
-      Level[4]
-    ]
-  ]
+  filterChoices: GeneralFilterChoices;
 
   // Pie
   public pieOptions: ChartOptions = {
@@ -65,6 +52,15 @@ export class DashboardComponent implements OnInit {
   constructor(private backend: BackendService) {
     monkeyPatchChartJsTooltip();
     monkeyPatchChartJsLegend();
+    this.concept  = [];
+    this.filterChosen = "level";
+
+    this.filterChoices = {
+      necessities: [Necessity[0], Necessity[1], Necessity[2], Necessity[3]],
+      levels: [Level[0], Level[1], Level[2], Level[3], Level[4]]
+    }
+
+
   }
 
   ngOnInit(): void {
@@ -84,13 +80,13 @@ export class DashboardComponent implements OnInit {
     this.pieData = [];
     switch (filterType) {
       case 'level':
-        this.filterChoices[1].forEach((choice, i) => {
+        this.filterChoices.levels.forEach((choice, i) => {
           this.pieLabels.push(choice);
           this.pieData.push(this.concept.reduce((acc, curr) => acc + (curr.level === i ? 1 : 0), 0));
         })
         break;
       case 'necessity':
-        this.filterChoices[0].forEach((choice, i) => {
+        this.filterChoices.necessities.forEach((choice, i) => {
           this.pieLabels.push(choice);
           this.pieData.push(this.concept.reduce((acc, curr) => acc + (curr.level === i ? 1 : 0), 0));
         })
