@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { SubSink } from 'subsink';
 
 import { Concept } from '../core/models/interfaces/concepts.model';
@@ -33,12 +33,15 @@ export class ConceptsComponent implements OnInit {
   concepts: Concept[] = [];
   filteredConcepts: any = [];
 
+  tabLabels:string[];
+
   //kanban tab
   selectedFilter: string;
   boxDetails: string[];
   kanbanLabels: string[] = [];
   kanbanHeaders: string[] = [];
   filterChoices: GeneralFilterChoices;
+
 
   //table tab
   columns: string[];
@@ -65,6 +68,7 @@ export class ConceptsComponent implements OnInit {
     private media: MediaObserver
 
   ) {
+    this.tabLabels = ['Add Concept','Concept Table','Concept Kanban'];
     this.media$ = media.asObservable();
 
     this.selectedFilter = 'level';
