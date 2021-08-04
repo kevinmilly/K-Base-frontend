@@ -21,6 +21,8 @@ import { SubSink } from 'subsink';
 })
 export class ConceptDetailComponent implements OnInit {
 
+  tabLabels:string[];
+
   columns: string[];
 
   filterChoices:DetailFilterChoices;
@@ -53,6 +55,7 @@ export class ConceptDetailComponent implements OnInit {
     private gamifyService: GamificationServiceService
   ) {
 
+      this.tabLabels = ['Edit Concept','Add Note', 'Current Notes'];
       this.concept = this.data.concept;
 
       this.columns = ["title","difficulty","lastRecalled","status","completed"];

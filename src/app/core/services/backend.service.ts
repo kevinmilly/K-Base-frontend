@@ -149,7 +149,7 @@ export class BackendService {
       }),
       body: resourcesToDelete
     }
-    return this.http.delete<{ concept: Concept }>(`${this.BASE_URL}/api/resources`, options)
+    this.http.delete<{ concept: Concept }>(`${this.BASE_URL}/api/resources`, options)
       .subscribe(r => {
         const updatedResources = this.resources.filter(resource => !resourcesToDelete.includes(resource._id));
         this.resourcesUpdated.next(updatedResources);
